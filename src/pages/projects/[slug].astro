@@ -1,0 +1,10 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AtlasGlobe from '../../components/AtlasGlobe.astro';
+import ModuleRenderer from '../../components/ModuleRenderer.astro';
+import { withBase } from '../../utils/paths';
+export async function getStaticPaths() { const entries = await getCollection('research', ({ data }) => data.published && data.page); return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } })); }
+const { entry } = Astro.props; const d = entry.data; const hero = d.hero || { type: 'none' }; const image = hero.image ? (/^https?:\/\//.test(hero.image) ? hero.image : withBase(hero.image)) : '';
+---
+<BaseLayout title={d.title} active="Research" projectTheme={d.theme}><main class="project-main"><div class="project-back"><a href={withBase('/research/')}>← Research</a></div>{hero.type === 'atlas-globe' ? <AtlasGlobe buttonLabel={hero.buttonLabel} buttonUrl={hero.buttonUrl} intro={hero.intro} /> : <section class="project-hero">{hero.type === 'image' && image && <img class="project-hero-image" src={image} alt={hero.imageAlt || ''} />}<h1 class="project-title">{d.title}</h1>{hero.intro && <p class="project-intro">{hero.intro}</p>}{hero.buttonLabel && hero.buttonUrl && <div class="project-launch"><a href={/^https?:\/\//.test(hero.buttonUrl) ? hero.buttonUrl : withBase(hero.buttonUrl)}>{hero.buttonLabel}</a></div>}</section>}<ModuleRenderer modules={d.modules} /></main></BaseLayout>

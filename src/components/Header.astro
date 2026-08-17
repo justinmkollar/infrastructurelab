@@ -1,0 +1,20 @@
+---
+import site from '../data/site.json';
+import { withBase } from '../utils/paths';
+interface Props { active?: string; }
+const { active = '' } = Astro.props;
+const resolveUrl = (url: string) => /^https?:\/\//.test(url) ? url : withBase(url);
+---
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-title" href={withBase('/')}>{site.title}</a>
+    <nav class="site-nav" aria-label="Primary">
+      {site.navigation.map((item) => <a href={resolveUrl(item.url)} aria-current={active === item.label ? 'page' : undefined}>{item.label}</a>)}
+    </nav>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle light and dark mode">◐</button>
+    <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-label="Open navigation">☰</button>
+  </div>
+  <nav class="mobile-nav" data-mobile-nav aria-label="Mobile navigation">
+    {site.navigation.map((item) => <a href={resolveUrl(item.url)} aria-current={active === item.label ? 'page' : undefined}>{item.label}</a>)}
+  </nav>
+</header>

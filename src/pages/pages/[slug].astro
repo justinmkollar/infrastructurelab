@@ -1,0 +1,8 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ModuleRenderer from '../../components/ModuleRenderer.astro';
+export async function getStaticPaths() { const entries = await getCollection('pages', ({ data }) => data.published); return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } })); }
+const { entry } = Astro.props;
+---
+<BaseLayout title={entry.data.title}><main class="page"><section class="page-section"><div class="content-narrow"><h1>{entry.data.title}</h1>{entry.data.description && <p>{entry.data.description}</p>}</div></section><ModuleRenderer modules={entry.data.modules} /></main></BaseLayout>

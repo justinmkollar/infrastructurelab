@@ -1,0 +1,7 @@
+---
+import { withBase } from '../utils/paths';
+const { entry } = Astro.props;
+const d = entry.data;
+const goto = d.page ? withBase(`/projects/${entry.id}/`) : d.externalUrl;
+---
+<article class="index-entry" data-index-entry><div class="index-summary"><button class="index-fields research-fields" type="button" data-index-toggle aria-expanded="false"><span class="index-cell">{d.title}</span><span class="index-cell">{d.contributors.join(', ')}</span><span class="index-cell end">{d.dateLabel}</span></button>{goto ? <a class="index-action goto" href={goto} aria-label={`Open ${d.title}`} target={d.externalUrl && !d.page ? '_blank' : undefined} rel={d.externalUrl && !d.page ? 'noopener' : undefined}>→</a> : <span class="index-action-spacer" aria-hidden="true"></span>}<button class="index-action expand" type="button" data-index-toggle data-expand-button aria-expanded="false" aria-label="Expand details">+</button></div><div class="index-detail-wrap" data-index-detail aria-hidden="true"><div class="index-detail-clip"><div class="index-detail"><div class="detail-block"><span class="detail-label">Description</span><div class="detail-text" set:html={d.description}></div></div>{(d.funding || d.duration) && <div class="detail-meta">{d.funding && <span class="detail-meta-item"><strong>Funding</strong> {d.funding}</span>}{d.duration && <span class="detail-meta-item"><strong>Duration</strong> {d.duration}</span>}</div>}</div></div></div></article>

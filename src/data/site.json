@@ -1,0 +1,27 @@
+{
+  "title": "Infrastructure Lab",
+  "institution": "National University of Singapore",
+  "footer": "Infrastructure Lab · National University of Singapore · Site in development",
+  "siteDescription": "Infrastructure Lab studies how built and landscape systems organize contemporary urban and regional life.",
+  "home": {
+    "heading": "About",
+    "lead": "Infrastructure Lab studies how built and landscape systems organize contemporary urban and regional life.",
+    "body": "<p>Based at the National University of Singapore, the lab examines the territorial systems behind energy, water, logistics, computation, manufacturing, and urban development. We study how infrastructures are sited, financed, permitted, contested, and made operational through land assembly, utility planning, industrial policy, public subsidy, and private investment.</p>",
+    "splashFadeSeconds": 2,
+    "splashHoldSeconds": 30,
+    "splashImages": [
+      {"image":"/uploads/images/splash/splash-01.svg","alt":"Infrastructure landscape"},
+      {"image":"/uploads/images/splash/splash-02.svg","alt":"Solar arrays in North Tainan, Taiwan"}
+    ]
+  },
+  "navigation": [
+    {"label":"About","url":"/"},
+    {"label":"Research","url":"/research/"},
+    {"label":"Publications","url":"/publications/"},
+    {"label":"People","url":"/people/"}
+  ],
+  "theme": {
+    "lightBackground":"#ffffff","lightText":"#1a1a1a","lightMuted":"#666666","lightLine":"#d7d7d7",
+    "darkBackground":"#1a1a1a","darkText":"#ffffff","darkMuted":"#b9b9b9","darkLine":"#454545"
+  }
+}

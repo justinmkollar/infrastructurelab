@@ -1,0 +1,316 @@
+media:
+  - name: images
+    label: Images
+    input: public/uploads/images
+    output: /uploads/images
+    categories: [image]
+    extensions: [jpg, jpeg, png, webp, gif, svg]
+    rename: safe
+  - name: files
+    label: Documents
+    input: public/uploads/files
+    output: /uploads/files
+    categories: [document]
+    rename: safe
+
+settings:
+  commit:
+    identity: user
+    templates:
+      create: "content: add {path}"
+      update: "content: update {path}"
+      delete: "content: remove {path}"
+      rename: "content: rename {oldPath} to {newPath}"
+
+components:
+  project_theme:
+    type: object
+    label: Project color scheme
+    fields:
+      - {name: lightBackground, label: Light background, type: string, default: "#f4f4f0", pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: lightText, label: Light text, type: string, default: "#171717", pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: lightMuted, label: Light secondary text, type: string, default: "#62686b", pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: lightLine, label: Light borders, type: string, default: "#c8cbcc", pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: darkBackground, label: Dark background, type: string, default: "#1d2028", pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: darkText, label: Dark text, type: string, default: "#f3f2f2", pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: darkMuted, label: Dark secondary text, type: string, default: "#a9adaa", pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: darkLine, label: Dark borders, type: string, default: "#46515a", pattern: "^#[0-9A-Fa-f]{6}$"}
+  page_modules:
+    type: block
+    label: Page modules
+    list:
+      collapsible: {collapsed: true, summary: "{type}: {heading}"}
+    blockKey: type
+    blocks:
+      - name: text
+        label: Text
+        fields:
+          - {name: heading, type: string}
+          - name: body
+            type: rich-text
+            options: {format: html, media: images, path: content}
+      - name: image
+        label: Image
+        fields:
+          - name: image
+            type: image
+            required: true
+            options: {media: images, path: content}
+          - {name: alt, label: Alternative text, type: string}
+          - {name: caption, type: text}
+          - name: size
+            type: select
+            default: wide
+            options: {values: [narrow, wide, full]}
+      - name: gallery
+        label: Image gallery
+        fields:
+          - {name: heading, type: string}
+          - name: images
+            type: object
+            list:
+              collapsible: {collapsed: true, summary: "{alt}"}
+            fields:
+              - name: image
+                type: image
+                required: true
+                options: {media: images, path: content}
+              - {name: alt, label: Alternative text, type: string}
+              - {name: caption, type: text}
+      - name: links
+        label: Links
+        fields:
+          - {name: heading, type: string}
+          - name: items
+            type: object
+            list:
+              collapsible: {collapsed: true, summary: "{label}"}
+            fields:
+              - {name: label, type: string, required: true}
+              - {name: url, type: string, required: true}
+              - {name: newWindow, label: Open in new window, type: boolean, default: false}
+      - name: accordion
+        label: Expandable sections
+        fields:
+          - {name: heading, type: string}
+          - name: intro
+            type: rich-text
+            options: {format: html, media: images, path: content}
+          - name: items
+            type: object
+            list:
+              collapsible: {collapsed: true, summary: "{title}"}
+            fields:
+              - {name: title, type: string, required: true}
+              - name: body
+                type: rich-text
+                options: {format: html, media: images, path: content}
+      - name: steps
+        label: Numbered steps
+        fields:
+          - {name: heading, type: string}
+          - name: intro
+            type: rich-text
+            options: {format: html, media: images, path: content}
+          - name: items
+            type: object
+            list:
+              collapsible: {collapsed: true, summary: "{title}"}
+            fields:
+              - {name: title, type: string, required: true}
+              - name: body
+                type: rich-text
+                options: {format: html, media: images, path: content}
+      - name: updates
+        label: Updates / timeline
+        fields:
+          - {name: heading, type: string}
+          - name: items
+            type: object
+            list:
+              collapsible: {collapsed: true, summary: "{date} — {title}"}
+            fields:
+              - {name: date, type: string}
+              - {name: title, type: string, required: true}
+              - name: body
+                type: rich-text
+                options: {format: html, media: images, path: content}
+
+content:
+  - name: site
+    label: Site settings
+    type: file
+    path: src/data/site.json
+    operations: {delete: false}
+    fields:
+      - {name: title, type: string, required: true}
+      - {name: institution, type: string}
+      - {name: footer, type: string}
+      - {name: siteDescription, label: Site description, type: text}
+      - name: home
+        type: object
+        fields:
+          - {name: heading, type: string}
+          - {name: lead, type: text}
+          - name: body
+            type: rich-text
+            options: {format: html, media: images, path: content}
+          - {name: splashFadeSeconds, label: Splash fade (seconds), type: number, default: 2}
+          - {name: splashHoldSeconds, label: Time per splash image (seconds), type: number, default: 30}
+          - name: splashImages
+            label: Splash images
+            type: object
+            list:
+              collapsible: {collapsed: true, summary: "{alt}"}
+            fields:
+              - name: image
+                type: image
+                required: true
+                options: {media: images, path: splash}
+              - {name: alt, label: Alternative text, type: string}
+      - name: navigation
+        type: object
+        list:
+          collapsible: {collapsed: true, summary: "{label}"}
+        fields:
+          - {name: label, type: string, required: true}
+          - {name: url, label: URL / path, type: string, required: true}
+      - {name: theme, component: project_theme, label: Global color scheme}
+
+  - name: research
+    label: Research
+    type: collection
+    path: src/content/research
+    format: yaml-frontmatter
+    filename: {template: "{title}.md", field: create}
+    view:
+      fields: [title, dateLabel, published]
+      primary: title
+      sort: [order, title]
+      search: [title, contributors, description]
+      default: {sort: order, order: asc}
+    fields:
+      - {name: title, type: string, required: true}
+      - {name: contributors, type: string, list: true}
+      - {name: dateLabel, label: Date, type: string, required: true}
+      - {name: order, type: number, default: 100}
+      - {name: published, type: boolean, default: true}
+      - name: description
+        type: rich-text
+        required: true
+        description: 50–250 words recommended.
+        options: {format: html, media: images, path: projects}
+      - {name: funding, type: string}
+      - {name: duration, type: string}
+      - {name: page, label: Create a project page, type: boolean, default: false}
+      - {name: externalUrl, label: External project URL, type: string}
+      - {name: theme, component: project_theme}
+      - name: hero
+        type: object
+        fields:
+          - name: type
+            type: select
+            default: none
+            options:
+              values:
+                - {name: none, label: No special hero}
+                - {name: image, label: Image hero}
+                - {name: atlas-globe, label: Atlas globe}
+          - name: image
+            type: image
+            options: {media: images, path: projects}
+          - {name: imageAlt, label: Image alternative text, type: string}
+          - {name: buttonLabel, type: string}
+          - {name: buttonUrl, type: string}
+          - {name: intro, type: text}
+      - {name: modules, component: page_modules}
+
+  - name: publications
+    label: Publications
+    type: collection
+    path: src/content/publications
+    format: yaml-frontmatter
+    filename: {template: "{title}.md", field: create}
+    view:
+      fields: [title, authors, type, date, published]
+      primary: title
+      sort: [order, title]
+      search: [title, authors, details, type, keywords]
+      default: {sort: order, order: asc}
+    fields:
+      - {name: authors, type: string, list: true, required: true}
+      - {name: title, type: string, required: true}
+      - {name: details, label: Publication details, type: string, required: true}
+      - name: type
+        label: Publication type
+        type: select
+        required: true
+        options: {values: [Peer-reviewed Article, Book, Book Chapter, Essay, Review, Report, Working Paper, Other]}
+      - {name: date, type: string}
+      - {name: order, type: number, default: 100}
+      - {name: published, type: boolean, default: true}
+      - {name: url, label: Publication URL, type: string}
+      - name: abstract
+        type: rich-text
+        description: 50–250 words recommended.
+        options: {format: html, media: images, path: publications}
+      - {name: keywords, type: string, list: true}
+
+  - name: people
+    label: People
+    type: collection
+    path: src/content/people
+    format: yaml-frontmatter
+    filename: {template: "{name}.md", field: create}
+    view:
+      fields: [name, title, institution, published]
+      primary: name
+      sort: [order, name]
+      search: [name, title, institution, bio]
+      default: {sort: order, order: asc}
+    fields:
+      - {name: name, type: string, required: true}
+      - {name: title, label: Position, type: string, required: true}
+      - {name: institution, type: string, required: true}
+      - {name: order, type: number, default: 100}
+      - {name: published, type: boolean, default: true}
+      - name: photo
+        type: image
+        options: {media: images, path: people}
+      - {name: photoAlt, label: Photo alternative text, type: string}
+      - name: bio
+        type: rich-text
+        description: 50–250 words recommended.
+        options: {format: html, media: images, path: people}
+      - {name: email, label: Email link, type: string, description: Use mailto:name@example.com.}
+      - name: cvFile
+        label: Upload CV
+        type: file
+        options: {media: files, categories: [document]}
+      - {name: cv, label: External CV URL, type: string}
+      - name: links
+        type: object
+        list:
+          collapsible: {collapsed: true, summary: "{label}"}
+        fields:
+          - {name: label, type: string}
+          - {name: url, type: string}
+
+  - name: pages
+    label: Additional pages
+    type: collection
+    path: src/content/pages
+    format: yaml-frontmatter
+    filename: {template: "{title}.md", field: create}
+    view:
+      fields: [title, published, order]
+      primary: title
+      sort: [order, title]
+      search: [title, description]
+      default: {sort: order, order: asc}
+    fields:
+      - {name: title, type: string, required: true}
+      - {name: description, type: text}
+      - {name: published, type: boolean, default: true}
+      - {name: order, type: number, default: 100}
+      - {name: modules, component: page_modules}

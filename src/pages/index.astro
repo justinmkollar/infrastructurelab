@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import site from '../data/site.json';
+import { withBase } from '../utils/paths';
+const fadeMs = Math.max(0, Number(site.home.splashFadeSeconds || 2) * 1000);
+const holdMs = Math.max(fadeMs + 500, Number(site.home.splashHoldSeconds || 30) * 1000);
+---
+<BaseLayout title={site.title} active="About" bodyClass="home-page"><main><section class="home-splash" data-splash data-fade-ms={fadeMs} data-hold-ms={holdMs} style={`--splash-fade:${site.home.splashFadeSeconds || 2}s`} aria-label="Infrastructure landscape">{site.home.splashImages.map((item) => <img class="splash-layer" src={withBase(item.image)} alt={item.alt || ''} aria-hidden="true" />)}</section><div class="page"><section class="page-section home-about"><div class="content-narrow"><h1>{site.home.heading}</h1><p class="lead">{site.home.lead}</p><div class="rich-text" set:html={site.home.body}></div></div></section></div></main></BaseLayout>

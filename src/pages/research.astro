@@ -1,0 +1,5 @@
+---
+import { getCollection } from 'astro:content'; import BaseLayout from '../layouts/BaseLayout.astro'; import ResearchIndexEntry from '../components/ResearchIndexEntry.astro';
+const entries = (await getCollection('research', ({ data }) => data.published)).sort((a,b) => a.data.order - b.data.order || a.data.title.localeCompare(b.data.title));
+---
+<BaseLayout title="Research" active="Research"><main class="page"><section class="page-section"><div class="content-narrow"><h1>Research</h1><p>Research projects, datasets, atlases, and other public-facing work.</p></div><div class="index-list">{entries.map((entry) => <ResearchIndexEntry entry={entry} />)}</div></section></main></BaseLayout>

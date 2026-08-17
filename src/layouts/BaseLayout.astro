@@ -1,0 +1,12 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import site from '../data/site.json';
+interface Theme { lightBackground?: string; lightText?: string; lightMuted?: string; lightLine?: string; darkBackground?: string; darkText?: string; darkMuted?: string; darkLine?: string; }
+interface Props { title?: string; description?: string; active?: string; bodyClass?: string; projectTheme?: Theme; }
+const { title = site.title, description = site.siteDescription, active = '', bodyClass = '', projectTheme } = Astro.props;
+const theme = { ...site.theme, ...(projectTheme || {}) };
+const themeCss = `:root{--bg:${theme.lightBackground};--fg:${theme.lightText};--muted:${theme.lightMuted};--line:${theme.lightLine};}:root[data-theme="dark"]{--bg:${theme.darkBackground};--fg:${theme.darkText};--muted:${theme.darkMuted};--line:${theme.darkLine};}`;
+---
+<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" /><meta name="description" content={description} /><title>{title === site.title ? site.title : `${title} — ${site.title}`}</title><style is:inline set:html={themeCss}></style></head><body class={bodyClass}><Header active={active} /><slot /><Footer /><script>import '../scripts/site.js';</script></body></html>
