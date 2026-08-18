@@ -30,11 +30,15 @@ components:
       - {name: lightBackground, label: Light background, type: string, default: "#f4f4f0", pattern: "^#[0-9A-Fa-f]{6}$"}
       - {name: lightText, label: Light text, type: string, default: "#171717", pattern: "^#[0-9A-Fa-f]{6}$"}
       - {name: lightMuted, label: Light secondary text, type: string, default: "#62686b", pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: lightSmall, label: Light small text, type: string, default: "#7d8183", pattern: "^#[0-9A-Fa-f]{6}$"}
       - {name: lightLine, label: Light borders, type: string, default: "#c8cbcc", pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: lightSoft, label: Light soft surface, type: string, default: "#e8e9e5", pattern: "^#[0-9A-Fa-f]{6}$"}
       - {name: darkBackground, label: Dark background, type: string, default: "#1d2028", pattern: "^#[0-9A-Fa-f]{6}$"}
       - {name: darkText, label: Dark text, type: string, default: "#f3f2f2", pattern: "^#[0-9A-Fa-f]{6}$"}
       - {name: darkMuted, label: Dark secondary text, type: string, default: "#a9adaa", pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: darkSmall, label: Dark small text, type: string, default: "#8d9395", pattern: "^#[0-9A-Fa-f]{6}$"}
       - {name: darkLine, label: Dark borders, type: string, default: "#46515a", pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: darkSoft, label: Dark soft surface, type: string, default: "#252a31", pattern: "^#[0-9A-Fa-f]{6}$"}
   page_modules:
     type: block
     label: Page modules
