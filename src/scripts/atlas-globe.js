@@ -4,7 +4,6 @@
   if (!canvas || !splash || canvas.dataset.initialized === 'true') return;
   canvas.dataset.initialized = 'true';
 
-  const dataUrl = canvas.dataset.globeData;
   const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
   if (!ctx) return;
 
@@ -15,9 +14,10 @@
   const COS0 = Math.cos(CENTER_LAT);
   const SINR = Math.sin(ROLL);
   const COSR = Math.cos(ROLL);
-  const ROTATION_MS = 480000;
-  const FRAME_MS = 80;
   const BASE_LON = -18 * DEG;
+  const ROTATION_MS = 480000; // one revolution every eight minutes
+  const FRAME_MS = 80; // ~12.5 fps, matching the original lightweight globe
+  const POINT_SIZE = 3;
   const HOVER_HIT_RADIUS = 7;
   const HOVER_EASE_MS = 140;
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -28,19 +28,19 @@
   let cx = 0;
   let cy = 0;
   let lastFrame = 0;
-  let start = performance.now();
   let visible = true;
-  let visibleDcPoints = [];
   let hoveredDc = -1;
   let lastHoverTime = performance.now();
+  let visibleDcPoints = [];
   const hoverScales = new Map();
+  const start = performance.now();
 
   function resize() {
     const rect = canvas.getBoundingClientRect();
-    const next = Math.max(1, Math.round(rect.width));
+    const nextSize = Math.max(1, Math.round(rect.width));
     const nextDpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    if (next === cssSize && nextDpr === dpr) return;
-    cssSize = next;
+    if (nextSize === cssSize && nextDpr === dpr) return;
+    cssSize = nextSize;
     dpr = nextDpr;
     canvas.width = Math.round(cssSize * dpr);
     canvas.height = Math.round(cssSize * dpr);
@@ -49,7 +49,7 @@
     radius = cssSize * 0.468;
   }
 
-  function currentLineColor() {
+  function lineColor() {
     return getComputedStyle(document.documentElement).getPropertyValue('--line').trim() || '#c8cbcc';
   }
 
@@ -58,13 +58,14 @@
     ctx.clearRect(0, 0, cssSize, cssSize);
     ctx.beginPath();
     ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-    ctx.strokeStyle = currentLineColor();
+    ctx.strokeStyle = lineColor();
     ctx.lineWidth = 0.72;
     ctx.stroke();
   }
 
   let raw;
   try {
+    const dataUrl = canvas.dataset.globeData;
     if (!dataUrl) throw new Error('No globe data URL supplied');
     const response = await fetch(dataUrl, { cache: 'no-cache' });
     if (!response.ok) throw new Error(`Globe data HTTP ${response.status}`);
@@ -74,25 +75,21 @@
     canvas.dataset.globeError = 'true';
     drawFrameOnly();
     new ResizeObserver(drawFrameOnly).observe(canvas);
-    new MutationObserver(drawFrameOnly).observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme'],
-    });
     return;
   }
 
   function prepPoint(pair) {
-    const lon = Number(pair[0]) * DEG;
+    const lonDegrees = Number(pair[0]);
     const lat = Number(pair[1]) * DEG;
-    return [lon, Math.sin(lat), Math.cos(lat), Number(pair[0])];
+    return [lonDegrees * DEG, Math.sin(lat), Math.cos(lat), lonDegrees];
   }
 
-  const countries = (Array.isArray(raw.countries) ? raw.countries : [])
+  const prepPaths = (paths) => (Array.isArray(paths) ? paths : [])
     .filter(Array.isArray)
     .map((path) => path.map(prepPoint));
-  const cables = (Array.isArray(raw.cables) ? raw.cables : [])
-    .filter(Array.isArray)
-    .map((path) => path.map(prepPoint));
+
+  const countries = prepPaths(raw.countries);
+  const cables = prepPaths(raw.cables);
   const dataCenters = (Array.isArray(raw.dataCenters) ? raw.dataCenters : []).map(prepPoint);
 
   function project(point, lon0) {
@@ -109,22 +106,21 @@
 
   function drawPaths(paths, lon0) {
     for (const path of paths) {
-      let pen = false;
+      let penDown = false;
       let lastLon = null;
       ctx.beginPath();
       for (const point of path) {
         const projected = project(point, lon0);
-        const dateline = lastLon !== null && Math.abs(point[3] - lastLon) > 180;
-        if (!projected || dateline) {
-          pen = false;
+        const crossesDateline = lastLon !== null && Math.abs(point[3] - lastLon) > 180;
+        if (!projected || crossesDateline) {
+          penDown = false;
           lastLon = point[3];
           continue;
         }
-        if (!pen) {
+        if (penDown) ctx.lineTo(projected[0], projected[1]);
+        else {
           ctx.moveTo(projected[0], projected[1]);
-          pen = true;
-        } else {
-          ctx.lineTo(projected[0], projected[1]);
+          penDown = true;
         }
         lastLon = point[3];
       }
@@ -132,19 +128,23 @@
     }
   }
 
+  function longitudeAt(now) {
+    const elapsed = ((now - start) % ROTATION_MS + ROTATION_MS) % ROTATION_MS;
+    return BASE_LON + (elapsed / ROTATION_MS) * Math.PI * 2;
+  }
+
   function draw(now) {
     resize();
-    const line = currentLineColor();
-    const lon0 = BASE_LON + (((now - start) % ROTATION_MS) / ROTATION_MS) * Math.PI * 2;
+    const color = lineColor();
+    const lon0 = longitudeAt(now);
 
     ctx.clearRect(0, 0, cssSize, cssSize);
     ctx.save();
     ctx.beginPath();
     ctx.arc(cx, cy, radius, 0, Math.PI * 2);
     ctx.clip();
-    ctx.strokeStyle = line;
-    ctx.fillStyle = line;
-    ctx.globalAlpha = 1;
+    ctx.strokeStyle = color;
+    ctx.fillStyle = color;
     ctx.lineWidth = 0.72;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
@@ -152,14 +152,13 @@
     drawPaths(countries, lon0);
     drawPaths(cables, lon0);
 
-    const pointSize = 3;
-    const half = pointSize / 2;
+    const half = POINT_SIZE / 2;
     visibleDcPoints = [];
-    for (let i = 0; i < dataCenters.length; i += 1) {
-      const projected = project(dataCenters[i], lon0);
+    for (let index = 0; index < dataCenters.length; index += 1) {
+      const projected = project(dataCenters[index], lon0);
       if (!projected) continue;
-      visibleDcPoints.push([projected[0], projected[1], i]);
-      ctx.fillRect(projected[0] - half, projected[1] - half, pointSize, pointSize);
+      visibleDcPoints.push([projected[0], projected[1], index]);
+      ctx.fillRect(projected[0] - half, projected[1] - half, POINT_SIZE, POINT_SIZE);
     }
 
     const dt = Math.max(0, Math.min(40, now - lastHoverTime));
@@ -172,9 +171,9 @@
         : current + (target - current) * Math.min(1, step * 4.2);
       const match = visibleDcPoints.find((point) => point[2] === index);
       if (match) {
-        const size = pointSize * next;
-        const hs = size / 2;
-        ctx.fillRect(match[0] - hs, match[1] - hs, size, size);
+        const size = POINT_SIZE * next;
+        const halfSize = size / 2;
+        ctx.fillRect(match[0] - halfSize, match[1] - halfSize, size, size);
       }
       if (target === 1 && Math.abs(next - 1) < 0.025) hoverScales.delete(index);
       else hoverScales.set(index, next);
@@ -183,7 +182,7 @@
     ctx.restore();
     ctx.beginPath();
     ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-    ctx.strokeStyle = line;
+    ctx.strokeStyle = color;
     ctx.lineWidth = 0.72;
     ctx.stroke();
   }
@@ -197,7 +196,7 @@
     canvas.style.cursor = next >= 0 ? 'pointer' : 'default';
   }
 
-  function hitTestDataCenter(event) {
+  canvas.addEventListener('pointermove', (event) => {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
@@ -213,14 +212,14 @@
       }
     }
     setHoveredDataCenter(nearest);
-  }
-
-  canvas.addEventListener('pointermove', hitTestDataCenter, { passive: true });
+  }, { passive: true });
   canvas.addEventListener('pointerleave', () => setHoveredDataCenter(-1), { passive: true });
 
   function loop(now) {
-    if (visible && (reduceMotion.matches || now - lastFrame >= FRAME_MS)) {
-      draw(reduceMotion.matches ? start : now);
+    // Reduced-motion affects only hover easing. It no longer freezes the globe;
+    // the slow eight-minute geographic rotation is part of the visualization.
+    if (visible && now - lastFrame >= FRAME_MS) {
+      draw(now);
       lastFrame = now;
     }
     requestAnimationFrame(loop);
