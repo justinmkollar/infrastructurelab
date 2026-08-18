@@ -1,4 +1,11 @@
 media:
+  - name: splash
+    label: Homepage splash
+    input: public/uploads/images/splash
+    output: /uploads/images/splash
+    categories: [image]
+    extensions: [jpg, jpeg, png, webp, gif]
+    rename: safe
   - name: images
     label: Images
     input: public/uploads/images
@@ -35,6 +42,7 @@ components:
       - {name: darkText, label: Dark text, type: string, default: "#f3f2f2", pattern: "^#[0-9A-Fa-f]{6}$"}
       - {name: darkMuted, label: Dark secondary text, type: string, default: "#a9adaa", pattern: "^#[0-9A-Fa-f]{6}$"}
       - {name: darkLine, label: Dark borders, type: string, default: "#46515a", pattern: "^#[0-9A-Fa-f]{6}$"}
+
   page_modules:
     type: block
     label: Page modules
@@ -166,7 +174,7 @@ content:
               - name: image
                 type: image
                 required: true
-                options: {media: images, path: splash}
+                options: {media: splash}
               - {name: alt, label: Alternative text, type: string}
       - name: navigation
         type: object
