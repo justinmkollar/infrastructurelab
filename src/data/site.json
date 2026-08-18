@@ -7,7 +7,7 @@
     "heading": "About",
     "lead": "Infrastructure Lab studies how built and landscape systems organize contemporary urban and regional life.",
     "body": "<p>Based at the National University of Singapore, the lab examines the territorial systems behind energy, water, logistics, computation, manufacturing, and urban development. We study how infrastructures are sited, financed, permitted, contested, and made operational through land assembly, utility planning, industrial policy, public subsidy, and private investment.</p>",
-    "splashFadeSeconds": 2,
+    "splashFadeSeconds": 2.5,
     "splashHoldSeconds": 30,
     "splashImages": [
       {
