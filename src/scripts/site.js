@@ -113,7 +113,13 @@ if (body.classList.contains('home-page') && header && splash) {
   const fadeMs = Math.max(0, Number(splash.dataset.fadeMs || 2000));
   const holdMs = Math.max(fadeMs + 500, Number(splash.dataset.holdMs || 30000));
   const transition = `opacity ${fadeMs}ms linear`;
-  let active = 0;
+  const preselected = layers.findIndex((layer) => layer.classList.contains('is-visible'));
+  const storedInitial = Number.parseInt(splash.dataset.initialSplash || '', 10);
+  let active = preselected >= 0
+    ? preselected
+    : (Number.isInteger(storedInitial) && storedInitial >= 0 && storedInitial < layers.length
+        ? storedInitial
+        : (layers.length ? Math.floor(Math.random() * layers.length) : 0));
   let contrastTimer = 0;
   let cycleTimer = 0;
 
@@ -213,15 +219,11 @@ if (body.classList.contains('home-page') && header && splash) {
     const outgoing = layers[active];
     const incoming = layers[next];
 
-    // Explicit inline transition keeps the intended crossfade even when the
-    // global reduced-motion stylesheet disables other decorative transitions.
     outgoing.style.transition = transition;
     incoming.style.transition = transition;
     incoming.classList.remove('is-initial');
     incoming.classList.remove('is-visible');
 
-    // Force the browser to commit the incoming image at opacity 0 before
-    // changing either layer, preventing a single-frame hard swap.
     void incoming.offsetWidth;
 
     requestAnimationFrame(() => {
@@ -235,8 +237,6 @@ if (body.classList.contains('home-page') && header && splash) {
       if (!header.classList.contains('is-solid')) chooseHeaderContrast(incoming);
     }, Math.max(0, fadeMs * 0.55));
 
-    // Keep the outgoing image in the DOM at opacity 0; this allows the same
-    // two-layer crossfade to work consistently when cycling back to it.
     setTimeout(() => {
       active = next;
       scheduleNext();
@@ -244,24 +244,26 @@ if (body.classList.contains('home-page') && header && splash) {
   }
 
   if (layers.length) {
-    // First load is deliberately immediate: no fade-in from the page background.
+    // Preserve the browser-side random selection made during HTML parsing so
+    // the chosen image is the one visible on the first paint, with no fade-in.
     layers.forEach((layer, index) => {
-      layer.classList.toggle('is-visible', index === 0);
-      layer.classList.toggle('is-initial', index === 0);
-      layer.style.transition = index === 0 ? 'none' : transition;
+      const selected = index === active;
+      layer.classList.toggle('is-visible', selected);
+      layer.classList.toggle('is-initial', selected);
+      layer.style.transition = selected ? 'none' : transition;
     });
 
-    imageReady(layers[0]).then(() => {
-      chooseHeaderContrast(layers[0]);
+    imageReady(layers[active]).then(() => {
+      chooseHeaderContrast(layers[active]);
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        layers[0].classList.remove('is-initial');
-        layers[0].style.transition = transition;
+        layers[active].classList.remove('is-initial');
+        layers[active].style.transition = transition;
       }));
     });
 
-    // The <img> elements already begin downloading immediately; decode them
-    // opportunistically so large images are ready before their first crossfade.
-    layers.slice(1).forEach((layer) => imageReady(layer));
+    layers.forEach((layer, index) => {
+      if (index !== active) imageReady(layer);
+    });
     scheduleNext();
   }
 
