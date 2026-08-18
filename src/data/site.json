@@ -11,14 +11,6 @@
     "splashHoldSeconds": 30,
     "splashImages": [
       {
-        "image": "/uploads/images/splash/splash-01.webp",
-        "alt": "Infrastructure landscape"
-      },
-      {
-        "image": "/uploads/images/splash/splash-02.webp",
-        "alt": "Solar arrays in North Tainan, Taiwan"
-      },
-      {
         "image": "/uploads/images/2023tsmcphoenixaerialoverview.jpg",
         "alt": "Aerial photo of a massive semiconductor fab construction on the fringes of Phoenix, Arizona with a water plant and suburban development in the foreground."
       },
