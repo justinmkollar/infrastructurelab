@@ -1,0 +1,7 @@
+{
+  "release": "atlas-original-globe-and-project-styles-2026-08-18",
+  "dataCenters": 9717,
+  "coordinatePrecision": "original source coordinates; no rounding or spatial binning",
+  "rotation": "continuous 8-minute revolution",
+  "projectThemes": "editable light and dark palettes per research project"
+}
