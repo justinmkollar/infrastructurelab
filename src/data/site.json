@@ -17,6 +17,14 @@
       {
         "image": "/uploads/images/splash/splash-02.webp",
         "alt": "Solar arrays in North Tainan, Taiwan"
+      },
+      {
+        "image": "/uploads/images/2023tsmcphoenixaerialoverview.jpg",
+        "alt": "Aerial photo of a massive semiconductor fab construction on the fringes of Phoenix, Arizona with a water plant and suburban development in the foreground."
+      },
+      {
+        "image": "/uploads/images/dji0321northtainansolarpanels2022.jpg",
+        "alt": "Utility-scale solar arrays replacing farmland in Tainan, Taiwan."
       }
     ]
   },
@@ -42,10 +50,14 @@
     "lightBackground": "#ffffff",
     "lightText": "#1a1a1a",
     "lightMuted": "#666666",
+    "lightSmall": "#7d8183",
     "lightLine": "#d7d7d7",
+    "lightSoft": "#e8e9e5",
     "darkBackground": "#1a1a1a",
     "darkText": "#ffffff",
     "darkMuted": "#b9b9b9",
-    "darkLine": "#454545"
+    "darkSmall": "#8d9395",
+    "darkLine": "#454545",
+    "darkSoft": "#252a31"
   }
 }
