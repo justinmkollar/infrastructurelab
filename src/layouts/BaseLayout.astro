@@ -34,11 +34,29 @@ const {
   projectTheme
 } = Astro.props;
 
-const theme = { ...site.theme, ...(projectTheme || {}) };
-const lightSmall = projectTheme?.lightSmall || '#7b7b7b';
-const lightSoft = projectTheme?.lightSoft || `color-mix(in srgb,${theme.lightText} 5%,${theme.lightBackground})`;
-const darkSmall = projectTheme?.darkSmall || '#a2a2a2';
-const darkSoft = projectTheme?.darkSoft || `color-mix(in srgb,${theme.darkText} 5%,${theme.darkBackground})`;
-const themeCss = `:root{--bg:${theme.lightBackground};--fg:${theme.lightText};--muted:${theme.lightMuted};--small:${lightSmall};--line:${theme.lightLine};--soft:${lightSoft};}:root[data-theme="dark"]{--bg:${theme.darkBackground};--fg:${theme.darkText};--muted:${theme.darkMuted};--small:${darkSmall};--line:${theme.darkLine};--soft:${darkSoft};}`;
+const globalTheme = site.theme as Theme;
+const mergedProjectTheme = { ...globalTheme, ...(projectTheme || {}) };
+
+const globalLightSmall = globalTheme.lightSmall || '#7b7b7b';
+const globalLightSoft = globalTheme.lightSoft || `color-mix(in srgb,${globalTheme.lightText} 5%,${globalTheme.lightBackground})`;
+const globalDarkSmall = globalTheme.darkSmall || '#a2a2a2';
+const globalDarkSoft = globalTheme.darkSoft || `color-mix(in srgb,${globalTheme.darkText} 5%,${globalTheme.darkBackground})`;
+
+const rootThemeCss = `:root{--bg:${globalTheme.lightBackground};--fg:${globalTheme.lightText};--muted:${globalTheme.lightMuted};--small:${globalLightSmall};--line:${globalTheme.lightLine};--soft:${globalLightSoft};}:root[data-theme="dark"]{--bg:${globalTheme.darkBackground};--fg:${globalTheme.darkText};--muted:${globalTheme.darkMuted};--small:${globalDarkSmall};--line:${globalTheme.darkLine};--soft:${globalDarkSoft};}`;
+
+let projectThemeCss = '';
+if (projectTheme) {
+  const projectLightSmall = projectTheme.lightSmall || '#7d8183';
+  const projectLightSoft = projectTheme.lightSoft || `color-mix(in srgb,${mergedProjectTheme.lightText} 5%,${mergedProjectTheme.lightBackground})`;
+  const projectDarkSmall = projectTheme.darkSmall || '#8d9395';
+  const projectDarkSoft = projectTheme.darkSoft || `color-mix(in srgb,${mergedProjectTheme.darkText} 5%,${mergedProjectTheme.darkBackground})`;
+
+  // Project palettes are scoped to the project page itself, matching the
+  // original prototype. This prevents the global site palette from winning
+  // the cascade while keeping every value editable through the Research CMS.
+  projectThemeCss = `body.project-page{--bg:${mergedProjectTheme.lightBackground};--fg:${mergedProjectTheme.lightText};--muted:${mergedProjectTheme.lightMuted};--small:${projectLightSmall};--line:${mergedProjectTheme.lightLine};--soft:${projectLightSoft};}:root[data-theme="dark"] body.project-page{--bg:${mergedProjectTheme.darkBackground};--fg:${mergedProjectTheme.darkText};--muted:${mergedProjectTheme.darkMuted};--small:${projectDarkSmall};--line:${mergedProjectTheme.darkLine};--soft:${projectDarkSoft};}`;
+}
+
+const themeCss = `${rootThemeCss}${projectThemeCss}`;
 ---
 <!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" /><meta name="description" content={description} /><title>{title === site.title ? site.title : `${title} — ${site.title}`}</title><style is:inline set:html={themeCss}></style></head><body class={bodyClass}><Header active={active} /><slot /><Footer /><script>import '../scripts/site.js';</script></body></html>
