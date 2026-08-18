@@ -7,7 +7,6 @@ interface Props {
 }
 const { buttonLabel = 'Open the Atlas of Data Center Politics', buttonUrl = '#', intro = '' } = Astro.props;
 const href = /^https?:\/\//.test(buttonUrl) || buttonUrl === '#' ? buttonUrl : withBase(buttonUrl);
-const globeScript = withBase('/scripts/atlas-globe.js');
 ---
 <section class="project-hero atlas-hero">
   <div class="atlas-splash" aria-hidden="true">
@@ -18,4 +17,4 @@ const globeScript = withBase('/scripts/atlas-globe.js');
   <div class="project-launch"><a href={href}>{buttonLabel}</a></div>
   {intro && <p class="project-intro">{intro}</p>}
 </section>
-<script is:inline src={globeScript}></script>
+<script src="../scripts/atlas-globe.js"></script>
