@@ -17,4 +17,4 @@ const href = /^https?:\/\//.test(buttonUrl) || buttonUrl === '#' ? buttonUrl : w
   <div class="project-launch"><a href={href}>{buttonLabel}</a></div>
   {intro && <p class="project-intro">{intro}</p>}
 </section>
-<script src="../scripts/atlas-globe.js"></script>
+<script>import '../scripts/atlas-globe.js';</script>
