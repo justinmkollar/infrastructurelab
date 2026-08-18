@@ -6,11 +6,15 @@ const themeSchema = z.object({
   lightBackground: z.string().default('#f4f4f0'),
   lightText: z.string().default('#171717'),
   lightMuted: z.string().default('#62686b'),
+  lightSmall: z.string().default('#7d8183'),
   lightLine: z.string().default('#c8cbcc'),
+  lightSoft: z.string().default('#e8e9e5'),
   darkBackground: z.string().default('#1d2028'),
   darkText: z.string().default('#f3f2f2'),
   darkMuted: z.string().default('#a9adaa'),
-  darkLine: z.string().default('#46515a')
+  darkSmall: z.string().default('#8d9395'),
+  darkLine: z.string().default('#46515a'),
+  darkSoft: z.string().default('#252a31')
 }).optional();
 
 const heroSchema = z.object({
