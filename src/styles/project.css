@@ -1,12 +1,7 @@
 /* Research-project presentation layer.
-   Core colors come from each project's editable theme record and are injected
-   by BaseLayout. These rules restore the proportions and hierarchy of the
+   Colors come from each project's editable theme record and are injected by
+   BaseLayout. These rules restore the proportions and hierarchy of the
    original Infrastructure Lab project-page prototype. */
-
-.project-page {
-  --small: color-mix(in srgb, var(--muted) 78%, var(--bg));
-  --soft: color-mix(in srgb, var(--fg) 5%, var(--bg));
-}
 
 .project-page .site-header {
   background: color-mix(in srgb, var(--bg) 96%, transparent);
