@@ -5,4 +5,43 @@ import { withBase } from '../utils/paths';
 const fadeMs = Math.max(0, Number(site.home.splashFadeSeconds || 2) * 1000);
 const holdMs = Math.max(fadeMs + 500, Number(site.home.splashHoldSeconds || 30) * 1000);
 ---
-<BaseLayout title={site.title} active="About" bodyClass="home-page"><main><section class="home-splash" data-splash data-fade-ms={fadeMs} data-hold-ms={holdMs} style={`--splash-fade:${site.home.splashFadeSeconds || 2}s`} aria-label="Infrastructure landscape">{site.home.splashImages.map((item, index) => <img class={`splash-layer${index === 0 ? ' is-initial is-visible' : ''}`} src={withBase(item.image)} alt={item.alt || ''} aria-hidden="true" />)}</section><div class="page"><section class="page-section home-about"><div class="content-narrow"><h1>{site.home.heading}</h1><p class="lead">{site.home.lead}</p><div class="rich-text" set:html={site.home.body}></div></div></section></div></main></BaseLayout>
+<BaseLayout title={site.title} active="About" bodyClass="home-page">
+  <main>
+    <section
+      class="home-splash"
+      data-splash
+      data-fade-ms={fadeMs}
+      data-hold-ms={holdMs}
+      style={`--splash-fade:${site.home.splashFadeSeconds || 2}s`}
+      aria-label="Infrastructure landscape"
+    >
+      {site.home.splashImages.map((item) =>
+        <img class="splash-layer" src={withBase(item.image)} alt={item.alt || ''} aria-hidden="true" />
+      )}
+    </section>
+    <script is:inline>
+      // Choose the first visible splash during HTML parsing so a static GitHub
+      // Pages build can still start on a different image on every page load.
+      // The selected image is shown immediately; the main controller handles
+      // only subsequent crossfades.
+      (() => {
+        const splash = document.querySelector('[data-splash]');
+        const layers = splash ? [...splash.querySelectorAll('.splash-layer')] : [];
+        if (!layers.length) return;
+        const active = Math.floor(Math.random() * layers.length);
+        layers[active].classList.add('is-initial', 'is-visible');
+        layers[active].style.transition = 'none';
+        splash.dataset.initialSplash = String(active);
+      })();
+    </script>
+    <div class="page">
+      <section class="page-section home-about">
+        <div class="content-narrow">
+          <h1>{site.home.heading}</h1>
+          <p class="lead">{site.home.lead}</p>
+          <div class="rich-text" set:html={site.home.body}></div>
+        </div>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
