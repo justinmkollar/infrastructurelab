@@ -186,7 +186,7 @@ content:
     type: collection
     path: src/content/research
     format: yaml-frontmatter
-    filename: {template: "{title}.md", field: create}
+    filename: "{title}.md"
     view:
       fields: [title, dateLabel, published]
       primary: title
@@ -234,7 +234,7 @@ content:
     type: collection
     path: src/content/publications
     format: yaml-frontmatter
-    filename: {template: "{title}.md", field: create}
+    filename: "{title}.md"
     view:
       fields: [title, authors, type, date, published]
       primary: title
@@ -265,7 +265,7 @@ content:
     type: collection
     path: src/content/people
     format: yaml-frontmatter
-    filename: {template: "{name}.md", field: create}
+    filename: "{name}.md"
     view:
       fields: [name, title, institution, published]
       primary: name
@@ -305,7 +305,7 @@ content:
     type: collection
     path: src/content/pages
     format: yaml-frontmatter
-    filename: {template: "{title}.md", field: create}
+    filename: "{title}.md"
     view:
       fields: [title, published, order]
       primary: title
