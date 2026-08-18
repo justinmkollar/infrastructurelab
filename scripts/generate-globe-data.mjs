@@ -1,7 +1,7 @@
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { feature as topoFeature } from 'topojson-client';
+import * as topojsonClient from 'topojson-client';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const round = (value) => Math.round(Number(value) * 100) / 100;
@@ -46,7 +46,7 @@ function linePaths(geometry) {
 
 const worldPath = path.join(root, 'node_modules', 'world-atlas', 'countries-110m.json');
 const world = JSON.parse(await readFile(worldPath, 'utf8'));
-const countryCollection = topoFeature(world, world.objects.countries);
+const countryCollection = topojsonClient.feature(world, world.objects.countries);
 const countries = countryCollection.features.flatMap((item) => exteriorPaths(item.geometry));
 
 const dcPath = path.join(root, 'src', 'data', 'globe-data-centers.json');
