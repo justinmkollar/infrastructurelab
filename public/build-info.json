@@ -1,8 +1,9 @@
 {
-  "release": "atlas-original-globe-project-styles-themes-final-2026-08-18",
+  "release": "atlas-original-globe-project-styles-themes-final-clean-2026-08-18",
   "dataCenters": 9717,
   "coordinatePrecision": "original source coordinates; no rounding or spatial binning",
   "rotation": "continuous 8-minute revolution",
   "projectThemes": "complete editable light and dark palettes per research project",
-  "themeFieldsPerProject": 12
+  "themeFieldsPerProject": 12,
+  "renderer": "single bundled Astro client renderer"
 }
