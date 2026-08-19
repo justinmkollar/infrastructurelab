@@ -2,8 +2,9 @@
 authors:
   - Dorothy Tang
 title: "Local Reservoirs and Chinese Aqueducts: The Politics of Water Security
-  in Hong Kong (Honolulu: University of Hawaii Press, 2023), 110-133"
-details: In Infrastructure and the Remaking of Asia
+  in Hong Kong"
+details: "In Infrastructure and the Remaking of Asia (Honolulu: University of
+  Hawaii Press, 2023), 110-133"
 type: Book Chapter
 date: "2023"
 order: 100
