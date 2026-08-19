@@ -39,6 +39,7 @@ components:
       - {name: darkSmall, label: Dark small text, type: string, default: "#8d9395", pattern: "^#[0-9A-Fa-f]{6}$"}
       - {name: darkLine, label: Dark borders, type: string, default: "#46515a", pattern: "^#[0-9A-Fa-f]{6}$"}
       - {name: darkSoft, label: Dark soft surface, type: string, default: "#252a31", pattern: "^#[0-9A-Fa-f]{6}$"}
+
   page_modules:
     type: block
     label: Page modules
@@ -51,8 +52,31 @@ components:
         fields:
           - {name: heading, type: string}
           - name: body
+            label: Text
             type: rich-text
             options: {format: html, media: images, path: content}
+          - name: images
+            label: Images in this text section
+            type: object
+            list:
+              collapsible: {collapsed: true, summary: "{caption}"}
+            fields:
+              - name: image
+                type: image
+                required: true
+                options: {media: images, path: content}
+              - {name: alt, label: Alternative text, type: string}
+              - {name: caption, type: text}
+          - name: links
+            label: Links in this text section
+            type: object
+            list:
+              collapsible: {collapsed: true, summary: "{label}"}
+            fields:
+              - {name: label, type: string, required: true}
+              - {name: url, type: string, required: true}
+              - {name: newWindow, label: Open in new window, type: boolean, default: false}
+
       - name: image
         label: Image
         fields:
@@ -62,10 +86,7 @@ components:
             options: {media: images, path: content}
           - {name: alt, label: Alternative text, type: string}
           - {name: caption, type: text}
-          - name: size
-            type: select
-            default: wide
-            options: {values: [narrow, wide, full]}
+
       - name: gallery
         label: Image gallery
         fields:
@@ -73,7 +94,7 @@ components:
           - name: images
             type: object
             list:
-              collapsible: {collapsed: true, summary: "{alt}"}
+              collapsible: {collapsed: true, summary: "{caption}"}
             fields:
               - name: image
                 type: image
@@ -81,6 +102,7 @@ components:
                 options: {media: images, path: content}
               - {name: alt, label: Alternative text, type: string}
               - {name: caption, type: text}
+
       - name: links
         label: Links
         fields:
@@ -93,6 +115,7 @@ components:
               - {name: label, type: string, required: true}
               - {name: url, type: string, required: true}
               - {name: newWindow, label: Open in new window, type: boolean, default: false}
+
       - name: accordion
         label: Expandable sections
         fields:
@@ -109,6 +132,7 @@ components:
               - name: body
                 type: rich-text
                 options: {format: html, media: images, path: content}
+
       - name: steps
         label: Numbered steps
         fields:
@@ -125,6 +149,7 @@ components:
               - name: body
                 type: rich-text
                 options: {format: html, media: images, path: content}
+
       - name: updates
         label: Updates / timeline
         fields:
