@@ -79,8 +79,8 @@ modules:
       reviewed before publication, and official sources generally take
       precedence where available.</p><p>Data centers are organized as campuses.
       Facilities with the same operator and development status located within
-      approximately 500 metres are generally clustered into a single record.
-      There is no minimum facility-size threshold. Capacity is represented
+      approximately 500 meters are generally clustered into a single record.
+      There is no minimum facility size threshold. Capacity is represented
       through broad size classes because reported MW figures often use different
       definitions and development horizons. Locations use the most precise
       defensible coordinates available, while Low, Medium, and High confidence
@@ -94,17 +94,16 @@ modules:
       descriptions are human reviewed.</p><p>The Atlas distinguishes explicit,
       source-supported relationships from geographic or thematic associations.
       Coverage and precision vary by place and record type, and the Atlas should
-      not be treated as a complete inventory or as evidence of
-      causation.</p><p>[Full Methodology Appendix Available Soon]</p>
+      not be treated as a complete inventory or as evidence of causation.</p>
   - type: text
     heading: User Manual
     body: "<p>The User Manual explains how to work with the Atlas as a research
       tool: navigating the map, browsing by geography or operator, filtering
       records, following connections among data centers, events, and
-      legislation, and using the Details window to trace sources and
-      relationships. It also explains how to export structured notes and tables
-      for further research and how to interpret explicit, geographic, and
-      thematic connections appropriately.</p><p>[User Guide Available Soon]</p>"
+      legislation, and using the interface to trace sources and relationships.
+      It also explains how to export structured notes and tables for further
+      research and how to interpret explicit, geographic, and thematic
+      connections appropriately.</p>"
   - type: updates
     heading: News & Planned Updates
     items:
@@ -120,4 +119,13 @@ modules:
           additional infrastructure context, dataset downloads and citation
           guidance.</p><p>Infratructural relations: Added watershed and energy
           systems layers to contextualize resource impacts and policy.</p>"
+  - type: links
+    heading: Downloads
+    items:
+      - label: "[User Guide Available Soon]"
+        url: https://justinmkollar.github.io/infrastructurelab/projects/atlas-of-data-center-politics/
+        newWindow: false
+      - label: "[Full Methodology Appendix Available Soon]"
+        url: https://justinmkollar.github.io/infrastructurelab/projects/atlas-of-data-center-politics/
+        newWindow: false
 ---
