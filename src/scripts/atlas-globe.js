@@ -18,6 +18,12 @@
   const ROTATION_MS = 480000; // one revolution every eight minutes
   const FRAME_MS = 80; // ~12.5 fps, matching the original lightweight globe
   const POINT_SIZE = 3;
+  const COUNTRY_LINE_WIDTH = 0.54;
+  const CABLE_LINE_WIDTH = 0.48;
+  const FRAME_LINE_WIDTH = 0.58;
+  const COUNTRY_ALPHA = 0.68;
+  const INFRA_ALPHA = 0.52;
+  const FRAME_ALPHA = 0.72;
   const HOVER_HIT_RADIUS = 7;
   const HOVER_EASE_MS = 140;
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -59,11 +65,14 @@
   function drawFrameOnly() {
     resize();
     ctx.clearRect(0, 0, cssSize, cssSize);
+    ctx.save();
     ctx.beginPath();
     ctx.arc(cx, cy, radius, 0, Math.PI * 2);
     ctx.strokeStyle = lineColor();
-    ctx.lineWidth = 0.72;
+    ctx.lineWidth = FRAME_LINE_WIDTH;
+    ctx.globalAlpha = FRAME_ALPHA;
     ctx.stroke();
+    ctx.restore();
   }
 
   let raw;
@@ -107,7 +116,9 @@
     return [cx + radius * xr, cy - radius * yr];
   }
 
-  function drawPaths(paths, lon0) {
+  function drawPaths(paths, lon0, lineWidth, alpha) {
+    ctx.lineWidth = lineWidth;
+    ctx.globalAlpha = alpha;
     for (const path of paths) {
       let penDown = false;
       let lastLon = null;
@@ -148,13 +159,15 @@
     ctx.clip();
     ctx.strokeStyle = color;
     ctx.fillStyle = color;
-    ctx.lineWidth = 0.72;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
 
-    drawPaths(countries, lon0);
-    drawPaths(cables, lon0);
+    drawPaths(countries, lon0, COUNTRY_LINE_WIDTH, COUNTRY_ALPHA);
+    drawPaths(cables, lon0, CABLE_LINE_WIDTH, INFRA_ALPHA);
 
+    // Data-center marks share the cable opacity. Overlapping squares therefore
+    // accumulate visually, allowing dense clusters to register more strongly.
+    ctx.globalAlpha = INFRA_ALPHA;
     const half = POINT_SIZE / 2;
     visibleDcPoints = [];
     for (let index = 0; index < dataCenters.length; index += 1) {
@@ -183,11 +196,14 @@
     }
 
     ctx.restore();
+    ctx.save();
     ctx.beginPath();
     ctx.arc(cx, cy, radius, 0, Math.PI * 2);
     ctx.strokeStyle = color;
-    ctx.lineWidth = 0.72;
+    ctx.lineWidth = FRAME_LINE_WIDTH;
+    ctx.globalAlpha = FRAME_ALPHA;
     ctx.stroke();
+    ctx.restore();
   }
 
   function setHoveredDataCenter(next) {
