@@ -5,16 +5,81 @@ function wrapIndex(index, length) {
   return ((index % length) + length) % length;
 }
 
-function setGalleryIndex(gallery, nextIndex) {
+function imageReady(image) {
+  if (!image) return Promise.resolve();
+  image.loading = 'eager';
+
+  const decode = () => {
+    if (typeof image.decode !== 'function') return Promise.resolve();
+    return image.decode().catch(() => undefined);
+  };
+
+  if (image.complete) return decode();
+
+  return new Promise((resolve) => {
+    const done = () => {
+      image.removeEventListener('load', done);
+      image.removeEventListener('error', done);
+      decode().finally(resolve);
+    };
+    image.addEventListener('load', done, { once: true });
+    image.addEventListener('error', done, { once: true });
+  });
+}
+
+function preloadGallery(gallery) {
+  const images = [...gallery.querySelectorAll('[data-gallery-slide] img')];
+  images.forEach((image) => {
+    image.loading = 'eager';
+    imageReady(image);
+  });
+}
+
+async function setGalleryIndex(gallery, nextIndex) {
   const slides = [...gallery.querySelectorAll('[data-gallery-slide]')];
-  if (!slides.length) return;
+  if (!slides.length || gallery.dataset.galleryBusy === 'true') return;
+
   const index = wrapIndex(nextIndex, slides.length);
+  const current = Number(gallery.dataset.galleryIndex || 0);
+  if (index === current) return;
+
+  const targetSlide = slides[index];
+  const targetImage = targetSlide.querySelector('img');
+  const activeElement = document.activeElement;
+  const restoreFocus = activeElement?.closest?.('[data-gallery-prev]')
+    ? '[data-gallery-prev]'
+    : activeElement?.closest?.('[data-gallery-next]')
+      ? '[data-gallery-next]'
+      : null;
+
+  gallery.dataset.galleryBusy = 'true';
+
+  // Do not remove the current slide until the destination image has loaded and
+  // decoded. This prevents the carousel from briefly collapsing in height.
+  await imageReady(targetImage);
+
+  const scrollX = window.scrollX;
+  const scrollY = window.scrollY;
+
   slides.forEach((slide, slideIndex) => {
     const active = slideIndex === index;
     slide.classList.toggle('is-active', active);
     slide.setAttribute('aria-hidden', active ? 'false' : 'true');
   });
   gallery.dataset.galleryIndex = String(index);
+
+  // The clicked arrow lives inside the outgoing slide. Move focus to the same
+  // control in the incoming slide without allowing the browser to scroll it
+  // into view, then restore the exact viewport position after layout settles.
+  if (restoreFocus) {
+    targetSlide.querySelector(restoreFocus)?.focus({ preventScroll: true });
+  }
+
+  window.scrollTo(scrollX, scrollY);
+  requestAnimationFrame(() => {
+    window.scrollTo(scrollX, scrollY);
+    gallery.dataset.galleryBusy = 'false';
+  });
 }
 
 galleries.forEach((gallery) => {
@@ -23,15 +88,17 @@ galleries.forEach((gallery) => {
 
   const initial = Math.max(0, slides.findIndex((slide) => slide.classList.contains('is-active')));
   gallery.dataset.galleryIndex = String(initial);
+  gallery.dataset.galleryBusy = 'false';
+  preloadGallery(gallery);
 
-  gallery.addEventListener('click', (event) => {
+  gallery.addEventListener('click', async (event) => {
     const previous = event.target.closest('[data-gallery-prev]');
     const next = event.target.closest('[data-gallery-next]');
     if (!previous && !next) return;
     event.preventDefault();
     event.stopPropagation();
     const current = Number(gallery.dataset.galleryIndex || 0);
-    setGalleryIndex(gallery, current + (next ? 1 : -1));
+    await setGalleryIndex(gallery, current + (next ? 1 : -1));
   });
 
   let touchX = 0;
@@ -43,14 +110,14 @@ galleries.forEach((gallery) => {
     gallery.dataset.gallerySwiped = 'false';
   }, { passive: true });
 
-  gallery.addEventListener('touchend', (event) => {
+  gallery.addEventListener('touchend', async (event) => {
     const touch = event.changedTouches[0];
     const dx = touch.clientX - touchX;
     const dy = touch.clientY - touchY;
     if (Math.abs(dx) < 44 || Math.abs(dx) <= Math.abs(dy) * 1.15) return;
     gallery.dataset.gallerySwiped = 'true';
     const current = Number(gallery.dataset.galleryIndex || 0);
-    setGalleryIndex(gallery, current + (dx < 0 ? 1 : -1));
+    await setGalleryIndex(gallery, current + (dx < 0 ? 1 : -1));
     setTimeout(() => { gallery.dataset.gallerySwiped = 'false'; }, 350);
   }, { passive: true });
 });
@@ -77,6 +144,8 @@ let lightboxNext;
 let lightboxMedia;
 let lightboxItems = [];
 let lightboxIndex = 0;
+let lightboxScrollX = 0;
+let lightboxScrollY = 0;
 
 function ensureLightbox() {
   if (lightbox) return lightbox;
@@ -113,6 +182,7 @@ function ensureLightbox() {
 
   lightbox.addEventListener('close', () => {
     document.body.classList.remove('media-lightbox-open');
+    window.scrollTo(lightboxScrollX, lightboxScrollY);
   });
 
   document.addEventListener('keydown', (event) => {
@@ -147,6 +217,16 @@ function ensureLightbox() {
 
 function sourceImage(item) {
   return item.matches?.('img') ? item : item.querySelector('img');
+}
+
+function preloadLightboxItems(items) {
+  items.forEach((item) => {
+    const image = sourceImage(item);
+    const src = item.dataset.src || image?.currentSrc || image?.src || '';
+    if (!src) return;
+    const preload = new Image();
+    preload.src = src;
+  });
 }
 
 function renderLightbox() {
@@ -196,8 +276,11 @@ function openMedia(trigger, event) {
   event?.preventDefault();
   lightboxItems = contextItems(trigger);
   lightboxIndex = Math.max(0, lightboxItems.indexOf(trigger));
+  preloadLightboxItems(lightboxItems);
   ensureLightbox();
   renderLightbox();
+  lightboxScrollX = window.scrollX;
+  lightboxScrollY = window.scrollY;
   document.body.classList.add('media-lightbox-open');
 
   if (typeof lightbox.showModal === 'function') {
