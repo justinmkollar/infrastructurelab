@@ -112,4 +112,12 @@ modules:
           additional infrastructure context, dataset downloads and citation
           guidance.</p><p>Infratructural relations: Added watershed and energy
           systems layers to contextualize resource impacts and policy.</p>"
+  - type: gallery
+    heading: Images
+    images:
+      - image: /uploads/images/adcpscreen01.jpg
+      - image: /uploads/images/adcpscreen02.jpg
+      - image: /uploads/images/adcpscreen03.jpg
+      - image: /uploads/images/adcpscreen04.jpg
+      - image: /uploads/images/adcpscreen05.jpg
 ---
