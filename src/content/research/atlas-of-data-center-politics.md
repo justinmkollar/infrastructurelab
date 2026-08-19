@@ -20,13 +20,13 @@ theme:
   lightText: "#171717"
   lightMuted: "#62686b"
   lightSmall: "#7d8183"
-  lightLine: "#b2b5b6"
+  lightLine: "#c8cbcc"
   lightSoft: "#e8e9e5"
   darkBackground: "#1d2028"
   darkText: "#f3f2f2"
   darkMuted: "#a9adaa"
   darkSmall: "#8d9395"
-  darkLine: "#5b6974"
+  darkLine: "#46515a"
   darkSoft: "#252a31"
 hero:
   type: atlas-globe
