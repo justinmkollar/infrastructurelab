@@ -1,0 +1,27 @@
+.project-page [data-module-type="text"] .rich-text img[data-inline-project-media] {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  margin: 24px 0 8px;
+  cursor: zoom-in;
+  transition: filter .28s ease;
+}
+
+.project-page [data-module-type="text"] .rich-text img[data-inline-project-media]:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-page [data-module-type="text"] .rich-text img[data-inline-project-media]:hover,
+  .project-page [data-module-type="text"] .rich-text img[data-inline-project-media]:focus-visible {
+    filter: brightness(.94);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-page [data-module-type="text"] .rich-text img[data-inline-project-media] {
+    transition: none;
+  }
+}
