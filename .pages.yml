@@ -206,6 +206,74 @@ content:
           - {name: url, label: URL / path, type: string, required: true}
       - {name: theme, component: project_theme, label: Global color scheme}
 
+  - name: display_order
+    label: Display ordering
+    type: file
+    path: src/data/display-order.json
+    format: json
+    operations: {delete: false}
+    fields:
+      - name: research
+        label: Research
+        type: object
+        description: Drag projects into the order they should appear on the Research page.
+        list: true
+        fields:
+          - name: entry
+            label: Project
+            type: reference
+            required: true
+            options:
+              collection: research
+              value: "{path}"
+              label: "{primary}"
+              search: "title,contributors"
+      - name: publications
+        label: Publications
+        type: object
+        description: Drag publications into the order they should appear on the Publications page.
+        list: true
+        fields:
+          - name: entry
+            label: Publication
+            type: reference
+            required: true
+            options:
+              collection: publications
+              value: "{path}"
+              label: "{primary}"
+              search: "title,authors"
+      - name: people
+        label: People
+        type: object
+        description: Drag people into the order they should appear on the People page.
+        list: true
+        fields:
+          - name: entry
+            label: Person
+            type: reference
+            required: true
+            options:
+              collection: people
+              value: "{path}"
+              label: "{primary}"
+              search: "name,title,institution"
+      - name: pages
+        label: Additional pages
+        type: object
+        description: Drag additional pages into their preferred order for future page lists or navigation uses.
+        list: true
+        fields:
+          - name: entry
+            label: Page
+            type: reference
+            required: true
+            options:
+              collection: pages
+              value: "{path}"
+              label: "{primary}"
+              search: "title,description"
+
   - name: research
     label: Research
     type: collection
@@ -213,16 +281,16 @@ content:
     format: yaml-frontmatter
     filename: "{title}.md"
     view:
-      fields: [order, title, dateLabel, published]
+      fields: [title, dateLabel, published]
       primary: title
-      sort: [order, title]
+      sort: [title, dateLabel]
       search: [title, contributors, description]
-      default: {sort: order, order: asc}
+      default: {sort: title, order: asc}
     fields:
       - {name: title, type: string, required: true}
       - {name: contributors, type: string, list: true}
       - {name: dateLabel, label: Date, type: string, required: true}
-      - {name: order, label: Display order, type: number, default: 100, description: "Lower numbers appear first. Using 10, 20, 30 leaves room to insert items later."}
+      - {name: order, type: number, default: 100, hidden: true}
       - {name: published, type: boolean, default: true}
       - name: description
         type: rich-text
@@ -261,11 +329,11 @@ content:
     format: yaml-frontmatter
     filename: "{title}.md"
     view:
-      fields: [order, title, authors, type, date, published]
+      fields: [title, authors, type, date, published]
       primary: title
-      sort: [order, title]
+      sort: [title, date]
       search: [title, authors, details, type, keywords]
-      default: {sort: order, order: asc}
+      default: {sort: title, order: asc}
     fields:
       - {name: authors, type: string, list: true, required: true}
       - {name: title, type: string, required: true}
@@ -276,7 +344,7 @@ content:
         required: true
         options: {values: [Peer-reviewed Article, Book, Book Chapter, Essay, Review, Report, Working Paper, Other]}
       - {name: date, type: string}
-      - {name: order, label: Display order, type: number, default: 100, description: "Lower numbers appear first. Using 10, 20, 30 leaves room to insert items later."}
+      - {name: order, type: number, default: 100, hidden: true}
       - {name: published, type: boolean, default: true}
       - {name: url, label: Publication URL, type: string}
       - name: abstract
@@ -292,16 +360,16 @@ content:
     format: yaml-frontmatter
     filename: "{name}.md"
     view:
-      fields: [order, name, title, institution, published]
+      fields: [name, title, institution, published]
       primary: name
-      sort: [order, name]
+      sort: [name, title]
       search: [name, title, institution, bio]
-      default: {sort: order, order: asc}
+      default: {sort: name, order: asc}
     fields:
       - {name: name, type: string, required: true}
       - {name: title, label: Position, type: string, required: true}
       - {name: institution, type: string, required: true}
-      - {name: order, label: Display order, type: number, default: 100, description: "Lower numbers appear first. Using 10, 20, 30 leaves room to insert items later."}
+      - {name: order, type: number, default: 100, hidden: true}
       - {name: published, type: boolean, default: true}
       - name: photo
         type: image
@@ -332,14 +400,14 @@ content:
     format: yaml-frontmatter
     filename: "{title}.md"
     view:
-      fields: [order, title, published]
+      fields: [title, published]
       primary: title
-      sort: [order, title]
+      sort: [title]
       search: [title, description]
-      default: {sort: order, order: asc}
+      default: {sort: title, order: asc}
     fields:
       - {name: title, type: string, required: true}
       - {name: description, type: text}
       - {name: published, type: boolean, default: true}
-      - {name: order, label: Display order, type: number, default: 100, description: "Lower numbers appear first. Using 10, 20, 30 leaves room to insert items later."}
+      - {name: order, type: number, default: 100, hidden: true}
       - {name: modules, component: page_modules}
