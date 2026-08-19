@@ -5,33 +5,93 @@ interface Props { modules?: any[]; }
 const { modules = [] } = Astro.props;
 
 const asset = (path = '') => /^https?:\/\//.test(path) ? path : withBase(path);
+const href = (path = '') => /^https?:\/\//.test(path) || path.startsWith('mailto:') || path.startsWith('tel:') ? path : withBase(path);
 const hasImage = (value: unknown): value is string => typeof value === 'string' && value.trim().length > 0;
+const validImages = (items: any[] = []) => items.filter((item) => hasImage(item?.image));
+const validLinks = (items: any[] = []) => items.filter((item) => typeof item?.label === 'string' && item.label.trim() && typeof item?.url === 'string' && item.url.trim());
 ---
 {modules.map((module) => {
   if (module.type === 'text') {
+    const images = validImages(module.images || []);
+    const links = validLinks(module.links || []);
     return <section class="module" data-module-type="text">
       {module.heading && <h1 class="module-heading">{module.heading}</h1>}
-      <div class="rich-text" set:html={module.body}></div>
+      {module.body && <div class="rich-text" set:html={module.body}></div>}
+
+      {images.length > 0 && <div class="text-module-media">
+        {images.map((item: any) => <figure class="module-image-figure text-module-image">
+          <button
+            class="media-open"
+            type="button"
+            aria-label="View image full screen"
+            data-project-media
+            data-src={asset(item.image)}
+            data-alt={item.alt || ''}
+            data-caption={item.caption || ''}
+          >
+            <img src={asset(item.image)} alt={item.alt || ''} loading="lazy" decoding="async" />
+          </button>
+          {item.caption && <figcaption class="module-caption">{item.caption}</figcaption>}
+        </figure>)}
+      </div>}
+
+      {links.length > 0 && <div class="module-inline-links">
+        {links.map((item: any) => <a class="module-inline-link" href={href(item.url)} target={item.newWindow ? '_blank' : undefined} rel={item.newWindow ? 'noopener' : undefined}>
+          <span>{item.label}</span><span aria-hidden="true">→</span>
+        </a>)}
+      </div>}
     </section>;
   }
 
   if (module.type === 'image') {
     if (!hasImage(module.image)) return null;
-    return <section class={`module module-image ${module.size || 'wide'}`} data-module-type="image">
+    return <section class="module module-image" data-module-type="image">
       <figure class="module-image-figure">
-        <img src={asset(module.image)} alt={module.alt || ''} loading="lazy" decoding="async" />
+        <button
+          class="media-open"
+          type="button"
+          aria-label="View image full screen"
+          data-project-media
+          data-src={asset(module.image)}
+          data-alt={module.alt || ''}
+          data-caption={module.caption || ''}
+        >
+          <img src={asset(module.image)} alt={module.alt || ''} loading="lazy" decoding="async" />
+        </button>
         {module.caption && <figcaption class="module-caption">{module.caption}</figcaption>}
       </figure>
     </section>;
   }
 
   if (module.type === 'gallery') {
-    const images = (module.images || []).filter((item: any) => hasImage(item?.image));
+    const images = validImages(module.images || []);
     return <section class="module module-gallery" data-module-type="gallery">
       {module.heading && <h1 class="module-heading">{module.heading}</h1>}
-      {images.length > 0 && <div class="gallery-grid">
-        {images.map((item: any) => <figure class="gallery-item">
-          <img src={asset(item.image)} alt={item.alt || ''} loading="lazy" decoding="async" />
+      {images.length > 0 && <div class="gallery-carousel" data-project-gallery>
+        {images.map((item: any, index: number) => <figure
+          class={`gallery-slide${index === 0 ? ' is-active' : ''}`}
+          data-gallery-slide
+          data-gallery-index={index}
+          aria-hidden={index === 0 ? 'false' : 'true'}
+        >
+          <div class="gallery-media" data-gallery-swipe>
+            <button
+              class="media-open"
+              type="button"
+              aria-label="View image full screen"
+              data-project-media
+              data-src={asset(item.image)}
+              data-alt={item.alt || ''}
+              data-caption={item.caption || ''}
+              data-gallery-index={index}
+            >
+              <img src={asset(item.image)} alt={item.alt || ''} loading="lazy" decoding="async" />
+            </button>
+            {images.length > 1 && <>
+              <button class="gallery-nav gallery-prev" type="button" aria-label="Previous image" data-gallery-prev><span aria-hidden="true">←</span></button>
+              <button class="gallery-nav gallery-next" type="button" aria-label="Next image" data-gallery-next><span aria-hidden="true">→</span></button>
+            </>}
+          </div>
           {item.caption && <figcaption class="module-caption">{item.caption}</figcaption>}
         </figure>)}
       </div>}
@@ -41,7 +101,7 @@ const hasImage = (value: unknown): value is string => typeof value === 'string' 
   if (module.type === 'links') {
     return <section class="module" data-module-type="links">
       {module.heading && <h1 class="module-heading">{module.heading}</h1>}
-      <div class="link-list">{module.items?.map((item:any) => <a href={/^https?:\/\//.test(item.url) ? item.url : withBase(item.url)} target={item.newWindow ? '_blank' : undefined} rel={item.newWindow ? 'noopener' : undefined}><span>{item.label}</span><span aria-hidden="true">→</span></a>)}</div>
+      <div class="link-list">{module.items?.map((item:any) => <a href={href(item.url)} target={item.newWindow ? '_blank' : undefined} rel={item.newWindow ? 'noopener' : undefined}><span>{item.label}</span><span aria-hidden="true">→</span></a>)}</div>
     </section>;
   }
 
@@ -70,3 +130,7 @@ const hasImage = (value: unknown): value is string => typeof value === 'string' 
 
   return null;
 })}
+
+<script>
+  import '../scripts/project-media.js';
+</script>
