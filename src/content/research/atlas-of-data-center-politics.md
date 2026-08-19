@@ -31,7 +31,7 @@ theme:
 hero:
   type: atlas-globe
   buttonLabel: Open the Atlas of Data Center Politics
-  buttonUrl: "#"
+  buttonUrl: https://atlasofdatacenterpolitics.vercel.app/
   intro: The Atlas of Data Center Politics is an interactive research tool for
     investigating where data centers are being built, who is developing them,
     and how governments, communities, organizations, and other actors are
