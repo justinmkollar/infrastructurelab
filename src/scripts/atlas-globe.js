@@ -50,7 +50,10 @@
   }
 
   function lineColor() {
-    return getComputedStyle(document.documentElement).getPropertyValue('--line').trim() || '#c8cbcc';
+    // Read the color from the canvas so project-scoped theme variables are
+    // inherited correctly. The globe uses the project's secondary-text color
+    // in both light and dark modes rather than the global border color.
+    return getComputedStyle(canvas).getPropertyValue('--muted').trim() || '#62686b';
   }
 
   function drawFrameOnly() {
