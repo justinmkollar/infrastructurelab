@@ -1,5 +1,13 @@
 ---
-import { getCollection } from 'astro:content'; import BaseLayout from '../layouts/BaseLayout.astro'; import PublicationIndexEntry from '../components/PublicationIndexEntry.astro';
-const entries = (await getCollection('publications', ({ data }) => data.published)).sort((a,b) => a.data.order - b.data.order || a.data.title.localeCompare(b.data.title));
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PublicationIndexEntry from '../components/PublicationIndexEntry.astro';
+import { sortByDisplayOrder } from '../utils/contentOrder';
+
+const entries = sortByDisplayOrder(
+  await getCollection('publications', ({ data }) => data.published),
+  'publications',
+  (entry) => entry.data.title
+);
 ---
 <BaseLayout title="Publications" active="Publications"><main class="page"><section class="page-section"><div class="content-narrow"><h1>Publications</h1><p>Selected publications and work in progress.</p></div><div class="index-list">{entries.map((entry) => <PublicationIndexEntry entry={entry} />)}</div></section></main></BaseLayout>
