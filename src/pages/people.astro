@@ -2,6 +2,12 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PeopleIndexEntry from '../components/PeopleIndexEntry.astro';
-const entries = (await getCollection('people', ({ data }) => data.published)).sort((a,b) => a.data.order - b.data.order || a.data.name.localeCompare(b.data.name));
+import { sortByDisplayOrder } from '../utils/contentOrder';
+
+const entries = sortByDisplayOrder(
+  await getCollection('people', ({ data }) => data.published),
+  'people',
+  (entry) => entry.data.name
+);
 ---
 <BaseLayout title="People" active="People"><main class="page"><section class="page-section"><div class="content-narrow"><h1>People</h1></div><div class="index-list">{entries.map((entry) => <PeopleIndexEntry entry={entry} />)}</div></section></main></BaseLayout>
