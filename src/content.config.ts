@@ -26,11 +26,43 @@ const heroSchema = z.object({
   intro: z.string().optional()
 }).optional();
 
+const imageItemSchema = z.object({
+  image: z.string(),
+  alt: z.string().default(''),
+  caption: z.string().optional()
+});
+
+const linkItemSchema = z.object({
+  label: z.string(),
+  url: z.string(),
+  newWindow: z.boolean().default(false)
+});
+
 const moduleSchema = z.discriminatedUnion('type', [
-  z.object({ type: z.literal('text'), heading: z.string().optional(), body: z.string().default('') }),
-  z.object({ type: z.literal('image'), image: z.string(), alt: z.string().default(''), caption: z.string().optional(), size: z.enum(['narrow', 'wide', 'full']).default('wide') }),
-  z.object({ type: z.literal('gallery'), heading: z.string().optional(), images: z.array(z.object({ image: z.string(), alt: z.string().default(''), caption: z.string().optional() })).default([]) }),
-  z.object({ type: z.literal('links'), heading: z.string().optional(), items: z.array(z.object({ label: z.string(), url: z.string(), newWindow: z.boolean().default(false) })).default([]) }),
+  z.object({
+    type: z.literal('text'),
+    heading: z.string().optional(),
+    body: z.string().default(''),
+    images: z.array(imageItemSchema).default([]),
+    links: z.array(linkItemSchema).default([])
+  }),
+  z.object({
+    type: z.literal('image'),
+    image: z.string(),
+    alt: z.string().default(''),
+    caption: z.string().optional(),
+    size: z.enum(['narrow', 'wide', 'full']).default('wide')
+  }),
+  z.object({
+    type: z.literal('gallery'),
+    heading: z.string().optional(),
+    images: z.array(imageItemSchema).default([])
+  }),
+  z.object({
+    type: z.literal('links'),
+    heading: z.string().optional(),
+    items: z.array(linkItemSchema).default([])
+  }),
   z.object({ type: z.literal('accordion'), heading: z.string().optional(), intro: z.string().optional(), items: z.array(z.object({ title: z.string(), body: z.string().default('') })).default([]) }),
   z.object({ type: z.literal('steps'), heading: z.string().optional(), intro: z.string().optional(), items: z.array(z.object({ title: z.string(), body: z.string().default('') })).default([]) }),
   z.object({ type: z.literal('updates'), heading: z.string().optional(), items: z.array(z.object({ date: z.string().optional(), title: z.string(), body: z.string().default('') })).default([]) })
