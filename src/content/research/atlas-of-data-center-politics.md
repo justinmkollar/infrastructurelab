@@ -34,8 +34,8 @@ hero:
   buttonUrl: https://atlasofdatacenterpolitics.vercel.app/
   intro: The Atlas of Data Center Politics is an interactive research tool for
     investigating where data centers are being built, who is developing them,
-    and how governments, communities, organizations, and other actors are
-    responding.
+    and how legislators, regulators, communities, organizations, and other
+    actors are responding.
 modules:
   - type: text
     heading: About
