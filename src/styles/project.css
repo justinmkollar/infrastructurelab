@@ -1,7 +1,6 @@
 /* Research-project presentation layer.
    Colors come from each project's editable theme record and are injected by
-   BaseLayout. These rules restore the proportions and hierarchy of the
-   original Infrastructure Lab project-page prototype. */
+   BaseLayout. */
 
 .project-page .site-header {
   background: color-mix(in srgb, var(--bg) 96%, transparent);
@@ -49,6 +48,7 @@
 }
 
 .project-page .module {
+  width: 100%;
   padding: 48px 0;
   border-bottom: 1px solid var(--line);
   scroll-margin-top: calc(var(--header-h) + 10px);
@@ -81,26 +81,65 @@
   margin-bottom: 0;
 }
 
-/* Image and gallery modules are first-class project modules. Pages CMS writes
-   public media paths; ModuleRenderer resolves those through the active Astro
-   base path, so the same content works on GitHub Pages and a custom domain. */
+/* Project media ----------------------------------------------------------- */
+.project-page .module-image,
+.project-page .module-gallery,
 .project-page .module-image-figure,
-.project-page .gallery-item {
+.project-page .text-module-media,
+.project-page .text-module-image,
+.project-page .gallery-carousel,
+.project-page .gallery-slide,
+.project-page .gallery-media {
+  width: 100%;
+  max-width: none;
+}
+
+.project-page .module-image-figure,
+.project-page .gallery-slide,
+.project-page .text-module-image {
   margin: 0;
 }
 
-.project-page .module-image img,
-.project-page .gallery-item img {
+.project-page .text-module-media {
+  display: grid;
+  gap: 28px;
+  margin-top: 28px;
+}
+
+.project-page .media-open {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: var(--soft);
+  color: inherit;
+  cursor: zoom-in;
+  text-align: left;
+}
+
+.project-page .media-open img {
   display: block;
   width: 100%;
   height: auto;
+  margin: 0;
+  transition: transform .28s ease, filter .28s ease;
+  transform-origin: center center;
 }
 
-.project-page .module-gallery .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  width: 100%;
+@media (hover: hover) and (pointer: fine) {
+  .project-page .media-open:hover img,
+  .project-page .media-open:focus-visible img {
+    transform: scale(1.008);
+    filter: brightness(.94);
+  }
+}
+
+.project-page .media-open:focus-visible,
+.project-page .gallery-nav:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: -2px;
 }
 
 .project-page .module-caption {
@@ -108,6 +147,210 @@
   color: var(--small);
   font-size: 10.5pt;
   line-height: 1.5;
+}
+
+/* One-image-at-a-time gallery. */
+.project-page .gallery-slide {
+  display: none;
+}
+
+.project-page .gallery-slide.is-active {
+  display: block;
+  animation: gallery-reveal .18s ease-out;
+}
+
+@keyframes gallery-reveal {
+  from { opacity: .84; }
+  to { opacity: 1; }
+}
+
+.project-page .gallery-media {
+  position: relative;
+  overflow: hidden;
+  background: var(--soft);
+  touch-action: pan-y;
+}
+
+.project-page .gallery-nav {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  width: min(22%, 94px);
+  padding: 0 14px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  opacity: 0;
+  font-family: var(--font-display);
+  font-size: 16pt;
+  line-height: 1;
+  text-shadow: 0 1px 5px rgba(0,0,0,.72);
+  cursor: pointer;
+  transition: opacity .14s ease;
+}
+
+.project-page .gallery-prev {
+  left: 0;
+  text-align: left;
+}
+
+.project-page .gallery-next {
+  right: 0;
+  text-align: right;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-page .gallery-nav:hover,
+  .project-page .gallery-nav:focus-visible {
+    opacity: 1;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .project-page .gallery-nav {
+    display: none;
+  }
+}
+
+/* Links can now live inside a text module as well as in a standalone module. */
+.project-page .module-inline-links {
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.project-page .module-inline-link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--fg);
+  font-family: var(--font-display);
+  font-size: 10.5pt;
+  text-decoration: none;
+}
+
+.project-page .module-inline-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Full-window image viewer. */
+body.media-lightbox-open {
+  overflow: hidden;
+}
+
+.project-lightbox {
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(10,10,10,.96);
+  color: #fff;
+}
+
+.project-lightbox::backdrop {
+  background: rgba(10,10,10,.96);
+}
+
+.project-lightbox .lightbox-shell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 48px 58px 26px;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.project-lightbox .lightbox-media {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-lightbox .lightbox-image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100dvh - 126px);
+  object-fit: contain;
+}
+
+.project-lightbox .lightbox-caption {
+  width: min(100%, 920px);
+  margin: 14px auto 0;
+  color: rgba(255,255,255,.82);
+  font-size: 10.5pt;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.project-lightbox .lightbox-close,
+.project-lightbox .lightbox-nav {
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-display);
+  cursor: pointer;
+}
+
+.project-lightbox .lightbox-close {
+  position: absolute;
+  z-index: 5;
+  top: 13px;
+  right: 18px;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  font-size: 23pt;
+  font-weight: 300;
+  line-height: 1;
+  opacity: .8;
+}
+
+.project-lightbox .lightbox-close:hover,
+.project-lightbox .lightbox-close:focus-visible {
+  opacity: 1;
+}
+
+.project-lightbox .lightbox-nav {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  bottom: 0;
+  width: 54px;
+  padding: 0;
+  font-size: 17pt;
+  opacity: .58;
+}
+
+.project-lightbox .lightbox-nav:hover,
+.project-lightbox .lightbox-nav:focus-visible {
+  opacity: 1;
+}
+
+.project-lightbox .lightbox-prev {
+  left: -54px;
+  text-align: left;
+}
+
+.project-lightbox .lightbox-next {
+  right: -54px;
+  text-align: right;
+}
+
+.project-lightbox .lightbox-nav[hidden],
+.project-lightbox .lightbox-caption[hidden] {
+  display: none;
 }
 
 .project-page .accordion {
@@ -222,8 +465,30 @@
     padding-bottom: 40px;
   }
 
-  .project-page .module-gallery .gallery-grid {
-    grid-template-columns: 1fr;
+  .project-page .text-module-media,
+  .project-page .module-inline-links {
+    margin-top: 22px;
+  }
+
+  .project-lightbox .lightbox-shell {
+    padding: 50px 12px 20px;
+  }
+
+  .project-lightbox .lightbox-image {
+    max-height: calc(100dvh - 116px);
+  }
+
+  .project-lightbox .lightbox-nav {
+    width: 40px;
+    opacity: .72;
+  }
+
+  .project-lightbox .lightbox-prev {
+    left: 0;
+  }
+
+  .project-lightbox .lightbox-next {
+    right: 0;
   }
 
   .atlas-project {
@@ -240,5 +505,13 @@
     height: 360px;
     max-width: calc(100vw - 28px);
     max-height: calc(100vw - 28px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-page .media-open img,
+  .project-page .gallery-slide {
+    transition: none;
+    animation: none;
   }
 }
