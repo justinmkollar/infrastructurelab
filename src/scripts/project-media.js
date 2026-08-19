@@ -39,6 +39,7 @@ galleries.forEach((gallery) => {
     const touch = event.changedTouches[0];
     touchX = touch.clientX;
     touchY = touch.clientY;
+    gallery.dataset.gallerySwiped = 'false';
   }, { passive: true });
 
   gallery.addEventListener('touchend', (event) => {
@@ -46,8 +47,10 @@ galleries.forEach((gallery) => {
     const dx = touch.clientX - touchX;
     const dy = touch.clientY - touchY;
     if (Math.abs(dx) < 44 || Math.abs(dx) <= Math.abs(dy) * 1.15) return;
+    gallery.dataset.gallerySwiped = 'true';
     const current = Number(gallery.dataset.galleryIndex || 0);
     setGalleryIndex(gallery, current + (dx < 0 ? 1 : -1));
+    setTimeout(() => { gallery.dataset.gallerySwiped = 'false'; }, 350);
   }, { passive: true });
 });
 
@@ -56,6 +59,7 @@ let lightboxImage;
 let lightboxCaption;
 let lightboxPrevious;
 let lightboxNext;
+let lightboxMedia;
 let lightboxItems = [];
 let lightboxIndex = 0;
 
@@ -82,6 +86,7 @@ function ensureLightbox() {
   lightboxCaption = lightbox.querySelector('.lightbox-caption');
   lightboxPrevious = lightbox.querySelector('.lightbox-prev');
   lightboxNext = lightbox.querySelector('.lightbox-next');
+  lightboxMedia = lightbox.querySelector('.lightbox-media');
 
   lightbox.querySelector('.lightbox-close').addEventListener('click', () => lightbox.close());
   lightboxPrevious.addEventListener('click', () => moveLightbox(-1));
@@ -106,14 +111,31 @@ function ensureLightbox() {
     }
   });
 
+  let lightboxTouchX = 0;
+  let lightboxTouchY = 0;
+  lightboxMedia.addEventListener('touchstart', (event) => {
+    const touch = event.changedTouches[0];
+    lightboxTouchX = touch.clientX;
+    lightboxTouchY = touch.clientY;
+  }, { passive: true });
+
+  lightboxMedia.addEventListener('touchend', (event) => {
+    const touch = event.changedTouches[0];
+    const dx = touch.clientX - lightboxTouchX;
+    const dy = touch.clientY - lightboxTouchY;
+    if (Math.abs(dx) < 44 || Math.abs(dx) <= Math.abs(dy) * 1.15) return;
+    moveLightbox(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
   return lightbox;
 }
 
 function renderLightbox() {
   if (!lightboxItems.length) return;
   const item = lightboxItems[lightboxIndex];
-  const src = item.dataset.src || item.querySelector('img')?.currentSrc || item.querySelector('img')?.src || '';
-  const alt = item.dataset.alt || item.querySelector('img')?.alt || '';
+  const sourceImage = item.querySelector('img');
+  const src = item.dataset.src || sourceImage?.currentSrc || sourceImage?.src || '';
+  const alt = item.dataset.alt || sourceImage?.alt || '';
   const caption = item.dataset.caption || '';
 
   lightboxImage.src = src;
@@ -148,12 +170,23 @@ function contextItems(trigger) {
 document.addEventListener('click', (event) => {
   const trigger = event.target.closest('[data-project-media]');
   if (!trigger) return;
-  event.preventDefault();
 
+  const gallery = trigger.closest('[data-project-gallery]');
+  if (gallery?.dataset.gallerySwiped === 'true') {
+    event.preventDefault();
+    return;
+  }
+
+  event.preventDefault();
   lightboxItems = contextItems(trigger);
   lightboxIndex = Math.max(0, lightboxItems.indexOf(trigger));
   ensureLightbox();
   renderLightbox();
   document.body.classList.add('media-lightbox-open');
-  lightbox.showModal();
+
+  if (typeof lightbox.showModal === 'function') {
+    lightbox.showModal();
+  } else {
+    lightbox.setAttribute('open', '');
+  }
 });
