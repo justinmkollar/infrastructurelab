@@ -61,6 +61,14 @@ modules:
       policymakers, and anyone trying to understand how the rapid expansion of
       data-center infrastructure is reshaping places and producing new political
       responses.</p>
+  - type: gallery
+    heading: Images
+    images:
+      - image: /uploads/images/adcpscreen01.jpg
+      - image: /uploads/images/adcpscreen02.jpg
+      - image: /uploads/images/adcpscreen03.jpg
+      - image: /uploads/images/adcpscreen04.jpg
+      - image: /uploads/images/adcpscreen05.jpg
   - type: text
     heading: Data & Methodology
     body: <p>Data are assembled from publicly available evidence, including
@@ -112,12 +120,4 @@ modules:
           additional infrastructure context, dataset downloads and citation
           guidance.</p><p>Infratructural relations: Added watershed and energy
           systems layers to contextualize resource impacts and policy.</p>"
-  - type: gallery
-    heading: Images
-    images:
-      - image: /uploads/images/adcpscreen01.jpg
-      - image: /uploads/images/adcpscreen02.jpg
-      - image: /uploads/images/adcpscreen03.jpg
-      - image: /uploads/images/adcpscreen04.jpg
-      - image: /uploads/images/adcpscreen05.jpg
 ---
