@@ -2,11 +2,11 @@
   "title": "Infrastructure Lab",
   "institution": "National University of Singapore",
   "footer": "Infrastructure Lab · National University of Singapore",
-  "siteDescription": "Infrastructure Lab studies how built and landscape systems organize contemporary urban and regional life.",
+  "siteDescription": "Located at the National University of Singapore, the Infrastructure Lab investigates the territorial systems and material flows that sustain the built environment. ",
   "home": {
     "heading": "About",
-    "lead": "Infrastructure Lab studies how built and landscape systems organize contemporary urban and regional life.",
-    "body": "<p>Located at the National University of Singapore, the Infrastructure Lab investigates the territorial systems and material flows that sustain the built environment. We examine the extended landscapes of material flows, tracing how extractive processes and historical trajectories connect distant resource frontiers to city centers. Our research maps the political economies and ecologies driving spatial change across networks of energy, water, logistics, computation, and manufacturing.</p><p>Rather than treating these systems as secondary, we ground our work in the infrastructural and institutional mechanics of spatial production. We study how large-scale infrastructures actually materialize on the ground—analyzing how they are sited, financed, permitted, and contested. Through spatial research and historical analysis, we highlight the frictions these global networks generate, observing how governments, developers, and communities navigate land assembly, utility planning, industrial policy, and capital investment to make these operational landscapes function.</p>",
+    "lead": "Located at the National University of Singapore, the Infrastructure Lab investigates the territorial systems and material flows that sustain the built environment. ",
+    "body": "<p>We examine the extended landscapes of material flows, tracing how extractive processes and historical trajectories connect distant resource frontiers to city centers. Our research maps the political economies and ecologies driving spatial change across networks of energy, water, logistics, computation, and manufacturing.</p><p>Rather than treating these systems as secondary, we ground our work in the infrastructural and institutional mechanics of spatial production. We study how large-scale infrastructures actually materialize on the ground—analyzing how they are sited, financed, permitted, and contested. Through spatial research and historical analysis, we highlight the frictions these global networks generate, observing how governments, developers, and communities navigate land assembly, utility planning, industrial policy, and capital investment to make these operational landscapes function.</p>",
     "splashFadeSeconds": 2.5,
     "splashHoldSeconds": 30,
     "splashImages": [
