@@ -18,3 +18,11 @@ const resolveUrl = (url: string) => /^https?:\/\//.test(url) ? url : withBase(ur
     {site.navigation.map((item) => <a href={resolveUrl(item.url)} aria-current={active === item.label ? 'page' : undefined}>{item.label}</a>)}
   </nav>
 </header>
+
+<style>
+  .site-title,
+  .site-nav a,
+  .mobile-nav a {
+    font-size: 12pt;
+  }
+</style>
