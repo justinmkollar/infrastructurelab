@@ -1,16 +1,72 @@
 ---
 import { withBase } from '../utils/paths';
+
 interface Props { modules?: any[]; }
 const { modules = [] } = Astro.props;
-const asset = (path: string) => /^https?:\/\//.test(path) ? path : withBase(path);
+
+const asset = (path = '') => /^https?:\/\//.test(path) ? path : withBase(path);
+const hasImage = (value: unknown): value is string => typeof value === 'string' && value.trim().length > 0;
 ---
 {modules.map((module) => {
-  if (module.type === 'text') return <section class="module">{module.heading && <h1 class="module-heading">{module.heading}</h1>}<div class="rich-text" set:html={module.body}></div></section>;
-  if (module.type === 'image') return <section class={`module module-image ${module.size || 'wide'}`}><img src={asset(module.image)} alt={module.alt || ''} loading="lazy" />{module.caption && <div class="module-caption">{module.caption}</div>}</section>;
-  if (module.type === 'gallery') return <section class="module">{module.heading && <h1 class="module-heading">{module.heading}</h1>}<div class="gallery-grid">{module.images?.map((item:any) => <figure class="gallery-item"><img src={asset(item.image)} alt={item.alt || ''} loading="lazy" />{item.caption && <figcaption class="module-caption">{item.caption}</figcaption>}</figure>)}</div></section>;
-  if (module.type === 'links') return <section class="module">{module.heading && <h1 class="module-heading">{module.heading}</h1>}<div class="link-list">{module.items?.map((item:any) => <a href={/^https?:\/\//.test(item.url) ? item.url : withBase(item.url)} target={item.newWindow ? '_blank' : undefined} rel={item.newWindow ? 'noopener' : undefined}><span>{item.label}</span><span aria-hidden="true">→</span></a>)}</div></section>;
-  if (module.type === 'accordion') return <section class="module">{module.heading && <h1 class="module-heading">{module.heading}</h1>}{module.intro && <div class="rich-text module-intro" set:html={module.intro}></div>}<div class="accordion">{module.items?.map((item:any, index:number) => <details open={index===0}><summary><span>{item.title}</span><span class="plus">+</span></summary><div class="accordion-body rich-text" set:html={item.body}></div></details>)}</div></section>;
-  if (module.type === 'steps') return <section class="module">{module.heading && <h1 class="module-heading">{module.heading}</h1>}{module.intro && <div class="rich-text module-intro" set:html={module.intro}></div>}<div class="steps">{module.items?.map((item:any) => <div class="step"><h3>{item.title}</h3><div class="rich-text" set:html={item.body}></div></div>)}</div></section>;
-  if (module.type === 'updates') return <section class="module">{module.heading && <h1 class="module-heading">{module.heading}</h1>}{module.items?.map((item:any) => <article class="update-item">{item.date && <span class="update-date">{item.date}</span>}<h3>{item.title}</h3><div class="rich-text" set:html={item.body}></div></article>)}</section>;
+  if (module.type === 'text') {
+    return <section class="module" data-module-type="text">
+      {module.heading && <h1 class="module-heading">{module.heading}</h1>}
+      <div class="rich-text" set:html={module.body}></div>
+    </section>;
+  }
+
+  if (module.type === 'image') {
+    if (!hasImage(module.image)) return null;
+    return <section class={`module module-image ${module.size || 'wide'}`} data-module-type="image">
+      <figure class="module-image-figure">
+        <img src={asset(module.image)} alt={module.alt || ''} loading="lazy" decoding="async" />
+        {module.caption && <figcaption class="module-caption">{module.caption}</figcaption>}
+      </figure>
+    </section>;
+  }
+
+  if (module.type === 'gallery') {
+    const images = (module.images || []).filter((item: any) => hasImage(item?.image));
+    return <section class="module module-gallery" data-module-type="gallery">
+      {module.heading && <h1 class="module-heading">{module.heading}</h1>}
+      {images.length > 0 && <div class="gallery-grid">
+        {images.map((item: any) => <figure class="gallery-item">
+          <img src={asset(item.image)} alt={item.alt || ''} loading="lazy" decoding="async" />
+          {item.caption && <figcaption class="module-caption">{item.caption}</figcaption>}
+        </figure>)}
+      </div>}
+    </section>;
+  }
+
+  if (module.type === 'links') {
+    return <section class="module" data-module-type="links">
+      {module.heading && <h1 class="module-heading">{module.heading}</h1>}
+      <div class="link-list">{module.items?.map((item:any) => <a href={/^https?:\/\//.test(item.url) ? item.url : withBase(item.url)} target={item.newWindow ? '_blank' : undefined} rel={item.newWindow ? 'noopener' : undefined}><span>{item.label}</span><span aria-hidden="true">→</span></a>)}</div>
+    </section>;
+  }
+
+  if (module.type === 'accordion') {
+    return <section class="module" data-module-type="accordion">
+      {module.heading && <h1 class="module-heading">{module.heading}</h1>}
+      {module.intro && <div class="rich-text module-intro" set:html={module.intro}></div>}
+      <div class="accordion">{module.items?.map((item:any, index:number) => <details open={index===0}><summary><span>{item.title}</span><span class="plus">+</span></summary><div class="accordion-body rich-text" set:html={item.body}></div></details>)}</div>
+    </section>;
+  }
+
+  if (module.type === 'steps') {
+    return <section class="module" data-module-type="steps">
+      {module.heading && <h1 class="module-heading">{module.heading}</h1>}
+      {module.intro && <div class="rich-text module-intro" set:html={module.intro}></div>}
+      <div class="steps">{module.items?.map((item:any) => <div class="step"><h3>{item.title}</h3><div class="rich-text" set:html={item.body}></div></div>)}</div>
+    </section>;
+  }
+
+  if (module.type === 'updates') {
+    return <section class="module" data-module-type="updates">
+      {module.heading && <h1 class="module-heading">{module.heading}</h1>}
+      {module.items?.map((item:any) => <article class="update-item">{item.date && <span class="update-date">{item.date}</span>}<h3>{item.title}</h3><div class="rich-text" set:html={item.body}></div></article>)}
+    </section>;
+  }
+
   return null;
 })}
