@@ -10,4 +10,4 @@ const entries = sortByDisplayOrder(
   (entry) => entry.data.title
 );
 ---
-<BaseLayout title="Publications" active="Publications"><main class="page"><section class="page-section"><div class="content-narrow"><h1>Publications</h1><p>Selected publications and work in progress.</p></div><div class="index-list">{entries.map((entry) => <PublicationIndexEntry entry={entry} />)}</div></section></main></BaseLayout>
+<BaseLayout title="Publications" active="Publications"><main class="page"><section class="page-section"><div class="content-narrow"><h1>Publications</h1></div><div class="index-list">{entries.map((entry) => <PublicationIndexEntry entry={entry} />)}</div></section></main></BaseLayout>
