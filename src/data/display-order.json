@@ -1,18 +1,34 @@
 {
   "research": [
-    { "entry": "src/content/research/atlas-of-data-center-politics.md" }
+    {
+      "entry": "src/content/research/atlas-of-data-center-politics.md"
+    }
   ],
   "publications": [
-    { "entry": "src/content/publications/governing-the-cloud.md" },
-    { "entry": "src/content/publications/silicon-frontier.md" },
-    { "entry": "src/content/publications/development-geopolitics-and-regionalism-in-southeast-asia.md" },
-    { "entry": "src/content/publications/local-reservoirs-and-chinese-aqueducts-the-politics-of-water-security-in-hong-kong-honolulu-university-of-hawaii-press-2023-110-133.md" }
+    {
+      "entry": "src/content/publications/silicon-frontier.md"
+    },
+    {
+      "entry": "src/content/publications/governing-the-cloud.md"
+    },
+    {
+      "entry": "src/content/publications/development-geopolitics-and-regionalism-in-southeast-asia.md"
+    },
+    {
+      "entry": "src/content/publications/local-reservoirs-and-chinese-aqueducts-the-politics-of-water-security-in-hong-kong-honolulu-university-of-hawaii-press-2023-110-133.md"
+    }
   ],
   "people": [
-    { "entry": "src/content/people/justin-kollar.md" },
-    { "entry": "src/content/people/dorothy-tang.md" }
+    {
+      "entry": "src/content/people/justin-kollar.md"
+    },
+    {
+      "entry": "src/content/people/dorothy-tang.md"
+    }
   ],
   "pages": [
-    { "entry": "src/content/pages/example-page.md" }
+    {
+      "entry": "src/content/pages/example-page.md"
+    }
   ]
 }
