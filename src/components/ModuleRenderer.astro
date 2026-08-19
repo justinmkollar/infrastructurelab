@@ -86,7 +86,7 @@ const validLinks = (items: any[] = []) => items.filter((item) => typeof item?.la
               data-caption={item.caption || ''}
               data-gallery-index={index}
             >
-              <img src={asset(item.image)} alt={item.alt || ''} loading="lazy" decoding="async" />
+              <img src={asset(item.image)} alt={item.alt || ''} loading="eager" decoding="async" />
             </button>
             {images.length > 1 && <button class="gallery-nav gallery-prev" type="button" aria-label="Previous image" data-gallery-prev><span aria-hidden="true">←</span></button>}
             {images.length > 1 && <button class="gallery-nav gallery-next" type="button" aria-label="Next image" data-gallery-next><span aria-hidden="true">→</span></button>}
