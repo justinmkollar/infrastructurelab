@@ -213,7 +213,7 @@ content:
     format: yaml-frontmatter
     filename: "{title}.md"
     view:
-      fields: [title, dateLabel, published]
+      fields: [order, title, dateLabel, published]
       primary: title
       sort: [order, title]
       search: [title, contributors, description]
@@ -222,7 +222,7 @@ content:
       - {name: title, type: string, required: true}
       - {name: contributors, type: string, list: true}
       - {name: dateLabel, label: Date, type: string, required: true}
-      - {name: order, type: number, default: 100}
+      - {name: order, label: Display order, type: number, default: 100, description: "Lower numbers appear first. Using 10, 20, 30 leaves room to insert items later."}
       - {name: published, type: boolean, default: true}
       - name: description
         type: rich-text
@@ -261,7 +261,7 @@ content:
     format: yaml-frontmatter
     filename: "{title}.md"
     view:
-      fields: [title, authors, type, date, published]
+      fields: [order, title, authors, type, date, published]
       primary: title
       sort: [order, title]
       search: [title, authors, details, type, keywords]
@@ -276,7 +276,7 @@ content:
         required: true
         options: {values: [Peer-reviewed Article, Book, Book Chapter, Essay, Review, Report, Working Paper, Other]}
       - {name: date, type: string}
-      - {name: order, type: number, default: 100}
+      - {name: order, label: Display order, type: number, default: 100, description: "Lower numbers appear first. Using 10, 20, 30 leaves room to insert items later."}
       - {name: published, type: boolean, default: true}
       - {name: url, label: Publication URL, type: string}
       - name: abstract
@@ -292,7 +292,7 @@ content:
     format: yaml-frontmatter
     filename: "{name}.md"
     view:
-      fields: [name, title, institution, published]
+      fields: [order, name, title, institution, published]
       primary: name
       sort: [order, name]
       search: [name, title, institution, bio]
@@ -301,7 +301,7 @@ content:
       - {name: name, type: string, required: true}
       - {name: title, label: Position, type: string, required: true}
       - {name: institution, type: string, required: true}
-      - {name: order, type: number, default: 100}
+      - {name: order, label: Display order, type: number, default: 100, description: "Lower numbers appear first. Using 10, 20, 30 leaves room to insert items later."}
       - {name: published, type: boolean, default: true}
       - name: photo
         type: image
@@ -332,7 +332,7 @@ content:
     format: yaml-frontmatter
     filename: "{title}.md"
     view:
-      fields: [title, published, order]
+      fields: [order, title, published]
       primary: title
       sort: [order, title]
       search: [title, description]
@@ -341,5 +341,5 @@ content:
       - {name: title, type: string, required: true}
       - {name: description, type: text}
       - {name: published, type: boolean, default: true}
-      - {name: order, type: number, default: 100}
+      - {name: order, label: Display order, type: number, default: 100, description: "Lower numbers appear first. Using 10, 20, 30 leaves room to insert items later."}
       - {name: modules, component: page_modules}
