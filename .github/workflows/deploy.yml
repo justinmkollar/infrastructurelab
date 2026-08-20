@@ -33,8 +33,8 @@ jobs:
       - name: Build Astro site
         run: npm run build
         env:
-          SITE_URL: ${{ vars.SITE_URL || 'https://justinmkollar.github.io' }}
-          BASE_PATH: ${{ vars.BASE_PATH || '/infrastructurelab' }}
+          SITE_URL: https://infrastructurelab.com
+          BASE_PATH: /
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
