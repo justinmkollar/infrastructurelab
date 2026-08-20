@@ -384,7 +384,8 @@ body.media-lightbox-open {
 
 .project-page .project-launch a {
   min-height: 44px;
-  padding: 0 17px;
+  max-width: 100%;
+  padding: 0 15px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -393,9 +394,11 @@ body.media-lightbox-open {
   background: var(--fg);
   color: var(--bg);
   font-family: var(--font-display);
-  font-size: 14pt;
+  font-size: 12pt;
   font-weight: 700;
   line-height: 1.1;
+  text-align: center;
+  white-space: nowrap;
   text-decoration: none;
   transition: opacity .15s ease;
 }
@@ -468,6 +471,13 @@ body.media-lightbox-open {
   .project-page .text-module-media,
   .project-page .module-inline-links {
     margin-top: 22px;
+  }
+
+  .project-page .project-launch a {
+    min-height: 42px;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: clamp(9.5pt, 3.7vw, 12pt);
   }
 
   .project-lightbox .lightbox-shell {
