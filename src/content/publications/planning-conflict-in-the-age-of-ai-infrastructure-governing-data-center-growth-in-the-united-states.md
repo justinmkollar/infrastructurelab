@@ -1,6 +1,7 @@
 ---
 authors:
   - Justin Kollar
+  - Silvia Danielak
 title: "Planning conflict in the age of AI infrastructure: Governing data center
   growth in the United States"
 details: Journal of the American Planning Association
