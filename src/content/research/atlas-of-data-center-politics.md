@@ -8,11 +8,11 @@ published: true
 description: <p>The Atlas of Data Center Politics is a research database and
   interactive spatial interface for examining data centers as political and
   infrastructural objects. It links facility records to political events,
-  legislation, actors, and administrative geography, allowing users to move
-  between individual projects and wider territorial patterns. The project
-  focuses on how digital infrastructure reorganizes land, electricity, water,
-  public authority, and development policy, while creating a transparent record
-  of the sources and relationships behind mapped information.</p>
+  policies, and actor-networks allowing users to move between individual
+  projects and wider territorial patterns. The project focuses on how digital
+  infrastructure reorganizes land, electricity, water, public authority, and
+  development policy, while creating a transparent record of the sources and
+  relationships behind mapped information.</p>
 duration: 2026—present
 page: true
 theme:
@@ -39,28 +39,23 @@ hero:
 modules:
   - type: text
     heading: About
-    body: <p>Rather than treating data centers as isolated points on a map, the
-      Atlas connects infrastructure to the political and planning processes
-      around it. Users can move between individual data-center campuses,
-      political events, legislation, operators, and geographic jurisdictions;
-      follow relationships among them; and examine the sources behind individual
-      records.</p><p>The Atlas can be used to investigate a single proposed data
-      center or community conflict, compare policy responses across states or
-      countries, trace an operator's development footprint, follow political
-      activity over time, or identify broader patterns in issues such as land
-      use, energy, water, taxation, public participation, noise, and
-      infrastructure development.</p><p>The map is therefore only one way into
-      the data. Users can browse by country, state or other subnational
-      jurisdiction, operator, or individual record; search and filter the
-      datasets; select places to see the infrastructure and political activity
-      associated with them; and follow linked records across the Data Centers,
-      Events, and Legislation layers. The Details window brings these pieces
-      together and provides source links and structured exports for further
-      research.</p><p>The Atlas is intended for researchers and students,
-      community organizations and local advocates, journalists, planners and
-      policymakers, and anyone trying to understand how the rapid expansion of
-      data-center infrastructure is reshaping places and producing new political
-      responses.</p>
+    body: <p>The Atlas connects data center infrastructure to the political and
+      planning processes that shape its development. It allows users to trace
+      relationships among facilities, policies, political events, and the actors
+      involved in building, governing, or contesting them. Users can investigate
+      individual projects and community conflicts, compare policy responses
+      across jurisdictions, trace an operator’s development footprint, or
+      examine broader patterns in how data center growth affects land,
+      resources, public finance, and local governance.</p><p>The interface
+      supports exploration across geographic scales and linked datasets. Users
+      can search and filter records, move from places or operators to related
+      activity, and follow connections across the Data Centers, Events, and
+      Policy layers. The Details window brings these relationships together with
+      supporting sources and structured exports for further research and
+      analysis.</p><p>The Atlas is designed for researchers, students, community
+      organizations, journalists, planners, policymakers, and others seeking to
+      understand how the rapid expansion of data center infrastructure is
+      reshaping places and generating new forms of political response.</p>
   - type: links
     heading: Downloads
     items:
@@ -73,17 +68,14 @@ modules:
   - type: updates
     heading: News & Planned Updates
     items:
-      - date: 25 August 2026
-        title: Public Beta Release
-        body: <p>The Atlas of Data Center Politics is now publicly available, offering
-          an interactive way to explore data centers, political events,
-          legislation, and their relationships across places, organizations, and
-          policy debates.</p>
+      - date: 15 September 2026
+        title: Soft Public Release
+        body: <p>The Atlas of Data Center Politics is now publicly available.</p>
       - date: Planned
         title: Future work
         body: "<p>Robustness and validity: Expanded global data center verification,
           additional infrastructure context, dataset downloads and citation
-          guidance.</p><p>Infratructural relations: Added watershed and energy
+          guidance.</p><p>Infrastructural relations: Added watershed and energy
           systems layers to contextualize resource impacts and policy.</p>"
   - type: gallery
     heading: Images
