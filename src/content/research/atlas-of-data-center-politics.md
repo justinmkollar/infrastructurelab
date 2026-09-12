@@ -56,75 +56,6 @@ modules:
       organizations, journalists, planners, policymakers, and others seeking to
       understand how the rapid expansion of data center infrastructure is
       reshaping places and generating new forms of political response.</p>
-  - type: links
-    heading: Downloads
-    items:
-      - label: "[User Guide Available Soon]"
-        url: https://justinmkollar.github.io/infrastructurelab/projects/atlas-of-data-center-politics/
-        newWindow: false
-      - label: "[Full Methodology Appendix Available Soon]"
-        url: https://justinmkollar.github.io/infrastructurelab/projects/atlas-of-data-center-politics/
-        newWindow: false
-  - type: text
-    heading: Methodology
-    body: <h3>Sources and inclusion</h3><p>Records are built from publicly
-      accessible evidence, including government and planning documents,
-      legislative and regulatory records, company materials, journalism,
-      research publications, and community documentation. Sources are evaluated
-      according to the claims they can support. Official or primary records
-      generally take precedence when they directly establish a project,
-      decision, policy action, or other fact, while journalism and other
-      secondary sources are often important for documenting changing project
-      plans, disputes, and political activity. Community sources are used to
-      document positions and participation rather than treated as neutral
-      evidence for contested factual claims.</p><p>Discovery is separate from
-      publication. News searches, public maps, legislative databases, and other
-      sources are used to identify possible records as leads, but these enter
-      the published Atlas only after review of their identity, relevance,
-      geography, attributes, sources, and relationships. Published records
-      remain grounded in the underlying public evidence. Large language models
-      may assist with discovery, translation, summarization, and classification,
-      but they are not treated as sources (see validation, updates, and
-      interpretation below).</p><h3>Constructing records and
-      relationships</h3><p>For data centers, the main unit is the physical
-      campus or site rather than an individual building, tenant deployment,
-      permit, or phase announcement. Records distinguish current lifecycle
-      status from development stage and use broad capacity categories where
-      exact and comparable megawatt figures cannot be established. Locations
-      represent the most precise defensible WGS84 point available, ranging from
-      verified parcels or addresses to broader geographic estimates. Positional
-      confidence describes the precision of that location rather than the
-      overall reliability of the record.</p><p>Events capture discrete
-      political, regulatory, legal, planning, environmental, or community
-      developments. Policies represent formal governmental instruments that
-      materially address data centers or their associated infrastructure and
-      resource demands. Actors provide stable identities for organizations.
-      Relationships are added only where sources support a connection at the
-      relevant scale (e.g., direct involvement in a campus, corporate hierarchy,
-      a durable institutional relationship, or participation in a specific
-      event). Proximity, shared geography, or thematic similarity may suggest
-      avenues for investigation but do not by themselves establish a formal
-      relationship.</p><h3>Validation, updates, and interpretation</h3><p>The
-      Atlas combines automated (deterministic) checks with substantive human
-      review. Validation tests identifiers, dates, coordinates, classifications,
-      lifecycle combinations, relationships, and likely duplicates, while human
-      review assesses whether the available evidence supports record identity
-      and interpretation. Records are updated as projects and policies change,
-      but this can be periodic and gaps may persist as data is updated weekly or
-      monthly. Stable Atlas identifiers are retained wherever the underlying
-      object remains the same. Public releases are tied to defined dataset
-      revisions so that changes can be tracked over time.</p><p>Coverage is
-      broad but uneven. Public documentation varies substantially across places,
-      and U.S. legislative coverage is currently more systematic than many
-      international and non-bill policy domains. Absence from the Atlas should
-      therefore not be interpreted as evidence that a facility, controversy,
-      policy, or institutional relationship does not exist. Capacity and
-      location precision also vary across records. More generally, the Atlas
-      documents observable sequences, associations, and evidence-supported
-      relationships; it does not aim to establish causation. Researchers should
-      therefore carry source quality, missing data, geographic precision, and
-      collection bias into subsequent spatial, statistical, comparative, or
-      qualitative analysis.</p>
   - type: updates
     heading: News & Planned Updates
     items:
@@ -145,4 +76,73 @@ modules:
       - image: /uploads/images/adcpscreen03.jpg
       - image: /uploads/images/adcpscreen04.jpg
       - image: /uploads/images/adcpscreen05.jpg
+  - type: text
+    heading: Methodology
+    body: <h1>Sources and inclusion</h1><p>Records are built from publicly
+      accessible evidence, including government and planning documents,
+      legislative and regulatory records, company materials, journalism,
+      research publications, and community documentation. Sources are evaluated
+      according to the claims they can support. Official or primary records
+      generally take precedence when they directly establish a project,
+      decision, policy action, or other fact, while journalism and other
+      secondary sources are often important for documenting changing project
+      plans, disputes, and political activity. Community sources are used to
+      document positions and participation rather than treated as neutral
+      evidence for contested factual claims.</p><p>Discovery is separate from
+      publication. News searches, public maps, legislative databases, and other
+      sources are used to identify possible records as leads, but these enter
+      the published Atlas only after review of their identity, relevance,
+      geography, attributes, sources, and relationships. Published records
+      remain grounded in the underlying public evidence. Large language models
+      may assist with discovery, translation, summarization, and classification,
+      but they are not treated as sources (see validation, updates, and
+      interpretation below).</p><h1>Constructing records and
+      relationships</h1><p>For data centers, the main unit is the physical
+      campus or site rather than an individual building, tenant deployment,
+      permit, or phase announcement. Records distinguish current lifecycle
+      status from development stage and use broad capacity categories where
+      exact and comparable megawatt figures cannot be established. Locations
+      represent the most precise defensible WGS84 point available, ranging from
+      verified parcels or addresses to broader geographic estimates. Positional
+      confidence describes the precision of that location rather than the
+      overall reliability of the record.</p><p>Events capture discrete
+      political, regulatory, legal, planning, environmental, or community
+      developments. Policies represent formal governmental instruments that
+      materially address data centers or their associated infrastructure and
+      resource demands. Actors provide stable identities for organizations.
+      Relationships are added only where sources support a connection at the
+      relevant scale (e.g., direct involvement in a campus, corporate hierarchy,
+      a durable institutional relationship, or participation in a specific
+      event). Proximity, shared geography, or thematic similarity may suggest
+      avenues for investigation but do not by themselves establish a formal
+      relationship.</p><h1>Validation, updates, and interpretation</h1><p>The
+      Atlas combines automated (deterministic) checks with substantive human
+      review. Validation tests identifiers, dates, coordinates, classifications,
+      lifecycle combinations, relationships, and likely duplicates, while human
+      review assesses whether the available evidence supports record identity
+      and interpretation. Records are updated as projects and policies change,
+      but this can be periodic and gaps may persist as data is updated weekly or
+      monthly. Stable Atlas identifiers are retained wherever the underlying
+      object remains the same. Public releases are tied to defined dataset
+      revisions so that changes can be tracked over time.</p><p>Coverage is
+      broad but uneven. Public documentation varies substantially across places,
+      and U.S. legislative coverage is currently more systematic than many
+      international and non-bill policy domains. Absence from the Atlas should
+      therefore not be interpreted as evidence that a facility, controversy,
+      policy, or institutional relationship does not exist. Capacity and
+      location precision also vary across records. More generally, the Atlas
+      documents observable sequences, associations, and evidence-supported
+      relationships; it does not aim to establish causation. Researchers should
+      therefore carry source quality, missing data, geographic precision, and
+      collection bias into subsequent spatial, statistical, comparative, or
+      qualitative analysis.</p>
+  - type: links
+    heading: Downloads
+    items:
+      - label: "[User Guide Available Soon]"
+        url: https://justinmkollar.github.io/infrastructurelab/projects/atlas-of-data-center-politics/
+        newWindow: false
+      - label: "[Full Methodology Appendix Available Soon]"
+        url: https://justinmkollar.github.io/infrastructurelab/projects/atlas-of-data-center-politics/
+        newWindow: false
 ---
