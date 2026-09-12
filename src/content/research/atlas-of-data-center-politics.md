@@ -65,26 +65,6 @@ modules:
       - label: "[Full Methodology Appendix Available Soon]"
         url: https://justinmkollar.github.io/infrastructurelab/projects/atlas-of-data-center-politics/
         newWindow: false
-  - type: updates
-    heading: News & Planned Updates
-    items:
-      - date: 15 September 2026
-        title: Soft Public Release
-        body: <p>The Atlas of Data Center Politics is now publicly available.</p>
-      - date: Planned
-        title: Future work
-        body: "<p>Robustness and validity: Expanded global data center verification,
-          additional infrastructure context, dataset downloads and citation
-          guidance.</p><p>Infrastructural relations: Added watershed and energy
-          systems layers to contextualize resource impacts and policy.</p>"
-  - type: gallery
-    heading: Images
-    images:
-      - image: /uploads/images/adcpscreen01.jpg
-      - image: /uploads/images/adcpscreen02.jpg
-      - image: /uploads/images/adcpscreen03.jpg
-      - image: /uploads/images/adcpscreen04.jpg
-      - image: /uploads/images/adcpscreen05.jpg
   - type: text
     heading: Methodology
     body: <h3>Sources and inclusion</h3><p>Records are built from publicly
@@ -105,7 +85,7 @@ modules:
       remain grounded in the underlying public evidence. Large language models
       may assist with discovery, translation, summarization, and classification,
       but they are not treated as sources (see validation, updates, and
-      interpretation below). </p><h3>Constructing records and
+      interpretation below).</p><h3>Constructing records and
       relationships</h3><p>For data centers, the main unit is the physical
       campus or site rather than an individual building, tenant deployment,
       permit, or phase announcement. Records distinguish current lifecycle
@@ -145,4 +125,24 @@ modules:
       therefore carry source quality, missing data, geographic precision, and
       collection bias into subsequent spatial, statistical, comparative, or
       qualitative analysis.</p>
+  - type: updates
+    heading: News & Planned Updates
+    items:
+      - date: 15 September 2026
+        title: Soft Public Release
+        body: <p>The Atlas of Data Center Politics is now publicly available.</p>
+      - date: Planned
+        title: Future work
+        body: "<p>Robustness and validity: Expanded global data center verification,
+          additional infrastructure context, dataset downloads and citation
+          guidance.</p><p>Infrastructural relations: Added watershed and energy
+          systems layers to contextualize resource impacts and policy.</p>"
+  - type: gallery
+    heading: Images
+    images:
+      - image: /uploads/images/adcpscreen01.jpg
+      - image: /uploads/images/adcpscreen02.jpg
+      - image: /uploads/images/adcpscreen03.jpg
+      - image: /uploads/images/adcpscreen04.jpg
+      - image: /uploads/images/adcpscreen05.jpg
 ---
