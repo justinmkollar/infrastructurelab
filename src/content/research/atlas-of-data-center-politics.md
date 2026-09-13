@@ -78,7 +78,7 @@ modules:
       - image: /uploads/images/adcpscreen05.jpg
   - type: text
     heading: Methodology
-    body: <h1>Sources and inclusion</h1><p>Records are built from publicly
+    body: <h2>Sources and inclusion</h2><p>Records are built from publicly
       accessible evidence, including government and planning documents,
       legislative and regulatory records, company materials, journalism,
       research publications, and community documentation. Sources are evaluated
@@ -96,8 +96,8 @@ modules:
       remain grounded in the underlying public evidence. Large language models
       may assist with discovery, translation, summarization, and classification,
       but they are not treated as sources (see validation, updates, and
-      interpretation below).</p><h1>Constructing records and
-      relationships</h1><p>For data centers, the main unit is the physical
+      interpretation below).</p><h2>Constructing records and
+      relationships</h2><p>For data centers, the main unit is the physical
       campus or site rather than an individual building, tenant deployment,
       permit, or phase announcement. Records distinguish current lifecycle
       status from development stage and use broad capacity categories where
@@ -115,7 +115,7 @@ modules:
       a durable institutional relationship, or participation in a specific
       event). Proximity, shared geography, or thematic similarity may suggest
       avenues for investigation but do not by themselves establish a formal
-      relationship.</p><h1>Validation, updates, and interpretation</h1><p>The
+      relationship.</p><h2>Validation, updates, and interpretation</h2><p>The
       Atlas combines automated (deterministic) checks with substantive human
       review. Validation tests identifiers, dates, coordinates, classifications,
       lifecycle combinations, relationships, and likely duplicates, while human
