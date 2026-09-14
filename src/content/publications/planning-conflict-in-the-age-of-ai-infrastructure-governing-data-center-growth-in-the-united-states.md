@@ -4,7 +4,7 @@ authors:
   - Silvia Danielak
 title: "Planning conflict in the age of AI infrastructure: Governing data center
   growth in the United States"
-details: Journal of the American Planning Association
+details: Journal of the American Planning Association, 2026
 type: Peer-reviewed Article
 date: "2026"
 order: 100
