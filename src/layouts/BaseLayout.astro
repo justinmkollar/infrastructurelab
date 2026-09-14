@@ -59,4 +59,28 @@ if (projectTheme) {
 
 const themeCss = `${rootThemeCss}${projectThemeCss}`;
 ---
-<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" /><meta name="description" content={description} /><title>{title === site.title ? site.title : `${title} — ${site.title}`}</title><style is:inline set:html={themeCss}></style></head><body class={bodyClass}><Header active={active} /><slot /><Footer /><script>import '../scripts/site.js';</script></body></html>
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-VZGCPN54VG"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-VZGCPN54VG');
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="description" content={description} />
+    <title>{title === site.title ? site.title : `${title} — ${site.title}`}</title>
+    <style is:inline set:html={themeCss}></style>
+  </head>
+  <body class={bodyClass}>
+    <Header active={active} />
+    <slot />
+    <Footer />
+    <script>import '../scripts/site.js';</script>
+  </body>
+</html>
