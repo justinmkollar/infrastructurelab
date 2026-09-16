@@ -48,14 +48,15 @@ const moduleSchema = z.discriminatedUnion('type', [
   }),
   z.object({
     type: z.literal('research-workflow'),
-    heading: z.string().default('Research and review workflow'),
+    heading: z.string().default('Agent-assisted research with human review'),
     agentLabel: z.string().default('Agent-assisted research and reconciliation'),
     discoveryLabel: z.string().default('Discovery and Research'),
     validateLabel: z.string().default('Validate and Reconcile'),
     noChangeLabel: z.string().default('No material change'),
-    changeLabel: z.string().default('Change identified'),
+    changeLabel: z.string().default('New record or change identified'),
     researchLogLabel: z.string().default('Research log'),
     humanReviewLabel: z.string().default('Human Review'),
+    humanReviewDetail: z.string().default('Verify sources, record identity, and proposed changes against evidence.'),
     publicAtlasLabel: z.string().default('Public Atlas')
   }),
   z.object({
