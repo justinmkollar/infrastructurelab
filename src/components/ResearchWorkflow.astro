@@ -8,18 +8,20 @@ interface Props {
   changeLabel?: string;
   researchLogLabel?: string;
   humanReviewLabel?: string;
+  humanReviewDetail?: string;
   publicAtlasLabel?: string;
 }
 
 const {
-  heading = 'Research and review workflow',
+  heading = 'Agent-assisted research with human review',
   agentLabel = 'Agent-assisted research and reconciliation',
   discoveryLabel = 'Discovery and Research',
   validateLabel = 'Validate and Reconcile',
   noChangeLabel = 'No material change',
-  changeLabel = 'Change identified',
+  changeLabel = 'New record or change identified',
   researchLogLabel = 'Research log',
   humanReviewLabel = 'Human Review',
+  humanReviewDetail = 'Verify sources, record identity, and proposed changes against evidence.',
   publicAtlasLabel = 'Public Atlas'
 } = Astro.props;
 ---
@@ -42,7 +44,10 @@ const {
         <div class="research-workflow-node" data-node="change">{changeLabel}</div>
 
         <div class="research-workflow-end" data-node="log">{researchLogLabel}</div>
-        <div class="research-workflow-node research-workflow-node--strong" data-node="human">{humanReviewLabel}</div>
+        <div class="research-workflow-node research-workflow-node--human" data-node="human">
+          <span class="research-workflow-human-title">{humanReviewLabel}</span>
+          {humanReviewDetail && <span class="research-workflow-human-detail">{humanReviewDetail}</span>}
+        </div>
 
         <div class="research-workflow-end" data-node="publish">{publicAtlasLabel}</div>
       </div>
@@ -63,7 +68,7 @@ const {
   }
 
   .research-workflow-heading {
-    margin: 0 0 11px;
+    margin: 0 0 18px;
     color: var(--fg);
     font-family: var(--font-display);
     font-size: 12pt;
@@ -157,8 +162,23 @@ const {
     border-radius: 4px;
   }
 
-  .research-workflow-node--strong {
+  .research-workflow-node--human {
+    flex-direction: column;
+    gap: 3px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+
+  .research-workflow-human-title {
     font-weight: 700;
+  }
+
+  .research-workflow-human-detail {
+    max-width: 185px;
+    color: var(--muted);
+    font-size: 7.7pt;
+    font-weight: 400;
+    line-height: 1.25;
   }
 
   .research-workflow-end {
@@ -174,21 +194,21 @@ const {
 
   /* When this module sits between text modules, treat all three as one
      continuous section. This follows module order in Pages CMS automatically. */
-  :global(.project-page .module[data-module-type="text"]:has(+ .module-research-workflow)) {
+  :global(.module[data-module-type="text"]:has(+ .module-research-workflow)) {
     padding-bottom: 12px;
     border-bottom: 0;
   }
 
-  :global(.project-page .module[data-module-type="text"] + .module-research-workflow) {
+  :global(.module[data-module-type="text"] + .module-research-workflow) {
     padding-top: 2px;
   }
 
-  :global(.project-page .module-research-workflow:has(+ .module[data-module-type="text"])) {
+  :global(.module-research-workflow:has(+ .module[data-module-type="text"])) {
     padding-bottom: 4px;
     border-bottom: 0;
   }
 
-  :global(.project-page .module-research-workflow + .module[data-module-type="text"]) {
+  :global(.module-research-workflow + .module[data-module-type="text"]) {
     padding-top: 12px;
   }
 
@@ -198,7 +218,7 @@ const {
     }
 
     .research-workflow-heading {
-      margin-bottom: 10px;
+      margin-bottom: 16px;
       font-size: 11pt;
     }
 
@@ -237,6 +257,11 @@ const {
       padding: 6px;
     }
 
+    .research-workflow-human-detail {
+      max-width: 150px;
+      font-size: 7.15pt;
+    }
+
     .research-workflow-end {
       min-height: 22px;
       padding: 2px 3px;
@@ -257,6 +282,10 @@ const {
     .research-workflow-node {
       padding-right: 4px;
       padding-left: 4px;
+    }
+
+    .research-workflow-human-detail {
+      font-size: 6.9pt;
     }
 
     .research-workflow-agent-label {
