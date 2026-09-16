@@ -75,7 +75,7 @@ const validLinks = (items: any[] = []) => items.filter((item) => typeof item?.la
         >
           <img src={asset(module.image)} alt={module.alt || ''} loading="lazy" decoding="async" />
         </button>
-        {item.caption && <figcaption class="module-caption">{item.caption}</figcaption>}
+        {module.caption && <figcaption class="module-caption">{module.caption}</figcaption>}
       </figure>
     </section>;
   }
