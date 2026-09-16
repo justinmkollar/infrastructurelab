@@ -80,14 +80,15 @@ components:
       - name: research-workflow
         label: Research workflow
         fields:
-          - {name: heading, label: Heading, type: string, default: "Research and review workflow"}
+          - {name: heading, label: Heading, type: string, default: "Agent-assisted research with human review"}
           - {name: agentLabel, label: Agent-assisted group label, type: string, default: "Agent-assisted research and reconciliation"}
           - {name: discoveryLabel, label: Discovery step, type: string, default: "Discovery and Research"}
           - {name: validateLabel, label: Validation step, type: string, default: "Validate and Reconcile"}
           - {name: noChangeLabel, label: No-change branch, type: string, default: "No material change"}
-          - {name: changeLabel, label: Change branch, type: string, default: "Change identified"}
+          - {name: changeLabel, label: Change branch, type: string, default: "New record or change identified"}
           - {name: researchLogLabel, label: Research-log endpoint, type: string, default: "Research log"}
           - {name: humanReviewLabel, label: Human-review step, type: string, default: "Human Review"}
+          - {name: humanReviewDetail, label: Human-review description, type: string, default: "Verify sources, record identity, and proposed changes against evidence."}
           - {name: publicAtlasLabel, label: Public endpoint, type: string, default: "Public Atlas"}
 
       - name: image
