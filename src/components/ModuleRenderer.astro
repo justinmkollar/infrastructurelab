@@ -1,5 +1,6 @@
 ---
 import { withBase } from '../utils/paths';
+import ResearchWorkflow from './ResearchWorkflow.astro';
 import '../styles/project-media.css';
 
 interface Props { modules?: any[]; }
@@ -42,6 +43,20 @@ const validLinks = (items: any[] = []) => items.filter((item) => typeof item?.la
         </a>)}
       </div>}
     </section>;
+  }
+
+  if (module.type === 'research-workflow') {
+    return <ResearchWorkflow
+      heading={module.heading}
+      agentLabel={module.agentLabel}
+      discoveryLabel={module.discoveryLabel}
+      validateLabel={module.validateLabel}
+      noChangeLabel={module.noChangeLabel}
+      changeLabel={module.changeLabel}
+      researchLogLabel={module.researchLogLabel}
+      humanReviewLabel={module.humanReviewLabel}
+      publicAtlasLabel={module.publicAtlasLabel}
+    />;
   }
 
   if (module.type === 'image') {
