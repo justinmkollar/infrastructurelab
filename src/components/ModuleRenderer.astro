@@ -55,6 +55,7 @@ const validLinks = (items: any[] = []) => items.filter((item) => typeof item?.la
       changeLabel={module.changeLabel}
       researchLogLabel={module.researchLogLabel}
       humanReviewLabel={module.humanReviewLabel}
+      humanReviewDetail={module.humanReviewDetail}
       publicAtlasLabel={module.publicAtlasLabel}
     />;
   }
@@ -74,7 +75,7 @@ const validLinks = (items: any[] = []) => items.filter((item) => typeof item?.la
         >
           <img src={asset(module.image)} alt={module.alt || ''} loading="lazy" decoding="async" />
         </button>
-        {module.caption && <figcaption class="module-caption">{module.caption}</figcaption>}
+        {item.caption && <figcaption class="module-caption">{item.caption}</figcaption>}
       </figure>
     </section>;
   }
