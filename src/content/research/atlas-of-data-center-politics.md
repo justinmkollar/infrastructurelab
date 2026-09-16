@@ -99,14 +99,15 @@ modules:
       as sources. The workflow below shows how agent-assisted research is
       separated from human review and publication.</p>
   - type: research-workflow
-    heading: Research and review workflow
+    heading: Agent-assisted research with human review
     agentLabel: Agent-assisted research and reconciliation
     discoveryLabel: Discovery and Research
     validateLabel: Validate and Reconcile
     noChangeLabel: No material change
-    changeLabel: Change identified
+    changeLabel: New record or change identified
     researchLogLabel: Research log
     humanReviewLabel: Human Review
+    humanReviewDetail: Verify sources, record identity, and proposed changes against evidence.
     publicAtlasLabel: Public Atlas
   - type: text
     body: <p>Research that produces no material change is logged so that completed
