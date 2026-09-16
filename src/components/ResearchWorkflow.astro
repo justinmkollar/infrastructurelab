@@ -25,25 +25,27 @@ const {
 ---
 
 <section class="module module-research-workflow" data-module-type="research-workflow" data-research-workflow>
-  {heading && <h1 class="module-heading">{heading}</h1>}
+  <div class="research-workflow-inner">
+    {heading && <h3 class="research-workflow-heading">{heading}</h3>}
 
-  <div class="research-workflow-wrap" data-workflow-wrap>
-    <svg class="research-workflow-lines" data-workflow-svg aria-hidden="true"></svg>
+    <div class="research-workflow-wrap" data-workflow-wrap>
+      <svg class="research-workflow-lines" data-workflow-svg aria-hidden="true"></svg>
 
-    <div class="research-workflow-layout">
-      <section class="research-workflow-agent" data-node="agent" aria-label={agentLabel}>
-        <span class="research-workflow-agent-label">{agentLabel}</span>
-        <div class="research-workflow-node" data-node="discovery">{discoveryLabel}</div>
-        <div class="research-workflow-node" data-node="validate">{validateLabel}</div>
-      </section>
+      <div class="research-workflow-layout">
+        <section class="research-workflow-agent" data-node="agent" aria-label={agentLabel}>
+          <span class="research-workflow-agent-label">{agentLabel}</span>
+          <div class="research-workflow-node" data-node="discovery">{discoveryLabel}</div>
+          <div class="research-workflow-node" data-node="validate">{validateLabel}</div>
+        </section>
 
-      <div class="research-workflow-node" data-node="nochange">{noChangeLabel}</div>
-      <div class="research-workflow-node" data-node="change">{changeLabel}</div>
+        <div class="research-workflow-node" data-node="nochange">{noChangeLabel}</div>
+        <div class="research-workflow-node" data-node="change">{changeLabel}</div>
 
-      <div class="research-workflow-end" data-node="log">{researchLogLabel}</div>
-      <div class="research-workflow-node research-workflow-node--strong" data-node="human">{humanReviewLabel}</div>
+        <div class="research-workflow-end" data-node="log">{researchLogLabel}</div>
+        <div class="research-workflow-node research-workflow-node--strong" data-node="human">{humanReviewLabel}</div>
 
-      <div class="research-workflow-end" data-node="publish">{publicAtlasLabel}</div>
+        <div class="research-workflow-end" data-node="publish">{publicAtlasLabel}</div>
+      </div>
     </div>
   </div>
 </section>
@@ -51,12 +53,28 @@ const {
 <style>
   .module-research-workflow {
     overflow: visible;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .research-workflow-inner {
+    width: min(100%, 520px);
+    margin: 0 auto;
+  }
+
+  .research-workflow-heading {
+    margin: 0 0 11px;
+    color: var(--fg);
+    font-family: var(--font-display);
+    font-size: 12pt;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -.005em;
   }
 
   .research-workflow-wrap {
     position: relative;
     width: 100%;
-    min-height: 335px;
   }
 
   .research-workflow-lines {
@@ -79,8 +97,8 @@ const {
       "nochange change"
       "log human"
       ". publish";
-    column-gap: 34px;
-    row-gap: 31px;
+    column-gap: 22px;
+    row-gap: 22px;
     align-items: start;
     justify-items: center;
   }
@@ -88,29 +106,29 @@ const {
   .research-workflow-agent {
     grid-area: agent;
     position: relative;
-    width: min(100%, 360px);
-    padding: 18px 16px 16px;
+    width: min(100%, 300px);
+    padding: 15px 13px 12px;
     border: 1px dashed var(--line);
-    border-radius: 8px;
+    border-radius: 7px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 18px;
+    gap: 14px;
     background: transparent;
   }
 
   .research-workflow-agent-label {
     position: absolute;
-    top: -9px;
-    left: 14px;
-    padding: 0 6px;
+    top: -8px;
+    left: 11px;
+    padding: 0 5px;
     background: var(--bg);
     color: var(--fg);
     font-family: var(--font-display);
-    font-size: 9pt;
+    font-size: 8.5pt;
     font-style: italic;
     font-weight: 400;
-    line-height: 1.2;
+    line-height: 1.15;
     white-space: nowrap;
   }
 
@@ -119,22 +137,22 @@ const {
     position: relative;
     z-index: 3;
     width: 100%;
-    max-width: 300px;
+    max-width: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--bg);
     color: var(--fg);
     font-family: var(--font-display);
-    font-size: 9.75pt;
+    font-size: 9pt;
     font-weight: 500;
-    line-height: 1.25;
+    line-height: 1.2;
     text-align: center;
   }
 
   .research-workflow-node {
-    min-height: 38px;
-    padding: 8px 12px;
+    min-height: 34px;
+    padding: 6px 9px;
     border: 1px solid var(--line);
     border-radius: 4px;
   }
@@ -144,8 +162,8 @@ const {
   }
 
   .research-workflow-end {
-    min-height: 30px;
-    padding: 4px 8px;
+    min-height: 24px;
+    padding: 2px 6px;
   }
 
   [data-node="nochange"] { grid-area: nochange; }
@@ -154,9 +172,34 @@ const {
   [data-node="human"] { grid-area: human; }
   [data-node="publish"] { grid-area: publish; }
 
+  /* When this module sits between text modules, treat all three as one
+     continuous section. This follows module order in Pages CMS automatically. */
+  :global(.project-page .module[data-module-type="text"]:has(+ .module-research-workflow)) {
+    padding-bottom: 12px;
+    border-bottom: 0;
+  }
+
+  :global(.project-page .module[data-module-type="text"] + .module-research-workflow) {
+    padding-top: 2px;
+  }
+
+  :global(.project-page .module-research-workflow:has(+ .module[data-module-type="text"])) {
+    padding-bottom: 4px;
+    border-bottom: 0;
+  }
+
+  :global(.project-page .module-research-workflow + .module[data-module-type="text"]) {
+    padding-top: 12px;
+  }
+
   @media (max-width: 560px) {
-    .research-workflow-wrap {
-      min-height: 360px;
+    .research-workflow-inner {
+      width: min(100%, 430px);
+    }
+
+    .research-workflow-heading {
+      margin-bottom: 10px;
+      font-size: 11pt;
     }
 
     .research-workflow-layout {
@@ -166,58 +209,58 @@ const {
         "nochange change"
         "log human"
         ". publish";
-      column-gap: 12px;
-      row-gap: 27px;
+      column-gap: 10px;
+      row-gap: 19px;
     }
 
     .research-workflow-agent {
-      width: min(100%, 300px);
-      padding: 17px 12px 14px;
-      gap: 16px;
+      width: min(100%, 275px);
+      padding: 14px 10px 11px;
+      gap: 13px;
     }
 
     .research-workflow-agent-label {
-      left: 10px;
-      max-width: calc(100% - 20px);
-      font-size: 8.25pt;
+      left: 9px;
+      max-width: calc(100% - 18px);
+      font-size: 7.8pt;
       white-space: nowrap;
     }
 
     .research-workflow-node,
     .research-workflow-end {
       max-width: none;
-      font-size: 8.75pt;
-      line-height: 1.2;
+      font-size: 8.25pt;
     }
 
     .research-workflow-node {
-      min-height: 42px;
-      padding: 7px;
+      min-height: 38px;
+      padding: 6px;
     }
 
     .research-workflow-end {
-      min-height: 28px;
-      padding: 3px 4px;
+      min-height: 22px;
+      padding: 2px 3px;
     }
   }
 
   @media (max-width: 360px) {
     .research-workflow-layout {
-      column-gap: 8px;
+      column-gap: 7px;
+      row-gap: 18px;
     }
 
     .research-workflow-node,
     .research-workflow-end {
-      font-size: 8.25pt;
+      font-size: 7.8pt;
     }
 
     .research-workflow-node {
-      padding-right: 5px;
-      padding-left: 5px;
+      padding-right: 4px;
+      padding-left: 4px;
     }
 
     .research-workflow-agent-label {
-      font-size: 7.8pt;
+      font-size: 7.4pt;
     }
   }
 </style>
@@ -277,12 +320,12 @@ const {
     const branchPath = (a: {x:number;y:number}, b: {x:number;y:number}, groupBottom: number) => {
       if (Math.abs(b.x - a.x) < 1) return `M ${a.x} ${a.y} V ${b.y - 6}`;
 
-      const radius = 7;
+      const radius = 6;
       const direction = b.x >= a.x ? 1 : -1;
-      const desiredGap = 7;
+      const desiredGap = 6;
       const minMidY = groupBottom + desiredGap;
-      const maxMidY = b.y - 13;
-      const naturalMidY = a.y + Math.max(10, Math.min(15, (b.y - a.y) * 0.42));
+      const maxMidY = b.y - 12;
+      const naturalMidY = a.y + Math.max(9, Math.min(13, (b.y - a.y) * 0.42));
       const midY = Math.min(maxMidY, Math.max(minMidY, naturalMidY));
       const r = Math.min(radius, Math.abs(b.x - a.x) / 3, Math.max(3, (b.y - midY - 6) / 2));
 
