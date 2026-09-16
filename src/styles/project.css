@@ -58,6 +58,12 @@
   border-bottom: 0;
 }
 
+/* Workflow diagrams function as inline figures within surrounding text rather
+   than as independently divided page sections. */
+.project-page .module[data-module-type="research-workflow"] {
+  border-bottom: 0;
+}
+
 .project-page .module-heading {
   margin: 0 0 18px;
   font-size: 16pt;
