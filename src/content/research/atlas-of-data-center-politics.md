@@ -94,9 +94,24 @@ modules:
       the published Atlas only after review of their identity, relevance,
       geography, attributes, sources, and relationships. Published records
       remain grounded in the underlying public evidence. Large language models
-      may assist with discovery, translation, summarization, and classification,
-      but they are not treated as sources (see validation, updates, and
-      interpretation below).</p><h2>Constructing records and
+      and other automated research tools may assist with discovery, translation,
+      summarization, classification, and reconciliation, but they are not treated
+      as sources. The research and review workflow is summarized below.</p>
+  - type: research-workflow
+    heading: Research and review workflow
+    agentLabel: Agent-assisted research and reconciliation
+    discoveryLabel: Discovery and Research
+    validateLabel: Validate and Reconcile
+    noChangeLabel: No material change
+    changeLabel: Change identified
+    researchLogLabel: Research log
+    humanReviewLabel: Human Review
+    publicAtlasLabel: Public Atlas
+  - type: text
+    body: <p>Research that does not result in a material change is also logged so
+      that completed checks, source sets, and unresolved questions can inform
+      later review. Records that move through this workflow are then structured
+      according to the following conventions.</p><h2>Constructing records and
       relationships</h2><p>For data centers, the main unit is the physical
       campus or site rather than an individual building, tenant deployment,
       permit, or phase announcement. Records distinguish current lifecycle
@@ -111,31 +126,32 @@ modules:
       materially address data centers or their associated infrastructure and
       resource demands. Actors provide stable identities for organizations.
       Relationships are added only where sources support a connection at the
-      relevant scale (e.g., direct involvement in a campus, corporate hierarchy,
-      a durable institutional relationship, or participation in a specific
-      event). Proximity, shared geography, or thematic similarity may suggest
-      avenues for investigation but do not by themselves establish a formal
-      relationship.</p><h2>Validation, updates, and interpretation</h2><p>The
-      Atlas combines automated (deterministic) checks with substantive human
-      review. Validation tests identifiers, dates, coordinates, classifications,
-      lifecycle combinations, relationships, and likely duplicates, while human
-      review assesses whether the available evidence supports record identity
-      and interpretation. Records are updated as projects and policies change,
-      but this can be periodic and gaps may persist as data is updated weekly or
-      monthly. Stable Atlas identifiers are retained wherever the underlying
-      object remains the same. Public releases are tied to defined dataset
-      revisions so that changes can be tracked over time.</p><p>Coverage is
-      broad but uneven. Public documentation varies substantially across places,
-      and U.S. legislative coverage is currently more systematic than many
-      international and non-bill policy domains. Absence from the Atlas should
-      therefore not be interpreted as evidence that a facility, controversy,
-      policy, or institutional relationship does not exist. Capacity and
-      location precision also vary across records. More generally, the Atlas
-      documents observable sequences, associations, and evidence-supported
-      relationships; it does not aim to establish causation. Researchers should
-      therefore carry source quality, missing data, geographic precision, and
-      collection bias into subsequent spatial, statistical, comparative, or
-      qualitative analysis.</p>
+      relevant scale, such as direct involvement in a campus, corporate
+      hierarchy, a durable institutional relationship, or participation in a
+      specific event. Proximity, shared geography, or thematic similarity may
+      suggest avenues for investigation but do not by themselves establish a
+      formal relationship.</p><h2>Validation, updates, and interpretation</h2><p>The
+      Atlas combines agent-assisted research and reconciliation, deterministic
+      validation, and substantive human review. Automated checks test
+      identifiers, dates, coordinates, classifications, lifecycle combinations,
+      relationships, and likely duplicates, while human review evaluates
+      proposed changes that require judgment about record identity,
+      interpretation, or structure. Records are updated as projects and policies
+      change, but this can be periodic and gaps may persist as data is updated
+      weekly or monthly. Stable Atlas identifiers are retained wherever the
+      underlying object remains the same. Public releases are tied to defined
+      dataset revisions so that changes can be tracked over time.</p><p>Coverage
+      is broad but uneven. Public documentation varies substantially across
+      places, and U.S. legislative coverage is currently more systematic than
+      many international and non-bill policy domains. Absence from the Atlas
+      should therefore not be interpreted as evidence that a facility,
+      controversy, policy, or institutional relationship does not exist.
+      Capacity and location precision also vary across records. More generally,
+      the Atlas documents observable sequences, associations, and
+      evidence-supported relationships; it does not aim to establish causation.
+      Researchers should therefore carry source quality, missing data,
+      geographic precision, and collection bias into subsequent spatial,
+      statistical, comparative, or qualitative analysis.</p>
   - type: links
     heading: Downloads
     items:
