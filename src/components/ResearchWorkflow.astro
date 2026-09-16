@@ -27,9 +27,9 @@ const {
 ---
 
 <section class="module module-research-workflow" data-module-type="research-workflow" data-research-workflow>
-  <div class="research-workflow-inner">
-    {heading && <h3 class="research-workflow-heading">{heading}</h3>}
+  {heading && <h3 class="research-workflow-heading">{heading}</h3>}
 
+  <div class="research-workflow-inner">
     <div class="research-workflow-wrap" data-workflow-wrap>
       <svg class="research-workflow-lines" data-workflow-svg aria-hidden="true"></svg>
 
@@ -62,12 +62,9 @@ const {
     padding-bottom: 18px;
   }
 
-  .research-workflow-inner {
-    width: min(100%, 520px);
-    margin: 0 auto;
-  }
-
   .research-workflow-heading {
+    width: 100%;
+    max-width: 720px;
     margin: 0 0 24px;
     color: var(--fg);
     font-family: var(--font-display);
@@ -75,6 +72,12 @@ const {
     font-weight: 500;
     line-height: 1.25;
     letter-spacing: -.005em;
+    text-align: left;
+  }
+
+  .research-workflow-inner {
+    width: min(100%, 520px);
+    margin: 0 auto;
   }
 
   .research-workflow-wrap {
@@ -213,13 +216,13 @@ const {
   }
 
   @media (max-width: 560px) {
-    .research-workflow-inner {
-      width: min(100%, 430px);
-    }
-
     .research-workflow-heading {
       margin-bottom: 22px;
-      font-size: 11pt;
+      font-size: 12pt;
+    }
+
+    .research-workflow-inner {
+      width: min(100%, 430px);
     }
 
     .research-workflow-layout {
