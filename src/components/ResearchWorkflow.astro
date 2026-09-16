@@ -1,0 +1,336 @@
+---
+interface Props {
+  heading?: string;
+  agentLabel?: string;
+  discoveryLabel?: string;
+  validateLabel?: string;
+  noChangeLabel?: string;
+  changeLabel?: string;
+  researchLogLabel?: string;
+  humanReviewLabel?: string;
+  publicAtlasLabel?: string;
+}
+
+const {
+  heading = 'Research and review workflow',
+  agentLabel = 'Agent-assisted research and reconciliation',
+  discoveryLabel = 'Discovery and Research',
+  validateLabel = 'Validate and Reconcile',
+  noChangeLabel = 'No material change',
+  changeLabel = 'Change identified',
+  researchLogLabel = 'Research log',
+  humanReviewLabel = 'Human Review',
+  publicAtlasLabel = 'Public Atlas'
+} = Astro.props;
+---
+
+<section class="module module-research-workflow" data-module-type="research-workflow" data-research-workflow>
+  {heading && <h1 class="module-heading">{heading}</h1>}
+
+  <div class="research-workflow-wrap" data-workflow-wrap>
+    <svg class="research-workflow-lines" data-workflow-svg aria-hidden="true"></svg>
+
+    <div class="research-workflow-layout">
+      <section class="research-workflow-agent" data-node="agent" aria-label={agentLabel}>
+        <span class="research-workflow-agent-label">{agentLabel}</span>
+        <div class="research-workflow-node" data-node="discovery">{discoveryLabel}</div>
+        <div class="research-workflow-node" data-node="validate">{validateLabel}</div>
+      </section>
+
+      <div class="research-workflow-node" data-node="nochange">{noChangeLabel}</div>
+      <div class="research-workflow-node" data-node="change">{changeLabel}</div>
+
+      <div class="research-workflow-end" data-node="log">{researchLogLabel}</div>
+      <div class="research-workflow-node research-workflow-node--strong" data-node="human">{humanReviewLabel}</div>
+
+      <div class="research-workflow-end" data-node="publish">{publicAtlasLabel}</div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .module-research-workflow {
+    overflow: visible;
+  }
+
+  .research-workflow-wrap {
+    position: relative;
+    width: 100%;
+    min-height: 335px;
+  }
+
+  .research-workflow-lines {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  .research-workflow-layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "agent agent"
+      "nochange change"
+      "log human"
+      ". publish";
+    column-gap: 34px;
+    row-gap: 31px;
+    align-items: start;
+    justify-items: center;
+  }
+
+  .research-workflow-agent {
+    grid-area: agent;
+    position: relative;
+    width: min(100%, 360px);
+    padding: 18px 16px 16px;
+    border: 1px dashed var(--line);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    background: transparent;
+  }
+
+  .research-workflow-agent-label {
+    position: absolute;
+    top: -9px;
+    left: 14px;
+    padding: 0 6px;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-display);
+    font-size: 9pt;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .research-workflow-node,
+  .research-workflow-end {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-display);
+    font-size: 9.75pt;
+    font-weight: 500;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .research-workflow-node {
+    min-height: 38px;
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+
+  .research-workflow-node--strong {
+    font-weight: 700;
+  }
+
+  .research-workflow-end {
+    min-height: 30px;
+    padding: 4px 8px;
+  }
+
+  [data-node="nochange"] { grid-area: nochange; }
+  [data-node="change"] { grid-area: change; }
+  [data-node="log"] { grid-area: log; }
+  [data-node="human"] { grid-area: human; }
+  [data-node="publish"] { grid-area: publish; }
+
+  @media (max-width: 560px) {
+    .research-workflow-wrap {
+      min-height: 360px;
+    }
+
+    .research-workflow-layout {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-areas:
+        "agent agent"
+        "nochange change"
+        "log human"
+        ". publish";
+      column-gap: 12px;
+      row-gap: 27px;
+    }
+
+    .research-workflow-agent {
+      width: min(100%, 300px);
+      padding: 17px 12px 14px;
+      gap: 16px;
+    }
+
+    .research-workflow-agent-label {
+      left: 10px;
+      max-width: calc(100% - 20px);
+      font-size: 8.25pt;
+      white-space: nowrap;
+    }
+
+    .research-workflow-node,
+    .research-workflow-end {
+      max-width: none;
+      font-size: 8.75pt;
+      line-height: 1.2;
+    }
+
+    .research-workflow-node {
+      min-height: 42px;
+      padding: 7px;
+    }
+
+    .research-workflow-end {
+      min-height: 28px;
+      padding: 3px 4px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .research-workflow-layout {
+      column-gap: 8px;
+    }
+
+    .research-workflow-node,
+    .research-workflow-end {
+      font-size: 8.25pt;
+    }
+
+    .research-workflow-node {
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+
+    .research-workflow-agent-label {
+      font-size: 7.8pt;
+    }
+  }
+</style>
+
+<script>
+  const workflowLinks = [
+    ['discovery', 'validate', 'vertical'],
+    ['validate', 'nochange', 'branch'],
+    ['validate', 'change', 'branch'],
+    ['nochange', 'log', 'vertical'],
+    ['change', 'human', 'vertical'],
+    ['human', 'publish', 'vertical']
+  ];
+
+  const boundWorkflows = new WeakSet<Element>();
+
+  function bindResearchWorkflow(root: Element) {
+    if (boundWorkflows.has(root)) return;
+    boundWorkflows.add(root);
+
+    const wrap = root.querySelector<HTMLElement>('[data-workflow-wrap]');
+    const svg = root.querySelector<SVGSVGElement>('[data-workflow-svg]');
+    if (!wrap || !svg) return;
+
+    const node = (name: string) => root.querySelector<HTMLElement>(`[data-node="${name}"]`);
+
+    const rectFor = (name: string, wrapRect: DOMRect) => {
+      const el = node(name);
+      if (!el) return null;
+      const rect = el.getBoundingClientRect();
+      return {
+        top: rect.top - wrapRect.top,
+        bottom: rect.bottom - wrapRect.top,
+        cx: rect.left - wrapRect.left + rect.width / 2
+      };
+    };
+
+    const pathEl = (d: string, color: string) => {
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', d);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', color);
+      path.setAttribute('stroke-width', '1');
+      path.setAttribute('vector-effect', 'non-scaling-stroke');
+      path.setAttribute('stroke-linecap', 'round');
+      path.setAttribute('stroke-linejoin', 'round');
+      return path;
+    };
+
+    const triangle = (x: number, y: number, color: string) => {
+      const marker = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      marker.setAttribute('points', `${x},${y} ${x - 4},${y - 6} ${x + 4},${y - 6}`);
+      marker.setAttribute('fill', color);
+      return marker;
+    };
+
+    const branchPath = (a: {x:number;y:number}, b: {x:number;y:number}, groupBottom: number) => {
+      if (Math.abs(b.x - a.x) < 1) return `M ${a.x} ${a.y} V ${b.y - 6}`;
+
+      const radius = 7;
+      const direction = b.x >= a.x ? 1 : -1;
+      const desiredGap = 7;
+      const minMidY = groupBottom + desiredGap;
+      const maxMidY = b.y - 13;
+      const naturalMidY = a.y + Math.max(10, Math.min(15, (b.y - a.y) * 0.42));
+      const midY = Math.min(maxMidY, Math.max(minMidY, naturalMidY));
+      const r = Math.min(radius, Math.abs(b.x - a.x) / 3, Math.max(3, (b.y - midY - 6) / 2));
+
+      return [
+        `M ${a.x} ${a.y}`,
+        `V ${midY - r}`,
+        `Q ${a.x} ${midY} ${a.x + direction * r} ${midY}`,
+        `H ${b.x - direction * r}`,
+        `Q ${b.x} ${midY} ${b.x} ${midY + r}`,
+        `V ${b.y - 6}`
+      ].join(' ');
+    };
+
+    let frame = 0;
+    const draw = () => {
+      const wrapRect = wrap.getBoundingClientRect();
+      const agentRect = rectFor('agent', wrapRect);
+      if (!agentRect) return;
+
+      const color = getComputedStyle(root).getPropertyValue('--line').trim() || '#c8cbcc';
+      svg.setAttribute('viewBox', `0 0 ${wrapRect.width} ${wrapRect.height}`);
+      svg.replaceChildren();
+
+      for (const [fromName, toName, type] of workflowLinks) {
+        const from = rectFor(fromName, wrapRect);
+        const to = rectFor(toName, wrapRect);
+        if (!from || !to) continue;
+
+        const a = { x: from.cx, y: from.bottom };
+        const b = { x: to.cx, y: to.top };
+        const d = type === 'branch'
+          ? branchPath(a, b, agentRect.bottom)
+          : `M ${a.x} ${a.y} V ${b.y - 6}`;
+
+        svg.append(pathEl(d, color), triangle(b.x, b.y, color));
+      }
+    };
+
+    const schedule = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(draw);
+    };
+
+    window.addEventListener('resize', schedule, { passive: true });
+    new ResizeObserver(schedule).observe(wrap);
+    document.fonts?.ready.then(schedule).catch(schedule);
+    schedule();
+  }
+
+  document.querySelectorAll('[data-research-workflow]').forEach(bindResearchWorkflow);
+</script>
