@@ -47,6 +47,18 @@ const moduleSchema = z.discriminatedUnion('type', [
     links: z.array(linkItemSchema).default([])
   }),
   z.object({
+    type: z.literal('research-workflow'),
+    heading: z.string().default('Research and review workflow'),
+    agentLabel: z.string().default('Agent-assisted research and reconciliation'),
+    discoveryLabel: z.string().default('Discovery and Research'),
+    validateLabel: z.string().default('Validate and Reconcile'),
+    noChangeLabel: z.string().default('No material change'),
+    changeLabel: z.string().default('Change identified'),
+    researchLogLabel: z.string().default('Research log'),
+    humanReviewLabel: z.string().default('Human Review'),
+    publicAtlasLabel: z.string().default('Public Atlas')
+  }),
+  z.object({
     type: z.literal('image'),
     image: z.string(),
     alt: z.string().default(''),
