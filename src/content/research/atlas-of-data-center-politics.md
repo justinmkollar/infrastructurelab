@@ -106,8 +106,8 @@ modules:
       is separated from human review and publication.</p>
   - type: research-workflow
     heading: Agent-assisted research with human review
-    agentLabel: Agent-assisted research and reconciliation
-    discoveryLabel: Discovery and Research
+    agentLabel: Agent-based Protocol
+    discoveryLabel: Source Discovery and Research
     validateLabel: Validate and Reconcile
     noChangeLabel: No material change
     changeLabel: New record or change identified
