@@ -96,7 +96,8 @@ modules:
       remain grounded in the underlying public evidence. Large language models
       and other automated research tools may assist with discovery, translation,
       summarization, classification, and reconciliation, but they are not treated
-      as sources. The research and review workflow is summarized below.</p>
+      as sources. The workflow below shows how agent-assisted research is
+      separated from human review and publication.</p>
   - type: research-workflow
     heading: Research and review workflow
     agentLabel: Agent-assisted research and reconciliation
@@ -108,10 +109,10 @@ modules:
     humanReviewLabel: Human Review
     publicAtlasLabel: Public Atlas
   - type: text
-    body: <p>Research that does not result in a material change is also logged so
-      that completed checks, source sets, and unresolved questions can inform
-      later review. Records that move through this workflow are then structured
-      according to the following conventions.</p><h2>Constructing records and
+    body: <p>Research that produces no material change is logged so that completed
+      checks, source sets, and unresolved questions can inform later review.
+      Records that move through this workflow are then structured according to
+      the following conventions.</p><h2>Constructing records and
       relationships</h2><p>For data centers, the main unit is the physical
       campus or site rather than an individual building, tenant deployment,
       permit, or phase announcement. Records distinguish current lifecycle
