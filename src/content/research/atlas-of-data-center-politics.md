@@ -121,7 +121,7 @@ modules:
     humanReviewDetail: Verify sources and make or confirm record
     publicAtlasLabel: Public Atlas
   - type: text
-    body: <p>Research that produces no material change is logged so that completed
+    body: "<p>Research that produces no material change is logged so that completed
       checks, source sets, and unresolved questions can inform later review.
       Records that move through this workflow are then structured according to
       the following conventions.</p><h2>Constructing records and
@@ -164,7 +164,53 @@ modules:
       evidence-supported relationships; it does not aim to establish causation.
       Researchers should therefore carry source quality, missing data,
       geographic precision, and collection bias into subsequent spatial,
-      statistical, comparative, or qualitative analysis.</p>
+      statistical, comparative, or qualitative analysis.</p><h2>Data
+      sources</h2><h3>Map layers and geography</h3><p>European Commission, Joint
+      Research Centre. \"Global Forest Cover 2020 (GFC2020), Version 4.\" Forest
+      Observations, 2026. <a
+      href=\"https://forobs.jrc.ec.europa.eu/GFC\">https://forobs.jrc.ec.europa\
+      .eu/GFC</a>. (Forest layer)</p><p>Natural Earth. \"1:10m Cultural Vectors:
+      Admin 0 – Countries; Admin 1 – States, Provinces; Admin 2 – Counties.\"
+      Natural Earth, n.d. <a
+      href=\"https://www.naturalearthdata.com/downloads/10m-cultural-vectors/\"\
+      >https://www.naturalearthdata.com/downloads/10m-cultural-vectors/</a>.
+      (National, subnational, and US county boundaries)</p><p>OpenStreetMap
+      contributors. \"OpenStreetMap.\" OpenStreetMap Foundation. Accessed
+      September 18, 2026. <a
+      href=\"https://www.openstreetmap.org/\">https://www.openstreetmap.org/</a\
+      >. (Base map, via Protomaps, and the power line and substation layers.
+      Licensed ODbL)</p><p>Potapov, Peter, Svetlana Turubanova, Matthew C.
+      Hansen, Alexandra Tyukavina, Viviana Zalles, Ahmad Khan, Xiao-Peng Song,
+      Amy Pickens, Quan Shen, and Jocelyn Cortez. \"Global Maps of Cropland
+      Extent and Change Show Accelerated Cropland Expansion in the Twenty-First
+      Century.\" Nature Food 3 (2022): 19–28. <a
+      href=\"https://doi.org/10.1038/s43016-021-00429-z\">https://doi.org/10.10\
+      38/s43016-021-00429-z</a>. Data: Global Land Analysis and Discovery
+      (GLAD), University of Maryland. <a
+      href=\"https://glad.umd.edu/dataset/croplands\">https://glad.umd.edu/data\
+      set/croplands</a>. (Cropland layer, 2019)</p><p>Protomaps. \"Protomaps
+      Basemap.\" Protomaps. <a
+      href=\"https://protomaps.com/\">https://protomaps.com/</a>. (Tiles for the
+      base map context archives)</p><p>TeleGeography. \"Submarine Cable Map.\"
+      TeleGeography, 2026. <a
+      href=\"https://www.submarinecablemap.com/\">https://www.submarinecablemap\
+      .com/</a>. (Cables and landingpoints geometry)</p><h3>Records and
+      relationships</h3><p>Global Legal Entity Identifier Foundation (GLEIF).
+      \"LEI Data and Level 2 Relationship Data.\" GLEIF. Accessed September 18,
+      2026. <a
+      href=\"https://www.gleif.org/en/lei-data/gleif-golden-copy\">https://www.\
+      gleif.org/en/lei-data/gleif-golden-copy</a>.(Operator and actor ownership
+      network)</p><p>LegiScan. \"LegiScan API: State and Federal Legislation.\"
+      LegiScan LLC. Accessed September 18, 2026. <a
+      href=\"https://legiscan.com/legiscan\">https://legiscan.com/legiscan</a>.
+      (US bill status, sponsors and actions)</p><h2>Citing this work</h2><p>The
+      data center, event, and legislation records come from the project's own
+      research workbooks, compiled from many primary sources included in each
+      record and is publicly available. For citing this work, please
+      use:</p><p>Kollar, Justin.<em> Atlas of Data Center Politics</em>. Version
+      0.1.0. Infrastructure Lab, National University of Singapore, 2026. <a
+      href=\"https://www.atlasofdatacenterpolitics.com/\">https://www.atlasofda\
+      tacenterpolitics.com/</a>. Licensed under CC BY 4.0.</p>"
   - type: links
     heading: Downloads
     items:
