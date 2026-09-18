@@ -108,7 +108,7 @@ modules:
       and other automated research tools may assist with discovery, translation,
       summarization, classification, and reconciliation, but they are not
       treated as sources. The workflow below shows how agent-assisted research
-      is separated from human review and publication.</p>
+      is separated from human review and publication.</p><p></p>
   - type: research-workflow
     heading: Agent-assisted research with human review
     agentLabel: Agent-based Protocol
