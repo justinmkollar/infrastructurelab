@@ -102,9 +102,22 @@ const people = defineCollection({
   })
 });
 
+const positions = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/positions' }),
+  schema: z.object({
+    title: z.string(),
+    dateLabel: z.string(),
+    order: z.number().default(100),
+    published: z.boolean().default(true),
+    description: z.string().default(''),
+    intro: z.string().default(''),
+    modules: z.array(moduleSchema).default([])
+  })
+});
+
 const pages = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/pages' }),
   schema: z.object({ title: z.string(), description: z.string().optional(), published: z.boolean().default(true), order: z.number().default(100), modules: z.array(moduleSchema).default([]) })
 });
 
-export const collections = { research, publications, people, pages };
+export const collections = { research, publications, people, positions, pages };

@@ -272,6 +272,21 @@ content:
               value: "{path}"
               label: "{primary}"
               search: "name,title,institution"
+      - name: positions
+        label: Open positions
+        type: object
+        description: Drag open positions into the order they should appear on the People page.
+        list: true
+        fields:
+          - name: entry
+            label: Position
+            type: reference
+            required: true
+            options:
+              collection: positions
+              value: "{path}"
+              label: "{primary}"
+              search: "title,dateLabel"
       - name: pages
         label: Additional pages
         type: object
@@ -406,6 +421,31 @@ content:
         fields:
           - {name: label, type: string}
           - {name: url, type: string}
+
+  - name: positions
+    label: Open positions
+    type: collection
+    path: src/content/positions
+    format: yaml-frontmatter
+    filename: "{title}.md"
+    view:
+      fields: [title, dateLabel, published]
+      primary: title
+      sort: [title, dateLabel]
+      search: [title, dateLabel, description]
+      default: {sort: title, order: asc}
+    fields:
+      - {name: title, type: string, required: true}
+      - {name: dateLabel, label: Date, type: string, required: true}
+      - {name: order, type: number, default: 100, hidden: true}
+      - {name: published, type: boolean, default: true}
+      - name: description
+        type: rich-text
+        required: true
+        description: Short summary shown when the position is expanded on the People page.
+        options: {format: html, media: images, path: positions}
+      - {name: intro, label: Page introduction, type: text}
+      - {name: modules, component: page_modules}
 
   - name: pages
     label: Additional pages

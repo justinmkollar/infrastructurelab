@@ -44,24 +44,15 @@
 .project-page .project-intro,
 .project-page .module p,
 .project-page .module .rich-text {
-  max-width: 720px;
+  width: 100%;
+  max-width: none;
 }
 
 .project-page .module {
   width: 100%;
-  padding: 48px 0;
-  border-bottom: 1px solid var(--line);
+  padding: var(--module-space) 0;
+  border-bottom: 0;
   scroll-margin-top: calc(var(--header-h) + 10px);
-}
-
-.project-page .module:last-child {
-  border-bottom: 0;
-}
-
-/* Workflow diagrams function as inline figures within surrounding text rather
-   than as independently divided page sections. */
-.project-page .module[data-module-type="research-workflow"] {
-  border-bottom: 0;
 }
 
 .project-page .module-heading {
@@ -455,7 +446,8 @@ body.media-lightbox-open {
 }
 
 .atlas-project .project-intro {
-  max-width: 720px;
+  width: 100%;
+  max-width: none;
   margin: 22px auto 0;
   color: var(--muted);
   font-size: 12pt;
@@ -468,8 +460,7 @@ body.media-lightbox-open {
     padding: 0 14px;
   }
 
-  .project-page .project-hero,
-  .project-page .module {
+  .project-page .project-hero {
     padding-top: 40px;
     padding-bottom: 40px;
   }
