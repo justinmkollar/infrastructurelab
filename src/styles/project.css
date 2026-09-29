@@ -1,6 +1,6 @@
-/* Research-project presentation layer.
-   Colors come from each project's editable theme record and are injected by
-   BaseLayout. */
+/* Shared long-form detail presentation layer.
+   Research projects can supply editable project colors through BaseLayout;
+   other detail pages inherit the global site theme. */
 
 .project-page .site-header {
   background: color-mix(in srgb, var(--bg) 96%, transparent);
