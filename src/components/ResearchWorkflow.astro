@@ -58,13 +58,11 @@ const {
 <style>
   .module-research-workflow {
     overflow: visible;
-    padding-top: 18px;
-    padding-bottom: 18px;
   }
 
   .research-workflow-heading {
     width: 100%;
-    max-width: 720px;
+    max-width: none;
     margin: 0 0 24px;
     color: var(--fg);
     font-family: var(--font-display);
@@ -194,26 +192,6 @@ const {
   [data-node="log"] { grid-area: log; }
   [data-node="human"] { grid-area: human; }
   [data-node="publish"] { grid-area: publish; }
-
-  /* When this module sits between text modules, treat all three as one
-     continuous section. This follows module order in Pages CMS automatically. */
-  :global(.module[data-module-type="text"]:has(+ .module-research-workflow)) {
-    padding-bottom: 12px;
-    border-bottom: 0;
-  }
-
-  :global(.module[data-module-type="text"] + .module-research-workflow) {
-    padding-top: 8px;
-  }
-
-  :global(.module-research-workflow:has(+ .module[data-module-type="text"])) {
-    padding-bottom: 0;
-    border-bottom: 0;
-  }
-
-  :global(.module-research-workflow + .module[data-module-type="text"]) {
-    padding-top: 6px;
-  }
 
   @media (max-width: 560px) {
     .research-workflow-heading {

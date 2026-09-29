@@ -33,5 +33,10 @@
     {
       "entry": "src/content/pages/example-page.md"
     }
+  ],
+  "positions": [
+    {
+      "entry": "src/content/positions/fully-funded-phd-opportunity-in-technology-infrastructure-and-the-pacific.md"
+    }
   ]
 }

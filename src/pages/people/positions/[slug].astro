@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ModuleRenderer from '../../../components/ModuleRenderer.astro';
+import { withBase } from '../../../utils/paths';
+import '../../../styles/project.css';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('positions', ({ data }) => data.published);
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const d = entry.data;
+---
+<BaseLayout title={d.title} active="People" bodyClass="project-page">
+  <main class="project-main">
+    <div class="project-back"><a href={withBase('/people/')}>← People</a></div>
+    <section class="project-hero">
+      <h1 class="project-title">{d.title}</h1>
+      {d.intro && <p class="project-intro">{d.intro}</p>}
+    </section>
+    <ModuleRenderer modules={d.modules} />
+  </main>
+</BaseLayout>
