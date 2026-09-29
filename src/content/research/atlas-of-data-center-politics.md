@@ -60,6 +60,9 @@ modules:
   - type: updates
     heading: News & Planned Updates
     items:
+      - date: 29 September 2026
+        title: Data Update
+        body: <p></p>
       - date: 16 September 2026
         title: Soft Public Release
         body: <p>The Atlas of Data Center Politics is now publicly available.</p>
