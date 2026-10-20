@@ -4,6 +4,10 @@ import site from '../data/site.json';
 import { withBase } from '../utils/paths';
 const fadeMs = Math.max(0, Number(site.home.splashFadeSeconds || 2) * 1000);
 const holdMs = Math.max(fadeMs + 500, Number(site.home.splashHoldSeconds || 30) * 1000);
+type SplashItem =
+  | { type: 'image'; image: string; alt?: string; focalX?: number; focalY?: number }
+  | { type: 'video'; video: string; poster: string; playbackRate?: number; displaySeconds?: number; focalX?: number; focalY?: number };
+const splashMedia = site.home.splashMedia as unknown as SplashItem[];
 ---
 <BaseLayout title={site.title} active="About" bodyClass="home-page">
   <main>
@@ -15,8 +19,29 @@ const holdMs = Math.max(fadeMs + 500, Number(site.home.splashHoldSeconds || 30) 
       style={`--splash-fade:${site.home.splashFadeSeconds || 2}s`}
       aria-label="Infrastructure landscape"
     >
-      {site.home.splashImages.map((item) =>
-        <img class="splash-layer" src={withBase(item.image)} alt={item.alt || ''} aria-hidden="true" />
+      {splashMedia.map((item) =>
+        item.type === 'video'
+          ? <video
+              class="splash-layer"
+              muted
+              playsinline
+              loop
+              preload="metadata"
+              poster={item.poster ? withBase(item.poster) : undefined}
+              data-playback-rate={item.playbackRate ?? 1}
+              data-display-ms={item.displaySeconds ? item.displaySeconds * 1000 : undefined}
+              style={`object-position:${item.focalX ?? 50}% ${item.focalY ?? 50}%`}
+              aria-hidden="true"
+            >
+              <source src={withBase(item.video)} type={item.video.toLowerCase().endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
+            </video>
+          : <img
+              class="splash-layer"
+              src={withBase(item.image)}
+              alt={item.alt || ''}
+              style={`object-position:${item.focalX ?? 50}% ${item.focalY ?? 50}%`}
+              aria-hidden="true"
+            />
       )}
     </section>
     <script is:inline>
@@ -28,7 +53,11 @@ const holdMs = Math.max(fadeMs + 500, Number(site.home.splashHoldSeconds || 30) 
         const splash = document.querySelector('[data-splash]');
         const layers = splash ? [...splash.querySelectorAll('.splash-layer')] : [];
         if (!layers.length) return;
-        const active = Math.floor(Math.random() * layers.length);
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const options = reduceMotion
+          ? layers.map((layer, index) => layer.tagName === 'IMG' ? index : -1).filter(index => index >= 0)
+          : layers.map((_, index) => index);
+        const active = options[Math.floor(Math.random() * options.length)] ?? 0;
         layers[active].classList.add('is-initial', 'is-visible');
         layers[active].style.transition = 'none';
         splash.dataset.initialSplash = String(active);

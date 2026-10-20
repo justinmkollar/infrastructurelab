@@ -9,20 +9,24 @@
     "body": "<p>Our work moves between infrastructural objects and the broader processes of <em>infrastructuring</em>, tracing how networks of energy, water, logistics, computation, and manufacturing connect cities to distant sites of extraction, production, and resource supply. Through spatial and historical research, we examine the political economies and ecologies of transformation through which these extended landscapes are produced.</p><p>We focus on the institutional and material processes through which infrastructure takes form on the ground: how projects are sited, financed, permitted, supplied, and contested. We are especially interested in the institutional arrangements that bring infrastructure into being and the conflicts that arise around land, resources, and investment, among other things. By following these processes across different sites and scales, the Lab examines how infrastructure reorganizes territory and how global systems become negotiated through particular places.</p><p>*Website still in development.</p>",
     "splashFadeSeconds": 2.5,
     "splashHoldSeconds": 30,
-    "splashImages": [
+    "splashMedia": [
       {
+        "type": "image",
         "image": "/uploads/images/2023tsmcphoenixaerialoverview.jpg",
         "alt": "A massive semiconductor fab construction on the fringes of Phoenix, Arizona."
       },
       {
+        "type": "image",
         "image": "/uploads/images/dji0321northtainansolarpanels2022.jpg",
         "alt": "Utility-scale solar arrays replacing farmland in Tainan, Taiwan."
       },
       {
+        "type": "image",
         "image": "/uploads/images/2026cyrusonedfw-1.jpg",
         "alt": "CyrusOne data centers under construction in Texas."
       },
       {
+        "type": "image",
         "image": "/uploads/images/2022hsinchufuliushuiexample-1.jpg",
         "alt": "Water infratructure near Hsinchu, Taiwan."
       }

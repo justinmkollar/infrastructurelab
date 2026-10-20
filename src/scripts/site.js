@@ -107,60 +107,60 @@ document.querySelectorAll('[data-index-entry]').forEach((entry) => {
   setOpen(false);
 });
 
+// Unified homepage splash controller. Images and silent video share the same layer layout.
 const splash = document.querySelector('[data-splash]');
 if (body.classList.contains('home-page') && header && splash) {
   const layers = [...splash.querySelectorAll('.splash-layer')];
   const fadeMs = Math.max(0, Number(splash.dataset.fadeMs || 2000));
   const holdMs = Math.max(fadeMs + 500, Number(splash.dataset.holdMs || 30000));
   const transition = `opacity ${fadeMs}ms linear`;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const preselected = layers.findIndex((layer) => layer.classList.contains('is-visible'));
-  const storedInitial = Number.parseInt(splash.dataset.initialSplash || '', 10);
-  let active = preselected >= 0
-    ? preselected
-    : (Number.isInteger(storedInitial) && storedInitial >= 0 && storedInitial < layers.length
-        ? storedInitial
-        : (layers.length ? Math.floor(Math.random() * layers.length) : 0));
-  let contrastTimer = 0;
+  let active = preselected >= 0 ? preselected : 0;
   let cycleTimer = 0;
+  let contrastTimer = 0;
 
-  function coverSourceRect(img, boxW, boxH, sampleH) {
-    const nw = img.naturalWidth;
-    const nh = img.naturalHeight;
+  function coverSourceRect(layer, boxW, boxH, sampleH) {
+    const nw = layer.videoWidth || layer.naturalWidth;
+    const nh = layer.videoHeight || layer.naturalHeight;
     if (!nw || !nh || !boxW || !boxH) return null;
     const scale = Math.max(boxW / nw, boxH / nh);
     const cropW = boxW / scale;
     const cropH = boxH / scale;
+    const pos = (layer.style.objectPosition || '50% 50%').split(' ');
+    const fx = Math.min(1, Math.max(0, parseFloat(pos[0]) / 100 || 0));
+    const fy = Math.min(1, Math.max(0, parseFloat(pos[1]) / 100 || 0));
     return {
-      sx: (nw - cropW) / 2,
-      sy: (nh - cropH) / 2,
+      sx: (nw - cropW) * fx,
+      sy: (nh - cropH) * fy,
       sw: cropW,
       sh: Math.min(cropH, Math.max(1, sampleH / scale))
     };
   }
 
-  function chooseHeaderContrast(img) {
-    if (!img?.complete || !img.naturalWidth) return;
+  function chooseHeaderContrast(layer) {
+    if (!layer || (layer.tagName === 'VIDEO' && layer.readyState < 2) ||
+        (layer.tagName === 'IMG' && (!layer.complete || !layer.naturalWidth))) {
+      root.style.setProperty('--hero-header-fg', '#ffffff');
+      return;
+    }
     try {
       const rect = splash.getBoundingClientRect();
-      const src = coverSourceRect(img, rect.width, rect.height, Math.min(header.offsetHeight, 96));
+      const src = coverSourceRect(layer, rect.width, rect.height, Math.min(header.offsetHeight, 96));
       if (!src) return;
       const canvas = document.createElement('canvas');
       canvas.width = 64;
       canvas.height = 8;
       const ctx = canvas.getContext('2d', { willReadFrequently: true });
-      ctx.drawImage(img, src.sx, src.sy, src.sw, src.sh, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(layer, src.sx, src.sy, src.sw, src.sh, 0, 0, canvas.width, canvas.height);
       const px = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
       let lum = 0;
-      let count = 0;
       const linear = (value) => value <= 0.04045 ? value / 12.92 : Math.pow((value + 0.055) / 1.055, 2.4);
       for (let i = 0; i < px.length; i += 4) {
-        const r = linear(px[i] / 255);
-        const g = linear(px[i + 1] / 255);
-        const b = linear(px[i + 2] / 255);
+        const r = linear(px[i] / 255), g = linear(px[i + 1] / 255), b = linear(px[i + 2] / 255);
         lum += 0.2126 * r + 0.7152 * g + 0.0722 * b;
-        count += 1;
       }
-      root.style.setProperty('--hero-header-fg', (lum / Math.max(1, count)) > 0.47 ? '#111111' : '#ffffff');
+      root.style.setProperty('--hero-header-fg', (lum / (px.length / 4)) > 0.47 ? '#111111' : '#ffffff');
     } catch {
       root.style.setProperty('--hero-header-fg', '#ffffff');
     }
@@ -172,59 +172,91 @@ if (body.classList.contains('home-page') && header && splash) {
     if (!solid) chooseHeaderContrast(layers[active]);
   }
 
-  async function imageReady(img) {
-    if (img.complete && img.naturalWidth > 0) {
-      try { await img.decode?.(); } catch {}
-      return true;
+  function mediaReady(layer) {
+    if (layer.tagName === 'VIDEO') {
+      // The poster is a valid visible fallback while the video buffers or autoplay is blocked.
+      if (layer.poster || layer.readyState >= 2) return Promise.resolve(true);
+      return new Promise((resolve) => {
+        const done = (ready) => { cleanup(); resolve(ready); };
+        const loaded = () => done(true);
+        const failed = () => done(false);
+        const timeout = setTimeout(() => done(false), 8000);
+        const cleanup = () => {
+          clearTimeout(timeout);
+          layer.removeEventListener('loadeddata', loaded);
+          layer.removeEventListener('error', failed);
+        };
+        layer.addEventListener('loadeddata', loaded, { once: true });
+        layer.addEventListener('error', failed, { once: true });
+        layer.load();
+      });
+    }
+    if (layer.complete && layer.naturalWidth > 0) {
+      return layer.decode ? layer.decode().catch(() => {}).then(() => true) : Promise.resolve(true);
     }
     return new Promise((resolve) => {
       const loaded = async () => {
         cleanup();
-        try { await img.decode?.(); } catch {}
-        resolve(img.naturalWidth > 0);
+        try { await layer.decode?.(); } catch {}
+        resolve(layer.naturalWidth > 0);
       };
-      const failed = () => {
-        cleanup();
-        resolve(false);
-      };
+      const failed = () => { cleanup(); resolve(false); };
       const cleanup = () => {
-        img.removeEventListener('load', loaded);
-        img.removeEventListener('error', failed);
+        layer.removeEventListener('load', loaded);
+        layer.removeEventListener('error', failed);
       };
-      img.addEventListener('load', loaded, { once: true });
-      img.addEventListener('error', failed, { once: true });
+      layer.addEventListener('load', loaded, { once: true });
+      layer.addEventListener('error', failed, { once: true });
     });
+  }
+
+  function pauseVideo(layer) {
+    if (layer?.tagName === 'VIDEO') layer.pause();
+  }
+
+  function playVideo(layer) {
+    if (layer?.tagName !== 'VIDEO' || reducedMotion.matches || document.hidden) return;
+    const rate = Number(layer.dataset.playbackRate);
+    layer.playbackRate = Number.isFinite(rate) && rate >= 0.25 && rate <= 2 ? rate : 1;
+    try { layer.currentTime = 0; } catch {}
+    layer.play().catch(() => { /* Browser keeps the poster visible on autoplay rejection. */ });
+  }
+
+  function displayDuration(layer) {
+    const override = Number(layer?.dataset.displayMs);
+    if (override > 0) return Math.max(fadeMs + 500, override);
+    if (layer?.tagName === 'VIDEO' && Number.isFinite(layer.duration) && layer.duration > 0) {
+      return Math.max(fadeMs + 500, (layer.duration / layer.playbackRate) * 1000 - fadeMs / 2);
+    }
+    return holdMs;
   }
 
   function scheduleNext() {
     clearTimeout(cycleTimer);
-    if (layers.length > 1) cycleTimer = setTimeout(crossfadeNext, holdMs);
+    if (layers.length > 1 && !reducedMotion.matches) {
+      cycleTimer = setTimeout(crossfadeNext, displayDuration(layers[active]));
+    }
   }
 
   async function crossfadeNext() {
-    if (layers.length < 2) return;
-
+    if (layers.length < 2 || reducedMotion.matches) return;
     let next = (active + 1) % layers.length;
     let attempts = 0;
-    while (attempts < layers.length - 1 && !(await imageReady(layers[next]))) {
+    while (attempts < layers.length - 1 && !(await mediaReady(layers[next]))) {
       next = (next + 1) % layers.length;
       attempts += 1;
     }
-
-    if (next === active || !layers[next].naturalWidth) {
+    if (next === active || !(await mediaReady(layers[next]))) {
       scheduleNext();
       return;
     }
 
-    const outgoing = layers[active];
-    const incoming = layers[next];
-
-    outgoing.style.transition = transition;
+    const outgoing = layers[active], incoming = layers[next];
     incoming.style.transition = transition;
-    incoming.classList.remove('is-initial');
-    incoming.classList.remove('is-visible');
-
+    outgoing.style.transition = transition;
+    incoming.classList.remove('is-initial', 'is-visible');
     void incoming.offsetWidth;
+    playVideo(incoming);
 
     requestAnimationFrame(() => {
       incoming.classList.add('is-visible');
@@ -238,22 +270,31 @@ if (body.classList.contains('home-page') && header && splash) {
     }, Math.max(0, fadeMs * 0.55));
 
     setTimeout(() => {
+      pauseVideo(outgoing);
       active = next;
       scheduleNext();
     }, fadeMs);
   }
 
   if (layers.length) {
-    // Preserve the browser-side random selection made during HTML parsing so
-    // the chosen image is the one visible on the first paint, with no fade-in.
     layers.forEach((layer, index) => {
       const selected = index === active;
       layer.classList.toggle('is-visible', selected);
       layer.classList.toggle('is-initial', selected);
       layer.style.transition = selected ? 'none' : transition;
+      if (layer.tagName === 'VIDEO') {
+        layer.addEventListener('loadeddata', () => {
+          if (layers[active] === layer) updateHeader();
+        });
+        layer.addEventListener('loadedmetadata', () => {
+          if (layers[active] === layer) scheduleNext();
+        });
+        if (!selected) layer.pause();
+      }
     });
 
-    imageReady(layers[active]).then(() => {
+    mediaReady(layers[active]).then(() => {
+      playVideo(layers[active]);
       chooseHeaderContrast(layers[active]);
       requestAnimationFrame(() => requestAnimationFrame(() => {
         layers[active].classList.remove('is-initial');
@@ -261,12 +302,31 @@ if (body.classList.contains('home-page') && header && splash) {
       }));
     });
 
+    // Prepare inactive image layers; video layers keep preload=metadata to save bandwidth.
     layers.forEach((layer, index) => {
-      if (index !== active) imageReady(layer);
+      if (index !== active && layer.tagName === 'IMG') mediaReady(layer);
     });
     scheduleNext();
   }
 
+  reducedMotion.addEventListener('change', () => {
+    if (reducedMotion.matches) {
+      clearTimeout(cycleTimer);
+      layers.forEach(pauseVideo);
+    } else {
+      playVideo(layers[active]);
+      scheduleNext();
+    }
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      clearTimeout(cycleTimer);
+      layers.forEach(pauseVideo);
+    } else if (!reducedMotion.matches) {
+      playVideo(layers[active]);
+      scheduleNext();
+    }
+  });
   updateHeader();
   addEventListener('scroll', updateHeader, { passive: true });
   addEventListener('resize', updateHeader, { passive: true });
