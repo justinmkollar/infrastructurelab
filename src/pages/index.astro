@@ -4,10 +4,59 @@ import site from '../data/site.json';
 import { withBase } from '../utils/paths';
 const fadeMs = Math.max(0, Number(site.home.splashFadeSeconds || 2) * 1000);
 const holdMs = Math.max(fadeMs + 500, Number(site.home.splashHoldSeconds || 30) * 1000);
-type SplashItem =
-  | { type: 'image'; image: string; alt?: string; focalX?: number; focalY?: number }
+type SplashImage = {
+  type: 'image'; image: string; alt?: string; focalX?: number; focalY?: number;
+  motion?: 'none' | 'zoom-in' | 'zoom-out' | 'pan-left' | 'pan-right' | 'pan-up' | 'pan-down';
+  zoomPercent?: number; panPercent?: number;
+};
+type SplashItem = SplashImage
   | { type: 'video'; video: string; poster: string; playbackRate?: number; displaySeconds?: number; focalX?: number; focalY?: number };
 const splashMedia = site.home.splashMedia as unknown as SplashItem[];
+
+// Constrain CMS values before including them in CSS custom properties.
+const clampMotionValue = (value: number | undefined, fallback: number, min: number, max: number) => {
+  const number = value === undefined || value === null ? fallback : Number(value);
+  return Number.isFinite(number) ? Math.max(min, Math.min(max, number)) : fallback;
+};
+const hasImageMotion = (item: SplashImage) =>
+  ['zoom-in', 'zoom-out', 'pan-left', 'pan-right', 'pan-up', 'pan-down'].includes(item.motion ?? 'none');
+
+function imageMotionStyle(item: SplashImage): string {
+  const focalX = clampMotionValue(item.focalX, 50, 0, 100);
+  const focalY = clampMotionValue(item.focalY, 50, 0, 100);
+  const zoom = clampMotionValue(item.zoomPercent, 3, 0.5, 5);
+  const pan = clampMotionValue(item.panPercent, 1, 0.25, 3);
+  let startScale = 1.004, endScale = 1.004;
+  let startX = 0, endX = 0, startY = 0, endY = 0;
+  switch (item.motion) {
+    case 'zoom-in':
+      startScale = 1; endScale = 1 + zoom / 100;
+      break;
+    case 'zoom-out':
+      startScale = 1 + zoom / 100; endScale = 1;
+      break;
+    case 'pan-left':
+    case 'pan-right':
+    case 'pan-up':
+    case 'pan-down': {
+      // 1% extra scaling allows at least 0.5% safety margin per side.
+      const scale = 1 + (pan + 1) / 100;
+      const half = pan / 2;
+      startScale = endScale = scale;
+      if (item.motion === 'pan-left') { startX = half; endX = -half; }
+      if (item.motion === 'pan-right') { startX = -half; endX = half; }
+      if (item.motion === 'pan-up') { startY = half; endY = -half; }
+      if (item.motion === 'pan-down') { startY = -half; endY = half; }
+      break;
+    }
+  }
+  return [
+    `object-position:${focalX}% ${focalY}%`,
+    `--motion-from-x:${startX}%`, `--motion-to-x:${endX}%`,
+    `--motion-from-y:${startY}%`, `--motion-to-y:${endY}%`,
+    `--motion-from-scale:${startScale}`, `--motion-to-scale:${endScale}`
+  ].join(';');
+}
 ---
 <BaseLayout title={site.title} active="About" bodyClass="home-page">
   <main>
@@ -16,7 +65,7 @@ const splashMedia = site.home.splashMedia as unknown as SplashItem[];
       data-splash
       data-fade-ms={fadeMs}
       data-hold-ms={holdMs}
-      style={`--splash-fade:${site.home.splashFadeSeconds || 2}s`}
+      style={`--splash-fade:${site.home.splashFadeSeconds || 2}s;--splash-motion-duration:${(holdMs + 2 * fadeMs) / 1000}s`}
       aria-label="Infrastructure landscape"
     >
       {splashMedia.map((item) =>
@@ -36,10 +85,10 @@ const splashMedia = site.home.splashMedia as unknown as SplashItem[];
               <source src={withBase(item.video)} type={item.video.toLowerCase().endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
             </video>
           : <img
-              class="splash-layer"
+              class={`splash-layer splash-image${hasImageMotion(item) ? ' has-motion' : ''}`}
               src={withBase(item.image)}
               alt={item.alt || ''}
-              style={`object-position:${item.focalX ?? 50}% ${item.focalY ?? 50}%`}
+              style={imageMotionStyle(item)}
               aria-hidden="true"
             />
       )}
@@ -59,6 +108,7 @@ const splashMedia = site.home.splashMedia as unknown as SplashItem[];
           : layers.map((_, index) => index);
         const active = options[Math.floor(Math.random() * options.length)] ?? 0;
         layers[active].classList.add('is-initial', 'is-visible');
+        if (layers[active].classList.contains('has-motion')) layers[active].classList.add('is-motion-active');
         layers[active].style.transition = 'none';
         splash.dataset.initialSplash = String(active);
       })();
