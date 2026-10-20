@@ -192,7 +192,7 @@ if (body.classList.contains('home-page') && header && splash) {
       });
     }
     if (layer.complete && layer.naturalWidth > 0) {
-      return layer.decode?.().catch(() => {}).then(() => true) ?? Promise.resolve(true);
+      return layer.decode ? layer.decode().catch(() => {}).then(() => true) : Promise.resolve(true);
     }
     return new Promise((resolve) => {
       const loaded = async () => {
