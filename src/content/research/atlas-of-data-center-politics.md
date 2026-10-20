@@ -62,39 +62,37 @@ modules:
     items:
       - date: 20 October 2026
         title: Interface and Data Update, Version 1.0.1
-        body: <ul><li><p><strong>New look and navigation.</strong> Reorganized panels,
-          collapsible filters and sections, and improved mobile navigation make
-          the Atlas easier to explore.</p></li><li><p><strong>Cleaner map
-          markers. </strong>Events and policies cluster by region at lower zoom
-          levels, with more precise local markers and a new terrestrial fiber
-          layer.</p></li><li><p><strong>Custom color palettes. </strong>Choose
-          from ten presets or customize colors separately for light and dark
-          themes, with options to save palettes.</p></li><li><p><strong>Data
-          update. </strong>Refinement of event inclusion criteria to focus on
-          core political events and less on project updates and advancement of
-          data center validation efforts.</p></li></ul><p></p>
+        body: <p>New look and navigation. Reorganized panels, collapsible filters and
+          sections, and improved mobile navigation make the Atlas easier to
+          explore.</p><p>Cleaner map markers. Events and policies cluster by
+          region at lower zoom levels, with more precise local markers and a new
+          terrestrial fiber layer.</p><p>Custom color palettes. Choose from ten
+          presets or customize colors separately for light and dark themes, with
+          options to save palettes.</p><p>Data update. Refinement of event
+          inclusion criteria to focus on core political events and less on
+          project updates and advancement of data center validation
+          efforts.</p><p></p>
       - date: 29 September 2026
         title: Data Update
-        body: <ul><li><p><strong>Greater coverage. </strong>Extended coverage for
-          geographies in Europe and Asia including policies, data centers, and
-          events.</p></li><li><p><strong>Validation Framework. </strong>Progress
-          on sourcing and validation efforts across the database, including a
-          framework for source type as well as access and creation dates on the
-          back end.</p></li></ul><p></p>
+        body: <p>Greater coverage. Extended coverage for geographies in Europe and Asia
+          including policies, data centers, and events.</p><p>Validation
+          framework.<strong> </strong>Progress on sourcing and validation
+          efforts across the database, including a framework for source type as
+          well as access and creation dates on the back end.</p><p></p>
       - date: 16 September 2026
         title: Soft Public Release Version 1.0.0
         body: <p>The Atlas of Data Center Politics is now publicly available.</p>
       - date: Planned
         title: Future work
-        body: "<p>Robustness and validity: Expanded global data center verification,
+        body: <p>Robustness and validity. Expanded global data center verification,
           additional infrastructure context, dataset downloads, and citation
-          guidance.</p><p>Infrastructural relations: Added watershed and energy
+          guidance.</p><p>Infrastructural relations. Added watershed and energy
           systems layers to contextualize resource impacts and policy across
-          domains.</p><p>Finance and ownership: Extending the actor network
+          domains.</p><p>Finance and ownership. Extending the actor network
           analysis to show the interconnections between powerful istitutional
           actors and energy and data center assets.</p><p>Wiki and data
-          download: An extended wiki-based interface with contextual
-          information, validated sources, and more.</p>"
+          download. An extended wiki-based interface with contextual
+          information, validated sources, and more.</p>
   - type: gallery
     heading: Images
     images:
