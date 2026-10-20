@@ -213,7 +213,12 @@ modules:
       base map context archives)</p><p>TeleGeography. \"Submarine Cable Map.\"
       TeleGeography, 2026. <a
       href=\"https://www.submarinecablemap.com/\">https://www.submarinecablemap\
-      .com/</a>. (Cables and landingpoints geometry)</p><h3>Records and
+      .com/</a>. (Cables and landingpoints geometry)</p><p>International
+      Telecommunication Union (ITU). “ITU Broadband Maps: Terrestrial
+      Transmission Network (trx_public_2).” ITU, 2022. Accessed October 14,
+      2026. <a
+      href=\"https://bbmaps.itu.int/bbmaps/\">https://bbmaps.itu.int/bbmaps/</a\
+      >. (Terrestrial fiber layer; microwave links excluded)</p><h3>Records and
       relationships</h3><p>Global Legal Entity Identifier Foundation (GLEIF).
       \"LEI Data and Level 2 Relationship Data.\" GLEIF. Accessed September 18,
       2026. <a
