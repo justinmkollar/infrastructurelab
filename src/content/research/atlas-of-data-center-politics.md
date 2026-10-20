@@ -61,7 +61,7 @@ modules:
     heading: News & Planned Updates
     items:
       - date: 20 October 2026
-        title: Interface and Data Update
+        title: Interface and Data Update, Version 1.0.1
         body: <ul><li><p><strong>New look and navigation.</strong> Reorganized panels,
           collapsible filters and sections, and improved mobile navigation make
           the Atlas easier to explore.</p></li><li><p><strong>Cleaner map
@@ -82,7 +82,7 @@ modules:
           framework for source type as well as access and creation dates on the
           back end.</p></li></ul><p></p>
       - date: 16 September 2026
-        title: Soft Public Release
+        title: Soft Public Release Version 1.0.0
         body: <p>The Atlas of Data Center Politics is now publicly available.</p>
       - date: Planned
         title: Future work
