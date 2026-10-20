@@ -224,6 +224,22 @@ content:
                   - {name: alt, label: Alternative text, type: string}
                   - {name: focalX, label: Horizontal focal point (%), type: number, default: 50}
                   - {name: focalY, label: Vertical focal point (%), type: number, default: 50}
+                  - name: motion
+                    label: Slow image motion
+                    type: select
+                    default: none
+                    description: Optional movement over the image display interval. Video playback is unchanged.
+                    options:
+                      values:
+                        - {name: none, label: None (static)}
+                        - {name: zoom-in, label: Zoom in}
+                        - {name: zoom-out, label: Zoom out}
+                        - {name: pan-left, label: Pan left}
+                        - {name: pan-right, label: Pan right}
+                        - {name: pan-up, label: Pan up}
+                        - {name: pan-down, label: Pan down}
+                  - {name: zoomPercent, label: Zoom amount (%) — 0.5 to 5, type: number, default: 3}
+                  - {name: panPercent, label: Pan distance (%) — 0.25 to 3, type: number, default: 1}
               - name: video
                 label: Video
                 fields:

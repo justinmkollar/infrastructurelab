@@ -262,8 +262,10 @@ if (body.classList.contains('home-page') && header && splash) {
     const outgoing = layers[active], incoming = layers[next];
     incoming.style.transition = transition;
     outgoing.style.transition = transition;
-    incoming.classList.remove('is-initial', 'is-visible');
+    incoming.classList.remove('is-initial', 'is-visible', 'is-motion-active');
+    // Reset a previously shown image only while it is completely transparent.
     void incoming.offsetWidth;
+    if (incoming.classList.contains('has-motion')) incoming.classList.add('is-motion-active');
     playVideo(incoming);
 
     requestAnimationFrame(() => {
@@ -279,6 +281,8 @@ if (body.classList.contains('home-page') && header && splash) {
 
     setTimeout(() => {
       pauseVideo(outgoing);
+      // Outgoing image continues its transform throughout its opacity fade.
+      outgoing.classList.remove('is-motion-active');
       active = next;
       scheduleNext();
     }, fadeMs);
@@ -289,6 +293,7 @@ if (body.classList.contains('home-page') && header && splash) {
       const selected = index === active;
       layer.classList.toggle('is-visible', selected);
       layer.classList.toggle('is-initial', selected);
+      layer.classList.toggle('is-motion-active', selected && layer.classList.contains('has-motion'));
       layer.style.transition = selected ? 'none' : transition;
       if (layer.tagName === 'VIDEO') {
         layer.addEventListener('loadeddata', () => {
@@ -327,6 +332,7 @@ if (body.classList.contains('home-page') && header && splash) {
     }
   });
   document.addEventListener('visibilitychange', () => {
+    splash.classList.toggle('is-page-hidden', document.hidden);
     if (document.hidden) {
       clearTimeout(cycleTimer);
       layers.forEach(pauseVideo);

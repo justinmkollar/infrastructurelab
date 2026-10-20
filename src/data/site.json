@@ -15,28 +15,40 @@
         "image": "/uploads/images/2023tsmcphoenixaerialoverview.jpg",
         "alt": "A massive semiconductor fab construction on the fringes of Phoenix, Arizona.",
         "focalX": 50,
-        "focalY": 50
+        "focalY": 50,
+        "motion": "none",
+        "zoomPercent": 3,
+        "panPercent": 1
       },
       {
         "type": "image",
         "image": "/uploads/images/dji0321northtainansolarpanels2022.jpg",
         "alt": "Utility-scale solar arrays replacing farmland in Tainan, Taiwan.",
         "focalX": 50,
-        "focalY": 50
+        "focalY": 50,
+        "motion": "none",
+        "zoomPercent": 3,
+        "panPercent": 1
       },
       {
         "type": "image",
         "image": "/uploads/images/2026cyrusonedfw-1.jpg",
         "alt": "CyrusOne data centers under construction in Texas.",
         "focalX": 50,
-        "focalY": 50
+        "focalY": 50,
+        "motion": "none",
+        "zoomPercent": 3,
+        "panPercent": 1
       },
       {
         "type": "image",
         "image": "/uploads/images/2022hsinchufuliushuiexample-1.jpg",
         "alt": "Water infratructure near Hsinchu, Taiwan.",
         "focalX": 50,
-        "focalY": 50
+        "focalY": 50,
+        "motion": "none",
+        "zoomPercent": 3,
+        "panPercent": 1
       },
       {
         "type": "video",
