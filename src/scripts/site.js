@@ -224,10 +224,18 @@ if (body.classList.contains('home-page') && header && splash) {
 
   function displayDuration(layer) {
     const override = Number(layer?.dataset.displayMs);
-    if (override > 0) return Math.max(fadeMs + 500, override);
     if (layer?.tagName === 'VIDEO' && Number.isFinite(layer.duration) && layer.duration > 0) {
-      return Math.max(fadeMs + 500, (layer.duration / layer.playbackRate) * 1000 - fadeMs / 2);
+      // Use the remaining playback time, not the full duration: a video may
+      // already have played during its incoming crossfade.
+      // Finish the entire outgoing crossfade 400ms before the video can loop.
+      const rate = layer.playbackRate > 0 ? layer.playbackRate : 1;
+      const remainingMs = Math.max(0, (layer.duration - layer.currentTime) / rate * 1000);
+      const latestStartMs = Math.max(0, remainingMs - fadeMs - 400);
+      // An explicit display time can shorten a video, but must not push its
+      // outgoing fade beyond the end of the first playback.
+      return override > 0 ? Math.min(override, latestStartMs) : latestStartMs;
     }
+    if (override > 0) return Math.max(fadeMs + 500, override);
     return holdMs;
   }
 
