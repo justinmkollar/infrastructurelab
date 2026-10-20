@@ -232,7 +232,7 @@ modules:
       research workbooks, compiled from many primary sources included in each
       record and is publicly available. For citing this work, please
       use:</p><p>Kollar, Justin.<em> Atlas of Data Center Politics</em>. Version
-      0.1.0. Infrastructure Lab, National University of Singapore, 2026. <a
+      1.0.1 Infrastructure Lab, National University of Singapore, 2026. <a
       href=\"https://www.atlasofdatacenterpolitics.com/\">https://www.atlasofda\
       tacenterpolitics.com/</a>. Licensed under CC BY 4.0.</p>"
   - type: links
