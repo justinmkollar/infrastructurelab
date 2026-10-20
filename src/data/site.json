@@ -16,9 +16,9 @@
         "alt": "A massive semiconductor fab construction on the fringes of Phoenix, Arizona.",
         "focalX": 50,
         "focalY": 50,
-        "motion": "none",
-        "zoomPercent": 3,
-        "panPercent": 1
+        "motion": "zoom-out",
+        "zoomPercent": 5,
+        "panPercent": 3
       },
       {
         "type": "image",
