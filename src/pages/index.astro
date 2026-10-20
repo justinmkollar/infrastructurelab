@@ -4,6 +4,10 @@ import site from '../data/site.json';
 import { withBase } from '../utils/paths';
 const fadeMs = Math.max(0, Number(site.home.splashFadeSeconds || 2) * 1000);
 const holdMs = Math.max(fadeMs + 500, Number(site.home.splashHoldSeconds || 30) * 1000);
+type SplashItem =
+  | { type: 'image'; image: string; alt?: string; focalX?: number; focalY?: number }
+  | { type: 'video'; video: string; poster: string; playbackRate?: number; displaySeconds?: number; focalX?: number; focalY?: number };
+const splashMedia = site.home.splashMedia as unknown as SplashItem[];
 ---
 <BaseLayout title={site.title} active="About" bodyClass="home-page">
   <main>
@@ -15,7 +19,7 @@ const holdMs = Math.max(fadeMs + 500, Number(site.home.splashHoldSeconds || 30) 
       style={`--splash-fade:${site.home.splashFadeSeconds || 2}s`}
       aria-label="Infrastructure landscape"
     >
-      {site.home.splashMedia.map((item) =>
+      {splashMedia.map((item) =>
         item.type === 'video'
           ? <video
               class="splash-layer"
