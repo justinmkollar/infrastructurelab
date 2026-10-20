@@ -13,22 +13,38 @@
       {
         "type": "image",
         "image": "/uploads/images/2023tsmcphoenixaerialoverview.jpg",
-        "alt": "A massive semiconductor fab construction on the fringes of Phoenix, Arizona."
+        "alt": "A massive semiconductor fab construction on the fringes of Phoenix, Arizona.",
+        "focalX": 50,
+        "focalY": 50
       },
       {
         "type": "image",
         "image": "/uploads/images/dji0321northtainansolarpanels2022.jpg",
-        "alt": "Utility-scale solar arrays replacing farmland in Tainan, Taiwan."
+        "alt": "Utility-scale solar arrays replacing farmland in Tainan, Taiwan.",
+        "focalX": 50,
+        "focalY": 50
       },
       {
         "type": "image",
         "image": "/uploads/images/2026cyrusonedfw-1.jpg",
-        "alt": "CyrusOne data centers under construction in Texas."
+        "alt": "CyrusOne data centers under construction in Texas.",
+        "focalX": 50,
+        "focalY": 50
       },
       {
         "type": "image",
         "image": "/uploads/images/2022hsinchufuliushuiexample-1.jpg",
-        "alt": "Water infratructure near Hsinchu, Taiwan."
+        "alt": "Water infratructure near Hsinchu, Taiwan.",
+        "focalX": 50,
+        "focalY": 50
+      },
+      {
+        "type": "video",
+        "video": "/uploads/videos/infrastructurelab-homepage-test.mp4",
+        "poster": "/uploads/images/2022hsinchufuliushuiexample-1-1.jpg",
+        "playbackRate": 0.75,
+        "focalX": 50,
+        "focalY": 50
       }
     ]
   },
