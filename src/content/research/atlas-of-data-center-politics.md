@@ -60,9 +60,27 @@ modules:
   - type: updates
     heading: News & Planned Updates
     items:
+      - date: 20 October 2026
+        title: Interface and Data Update
+        body: <ul><li><p><strong>New look and navigation.</strong> Reorganized panels,
+          collapsible filters and sections, and improved mobile navigation make
+          the Atlas easier to explore.</p></li><li><p><strong>Cleaner map
+          markers. </strong>Events and policies cluster by region at lower zoom
+          levels, with more precise local markers and a new terrestrial fiber
+          layer.</p></li><li><p><strong>Custom color palettes. </strong>Choose
+          from ten presets or customize colors separately for light and dark
+          themes, with options to save palettes.</p></li><li><p><strong>Data
+          update. </strong>Refinement of event inclusion criteria to focus on
+          core political events and less on project updates and advancement of
+          data center validation efforts.</p></li></ul><p></p>
       - date: 29 September 2026
         title: Data Update
-        body: <p></p>
+        body: <ul><li><p><strong>Greater coverage. </strong>Extended coverage for
+          geographies in Europe and Asia including policies, data centers, and
+          events.</p></li><li><p><strong>Validation Framework. </strong>Progress
+          on sourcing and validation efforts across the database, including a
+          framework for source type as well as access and creation dates on the
+          back end.</p></li></ul><p></p>
       - date: 16 September 2026
         title: Soft Public Release
         body: <p>The Atlas of Data Center Politics is now publicly available.</p>
