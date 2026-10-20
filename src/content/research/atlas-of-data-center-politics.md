@@ -90,15 +90,15 @@ modules:
         body: <p>The Atlas of Data Center Politics is now publicly available.</p>
       - date: Planned
         title: Future work
-        body: <p>Robustness and validity. Expanded global data center verification,
+        body: "<p>Robustness and validity: Expanded global data center verification,
           additional infrastructure context, dataset downloads, and citation
-          guidance.</p><p>Infrastructural relations. Added watershed and energy
+          guidance.</p><p>Infrastructural relations: Added watershed and energy
           systems layers to contextualize resource impacts and policy across
-          domains.</p><p>Finance and ownership. Extending the actor network
+          domains.</p><p>Finance and ownership:Extending the actor network
           analysis to show the interconnections between powerful istitutional
           actors and energy and data center assets.</p><p>Wiki and data
-          download. An extended wiki-based interface with contextual
-          information, validated sources, and more.</p>
+          download: An extended wiki-based interface with contextual
+          information, validated sources, and more.</p>"
   - type: gallery
     heading: Images
     images:
