@@ -12,6 +12,13 @@ media:
     output: /uploads/files
     categories: [document]
     rename: safe
+  - name: videos
+    label: Videos
+    input: public/uploads/videos
+    output: /uploads/videos
+    categories: [video]
+    extensions: [mp4, webm]
+    rename: safe
 
 settings:
   commit:
@@ -200,17 +207,40 @@ content:
             options: {format: html, media: images, path: content}
           - {name: splashFadeSeconds, label: Splash fade (seconds), type: number, default: 2}
           - {name: splashHoldSeconds, label: Time per splash image (seconds), type: number, default: 30}
-          - name: splashImages
-            label: Splash images
-            type: object
+          - name: splashMedia
+            label: Splash images and videos
+            type: block
             list:
-              collapsible: {collapsed: true, summary: "{alt}"}
-            fields:
+              collapsible: {collapsed: true, summary: "{type}"}
+            blockKey: type
+            blocks:
               - name: image
-                type: image
-                required: true
-                options: {media: images, path: splash}
-              - {name: alt, label: Alternative text, type: string}
+                label: Image
+                fields:
+                  - name: image
+                    type: image
+                    required: true
+                    options: {media: images, path: splash}
+                  - {name: alt, label: Alternative text, type: string}
+                  - {name: focalX, label: Horizontal focal point (%), type: number, default: 50}
+                  - {name: focalY, label: Vertical focal point (%), type: number, default: 50}
+              - name: video
+                label: Video
+                fields:
+                  - name: video
+                    label: Video file (MP4 or WebM)
+                    type: file
+                    required: true
+                    options: {media: videos, categories: [video], extensions: [mp4, webm]}
+                  - name: poster
+                    label: Still image fallback
+                    type: image
+                    required: true
+                    options: {media: images, path: splash}
+                  - {name: playbackRate, label: Playback speed (0.75 = 75%), type: number, default: 0.75}
+                  - {name: displaySeconds, label: Display time in seconds (blank = one playback), type: number}
+                  - {name: focalX, label: Horizontal focal point (%), type: number, default: 50}
+                  - {name: focalY, label: Vertical focal point (%), type: number, default: 50}
       - name: navigation
         type: object
         list:
