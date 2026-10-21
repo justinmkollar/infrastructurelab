@@ -60,7 +60,7 @@ modules:
   - type: updates
     heading: News & Planned Updates
     items:
-      - date: 20 October 2026
+      - date: 21 October 2026
         title: Interface and Data Update, Version 1.0.1
         body: "<p>An updated version with an enhanced interface, new export tools and
           progress on data validation:</p><ul><li><p>Easier navigation:
