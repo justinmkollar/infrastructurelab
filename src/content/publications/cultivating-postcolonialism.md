@@ -8,7 +8,8 @@ date: "2020"
 order: 100
 published: true
 url: "https://doi.org/10.4324/9780429429286-12"
-abstract: "<p>This chapter explores how colonial-era sugar production and associated institutions shaped Taiwan's landscape and subsequent political debates. It traces how agricultural estates, industrial infrastructure, and landholding arrangements persisted through changes in government and economic policy. The analysis considers how these inherited territories are contested and repurposed in contemporary discussions of heritage, environmental governance, and national identity.</p>"
+abstract: "<p>Taiwan's sugar plantations, processing facilities, and agricultural lands were developed through successive colonial and authoritarian regimes. This chapter examines how the Taiwan Sugar Corporation carried these inherited landscapes into the postcolonial period, when land and infrastructure acquired new political meanings. It traces the interaction of industrial development, environmental change, heritage, and competing national narratives. The case shows how colonial institutions continue to shape contemporary debates over land management and Taiwan's political future.</p>"
+abstractKind: summary
 keywords:
   - "Taiwan"
   - "colonial infrastructure"

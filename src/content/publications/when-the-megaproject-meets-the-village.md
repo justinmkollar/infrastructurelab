@@ -9,7 +9,8 @@ date: "2019"
 order: 100
 published: true
 url: "https://www.routledge.com/The-Routledge-Companion-to-Critical-Approaches-to-Cont-emporary/Chattopadhyay-White/p/book/9781032090344"
-abstract: "<p>This chapter examines the encounter between large planned development projects and existing urban villages in southern China. By comparing formal megaproject planning with the incremental urbanization of migrant settlements, it questions assumptions that large-scale development necessarily replaces or supersedes informal urban forms. The analysis highlights how different spatial practices and political-economic interests coexist and conflict within rapidly transforming metropolitan regions.</p>"
+abstract: "<p>Southern China's rapidly growing cities bring master-planned megaprojects into direct contact with dense urban villages built through incremental development. This chapter compares these different forms of urbanization and asks how planning and architectural practice account for migrant residents and existing settlements. The authors show how state-led redevelopment and informal construction coexist within the same metropolitan landscapes, often under unequal political and economic conditions. Their analysis challenges accounts of Chinese urbanization centered entirely on spectacular new projects.</p>"
+abstractKind: summary
 keywords:
   - "southern China"
   - "megaprojects"

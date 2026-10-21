@@ -8,7 +8,8 @@ date: "2023"
 order: 100
 published: true
 url: "https://appliedresearchanddesign.com/product/way-beyond-bigness"
-abstract: "<p>This chapter situates development in Southeast Asia within the geopolitics of regional infrastructure and shared watershed systems. Published as part of a comparative volume on water-based territorial challenges, it examines how development agendas, national boundaries, and cross-border environmental relationships shape the region's landscape. The contribution connects infrastructure planning to the wider political and ecological context of Southeast Asian regionalism.</p>"
+abstract: "<p>Southeast Asia's rivers and watersheds cross borders that divide environmental responsibility among national governments. This chapter considers how development priorities and regional geopolitical relationships affect the planning and management of these shared landscapes. It places water infrastructure within broader questions about regional cooperation, territorial boundaries, and the ambitions of large development projects. The discussion points toward watershed-based approaches that can make the ecological relationships between neighboring territories more visible in planning.</p>"
+abstractKind: summary
 keywords:
   - "Southeast Asia"
   - "geopolitics"

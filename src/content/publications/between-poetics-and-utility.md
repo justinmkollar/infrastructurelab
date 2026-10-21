@@ -8,7 +8,8 @@ date: "2019"
 order: 100
 published: true
 url: "https://madeinchinajournal.com/2019/07/23/between-poetics-and-utility-landscape-infrastructure-in-china/"
-abstract: "<p>This essay examines landscape infrastructure in China and the relationships between ecological performance, design practice, and state development ambitions. It considers the political expectations placed on landscape architecture as a way to address urban environmental problems while also producing public images of modernization. The essay situates infrastructure design within wider questions about professional expertise, environmental governance, and the everyday spaces created through large-scale urbanization.</p>"
+abstract: "<p>Chinese landscape architecture has long combined cultural interpretations of nature with practical interventions in the urban environment. This essay examines that relationship through contemporary ecological design, especially sponge city projects intended to absorb and manage stormwater. It argues that landscape infrastructure should be understood both as technical environmental management and as a cultural practice that shapes ideas of urban nature. The discussion offers a way to study the production of nature through design, infrastructure, and policy in Chinese cities.</p>"
+abstractKind: summary
 keywords:
   - "China"
   - "landscape infrastructure"

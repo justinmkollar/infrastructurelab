@@ -8,7 +8,8 @@ date: "2022"
 order: 100
 published: true
 url: "https://doi.org/10.1332/policypress/9781529220773.003.0004"
-abstract: "<p>This chapter compares industrial economic zones in Lusaka to explain how development planning mediates between foreign investment and Zambian policy priorities. It considers the spatial and institutional arrangements associated with Chinese-funded development and a Zambian-led zone supported by other international partners. Rather than treating special economic zones as isolated foreign enclaves, the chapter places their design within longer histories of national industrialization, geopolitical negotiation, and urban development.</p>"
+abstract: "<p>Industrial economic zones in Zambia sit at the intersection of national development plans and foreign investment strategies. Comparing the Chinese-backed Zambia–China Economic and Trade Cooperation Zone with the Lusaka South zone, this chapter examines how governments and investors negotiate land, infrastructure, and urban form. It situates both projects within Zambia's longer history of economic planning and its relationships with China, Japan, and Malaysia. The comparison shows why industrial zones cannot be understood simply as foreign enclaves: their design reflects competing state priorities and development agendas.</p>"
+abstractKind: summary
 keywords:
   - "Zambia"
   - "China"

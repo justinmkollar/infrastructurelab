@@ -8,7 +8,8 @@ date: "2013"
 order: 100
 published: true
 url: "https://hub.hku.hk/handle/10722/185552"
-abstract: "<p>This article examines the engineered landscapes and water infrastructure connecting Hong Kong and Shenzhen. It situates urban water systems within the geographical and political relationships of the Pearl River Delta, where water provision crosses administrative boundaries and links distinct patterns of development. The contribution offers an early foundation for studying how hydraulic infrastructure both responds to and reshapes territorial relations.</p>"
+abstract: "<p>Hong Kong and Shenzhen share water systems and coastal environments despite their distinct political and administrative arrangements. Drawing on the Counterpart Cities research and design project, this article examines their interdependence through freshwater supply, port infrastructure, and estuarine ecology. It considers how urban development and anticipated sea-level rise place pressure on landscapes that cross the city boundary. The analysis identifies shared ecological systems as both sources of vulnerability and opportunities for coordinated regional planning.</p>"
+abstractKind: summary
 keywords:
   - "Hong Kong"
   - "Shenzhen"
