@@ -422,6 +422,14 @@ content:
       - {name: order, type: number, default: 100, hidden: true}
       - {name: published, type: boolean, default: true}
       - {name: url, label: Publication URL, type: string}
+      - name: abstractKind
+        label: Description type
+        type: select
+        default: summary
+        options:
+          values:
+            - {name: official, label: Published abstract}
+            - {name: summary, label: Editorial summary}
       - name: abstract
         type: rich-text
         description: 50–250 words recommended.

@@ -8,7 +8,8 @@ date: "2025"
 order: 100
 published: true
 url: "https://doi.org/10.1080/21582041.2025.2565226"
-abstract: "<p>This article examines semiconductor industrial strategy in Arizona through the concept of techno-statecraft. It shows how federal industrial policy depends on territorial negotiation among firms, public authorities, infrastructure providers, and development institutions. The Arizona case demonstrates that advanced manufacturing capacity is produced through localized arrangements for land, infrastructure, resource provision, and investment rather than through national subsidies alone.</p>"
+abstract: "<p>The resurgence of U.S. industrial strategy discourse is not a centralised return of the state but a territorially fragmented form of techno-statecraft. This article analyzes Arizona's semiconductor expansion as a case in which subnational actors – agencies, utilities, universities, and developers – mobilise infrastructure, land-use policy, and regulatory coordination to attract global capital. Rather than a coherent national plan, Arizona's strategy reflects speculative governance oriented toward risk absorption and territorial readiness. The article situates this conjuncture within longer histories of militarised growth and infrastructural overbuild, contributing to debates on state capitalism, industrial strategy, and the spatial politics of techno-industrial transformation.</p>"
+abstractKind: official
 keywords:
   - "semiconductors"
   - "Arizona"

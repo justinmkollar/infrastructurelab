@@ -91,7 +91,7 @@ const research = defineCollection({
 const publications = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/publications' }),
   schema: z.object({
-    authors: z.array(z.string()).default([]), title: z.string(), details: z.string(), type: z.string(), date: z.string().optional(), order: z.number().default(100), published: z.boolean().default(true), url: z.string().optional(), abstract: z.string().default(''), keywords: z.array(z.string()).default([])
+    authors: z.array(z.string()).default([]), title: z.string(), details: z.string(), type: z.string(), date: z.string().optional(), order: z.number().default(100), published: z.boolean().default(true), url: z.string().optional(), abstract: z.string().default(''), abstractKind: z.enum(['official', 'summary']).default('summary'), keywords: z.array(z.string()).default([])
   })
 });
 

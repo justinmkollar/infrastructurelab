@@ -8,7 +8,8 @@ date: "2026"
 order: 100
 published: true
 url: "https://doi.org/10.1080/01944363.2026.2618221"
-abstract: "<p>This viewpoint examines how state legislation and infrastructure decision-making restrict local planning authority over data centers and associated energy development. It traces the use of statutory preemption, utility regulation, financial incentives, and administrative procedures to shift authority away from municipal review. The article considers the implications of these changes for public participation, environmental oversight, and the institutional capacity of planning to govern large technology infrastructures.</p>"
+abstract: "<p>A new wave of state legislation is fundamentally reshaping American planning by reducing local authority over land use, zoning, and environmental review, particularly for artificial intelligence (AI)–related energy and data center infrastructure. Drawing on recent cases across multiple states, I examine how planning power is being rescaled through statutory overrides, utility governance, fiscal incentives, and procedural constraints. These mechanisms shift decision-making authority upward to state agencies, utilities, and corporate actors, transforming planning from deliberative practice into administrative coordination. This reconfiguration raises critical questions about democratic participation, environmental protection, and planning’s role within accelerated infrastructural capitalism.</p>"
+abstractKind: official
 keywords:
   - "data centers"
   - "planning preemption"
