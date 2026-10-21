@@ -90,7 +90,7 @@ modules:
           project status, company relationships, and other incomplete or
           inconsistent records.</p></li></ul><p></p>"
       - date: 16 September 2026
-        title: Soft Public Release Version 1.0.0
+        title: Soft Public Release, Version 1.0.0
         body: <p>The Atlas of Data Center Politics is now publicly available.</p>
       - date: Planned
         title: Future work
