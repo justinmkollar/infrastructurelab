@@ -26,7 +26,7 @@
         "alt": "Utility-scale solar arrays replacing farmland in Tainan, Taiwan.",
         "focalX": 50,
         "focalY": 50,
-        "motion": "none",
+        "motion": "pan-up",
         "zoomPercent": 3,
         "panPercent": 1
       },
@@ -36,9 +36,9 @@
         "alt": "CyrusOne data centers under construction in Texas.",
         "focalX": 50,
         "focalY": 50,
-        "motion": "none",
-        "zoomPercent": 3,
-        "panPercent": 1
+        "motion": "pan-right",
+        "zoomPercent": 1,
+        "panPercent": 2
       },
       {
         "type": "image",
@@ -46,9 +46,9 @@
         "alt": "Water infratructure near Hsinchu, Taiwan.",
         "focalX": 50,
         "focalY": 50,
-        "motion": "none",
-        "zoomPercent": 3,
-        "panPercent": 1
+        "motion": "pan-right",
+        "zoomPercent": 1,
+        "panPercent": 2
       }
     ]
   },
