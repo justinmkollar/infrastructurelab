@@ -49,22 +49,6 @@
         "motion": "none",
         "zoomPercent": 3,
         "panPercent": 1
-      },
-      {
-        "type": "video",
-        "video": "/uploads/videos/infrastructurelab-homepage-test.mp4",
-        "poster": "/uploads/images/2022hsinchufuliushuiexample-1-1.jpg",
-        "playbackRate": 0.75,
-        "focalX": 50,
-        "focalY": 50
-      },
-      {
-        "type": "video",
-        "video": "/uploads/videos/Arizona01.mp4",
-        "poster": "/uploads/images/2023tsmcphoenixaerialoverview.jpg",
-        "playbackRate": 0.75,
-        "focalX": 50,
-        "focalY": 50
       }
     ]
   },
