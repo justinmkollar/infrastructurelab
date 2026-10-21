@@ -62,29 +62,33 @@ modules:
     items:
       - date: 20 October 2026
         title: Interface and Data Update, Version 1.0.1
-        body: <p>An updated version with enhanced interface and data validation
-          progress, including:</p><ul><li><p>Reorganized panels, collapsible
-          filters and sections, and improved mobile navigation make the Atlas
-          easier to explore.</p></li><li><p>Events and policies cluster by
-          region at lower zoom levels, with more precise local markers and a new
-          terrestrial fiber layer.</p></li><li><p>Choose from ten presets or
-          customize colors separately for light and dark themes, with options to
-          save palettes.</p></li><li><p>Refinement of event inclusion criteria
-          to focus on core political events and less on project updates and
-          advancement of data center validation efforts.</p></li></ul><p></p>
+        body: "<p>An updated version with an enhanced interface, new export tools and
+          progress on data validation:</p><ul><li><p>Easier navigation:
+          reorganized panels, collapsible filters and sections, improved mobile
+          navigation, and clearer Data center details with figures grouped under
+          Scale &amp; resources.</p></li><li><p>Map: events and policies cluster
+          by region at lower zoom levels, with more precise local markers and a
+          new terrestrial fiber layer.</p></li><li><p>Colors: ten presets or
+          custom palettes for light and dark themes, which you can
+          save.</p></li><li><p>Export: save the map as PNG, PDF or SVG with a
+          title, key and scale bar, and export any Details view as Markdown,
+          CSV, Excel or JSON, with an optional research
+          package.</p></li><li><p>Data: event inclusion now focuses on core
+          political events rather than project updates, and data center
+          validation continues.</p></li></ul><p></p>"
       - date: 29 September 2026
         title: Data Update
-        body: <p>An interim release of ongoing data collection, validation, and
-          remediation efforts. This update includes:</p><ul><li><p>Expanded
-          geographic coverage across the United States, Europe, Australia, and
-          Southeast Asia, including fast-growing and previously underrepresented
-          data center markets.</p></li><li><p>Added and updated records on
-          project development, approvals, construction, cancellations, closures,
-          policy changes, environmental constraints, and community
-          responses.</p></li><li><p>Conducted broad data remediation and
+        body: "<p>An interim release from ongoing data collection, validation and
+          remediation:</p><ul><li><p>Coverage: expanded geographic coverage
+          across the United States, Europe, Australia and Southeast Asia,
+          including fast-growing and previously underrepresented data center
+          markets.</p></li><li><p>Records: new and updated records on project
+          development, approvals, construction, cancellations, closures, policy
+          changes, environmental constraints and community
+          responses.</p></li><li><p>Data quality: broad remediation and
           validation to correct duplicate sites, capacity figures, operators,
           project status, company relationships, and other incomplete or
-          inconsistent records.</p></li></ul><p></p>
+          inconsistent records.</p></li></ul><p></p>"
       - date: 16 September 2026
         title: Soft Public Release Version 1.0.0
         body: <p>The Atlas of Data Center Politics is now publicly available.</p>
