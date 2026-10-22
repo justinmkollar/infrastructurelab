@@ -106,16 +106,18 @@ modules:
   - type: gallery
     heading: Images
     images:
-      - image: /uploads/images/adcpscreen01.jpg
+      - image: /uploads/images/03.jpg
+      - image: /uploads/images/04.jpg
+      - image: /uploads/images/07.jpg
       - image: /uploads/images/adcpscreen02.jpg
-      - image: /uploads/images/adcpscreen03.jpg
       - image: /uploads/images/adcpscreen04.jpg
-      - image: /uploads/images/adcpscreen05.jpg
       - image: /uploads/images/atlas01.png
-      - image: /uploads/images/atlas02.png
-      - image: /uploads/images/atlas03.png
       - image: /uploads/images/atlas04.png
       - image: /uploads/images/atlas05.png
+      - image: /uploads/images/01.jpg
+      - image: /uploads/images/02.jpg
+      - image: /uploads/images/05.jpg
+      - image: /uploads/images/06.jpg
   - type: text
     heading: Methodology
     body: <h2>Sources and inclusion</h2><p>Records are built from publicly
