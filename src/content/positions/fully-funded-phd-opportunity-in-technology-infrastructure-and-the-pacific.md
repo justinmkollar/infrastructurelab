@@ -83,8 +83,4 @@ modules:
       href="https://nusgs.nus.edu.sg/scholarships/nus-research-scholarship/">NUS
       Research Scholarship</a></p></li></ul><p><strong>Contact:</strong> Justin
       Kollar — <a href="mailto:jkollar@nus.edu.sg">jkollar@nus.edu.sg</a></p>
-    links:
-      - label: PhD by Research · NUS Architecture
-        url: https://cde.nus.edu.sg/arch/admission/maarchbyresearch-phdbyresearch/
-        newWindow: true
 ---
