@@ -52,7 +52,7 @@ modules:
       may also be considered in accordance with NUS admission requirements.
       Prior publications are welcome but not required.</p>
   - type: text
-    heading: Funding and Research Environment
+    heading: Funding and research environment
     body: <p>The position is intended to be fully funded through the NUS Research
       Scholarship, subject to admission and scholarship approval. The
       scholarship covers tuition fees and provides a monthly stipend for up to
