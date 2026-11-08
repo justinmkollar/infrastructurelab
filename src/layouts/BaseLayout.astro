@@ -66,10 +66,10 @@ const rootThemeCss = `:root{--bg:${globalTheme.lightBackground};--fg:${globalThe
 
 let projectThemeCss = '';
 if (projectTheme) {
-  const projectLightSmall = projectTheme.lightSmall || '#7d8183';
-  const projectLightSoft = projectTheme.lightSoft || `color-mix(in srgb,${mergedProjectTheme.lightText} 5%,${mergedProjectTheme.lightBackground})`;
-  const projectDarkSmall = projectTheme.darkSmall || '#8d9395';
-  const projectDarkSoft = projectTheme.darkSoft || `color-mix(in srgb,${mergedProjectTheme.darkText} 5%,${mergedProjectTheme.darkBackground})`;
+  const projectLightSmall = mergedProjectTheme.lightSmall || '#7d8183';
+  const projectLightSoft = mergedProjectTheme.lightSoft || `color-mix(in srgb,${mergedProjectTheme.lightText} 5%,${mergedProjectTheme.lightBackground})`;
+  const projectDarkSmall = mergedProjectTheme.darkSmall || '#8d9395';
+  const projectDarkSoft = mergedProjectTheme.darkSoft || `color-mix(in srgb,${mergedProjectTheme.darkText} 5%,${mergedProjectTheme.darkBackground})`;
 
   // Project palettes are scoped to the project page itself, matching the
   // original prototype. This prevents the global site palette from winning
