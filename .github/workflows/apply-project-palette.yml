@@ -1,0 +1,49 @@
+name: Apply project palette
+
+on:
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: Pages CMS action payload (JSON)
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-project-palette-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  apply-palette:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out selected CMS branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          persist-credentials: true
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Fill project theme HEX values
+        env:
+          PAGES_CMS_PAYLOAD: ${{ inputs.payload }}
+        run: node scripts/apply-project-palette.mjs
+
+      - name: Commit updated project colors
+        run: |
+          git diff --check
+          git add -- src/content/research/
+          if git diff --cached --quiet; then
+            echo "Project palette already matches the saved colors."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "content: apply selected project palette"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

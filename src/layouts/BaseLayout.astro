@@ -53,8 +53,10 @@ const selectedPreset = projectTheme?.preset && Object.prototype.hasOwnProperty.c
   : undefined;
 const mergedProjectTheme = {
   ...globalTheme,
-  ...validColors(selectedPreset || projectTheme),
-  ...validColors(projectTheme?.overrides)
+  ...validColors(selectedPreset),
+  // Support older project records while making stored HEX fields authoritative.
+  ...validColors(projectTheme?.overrides),
+  ...validColors(projectTheme)
 };
 
 const globalLightSmall = globalTheme.lightSmall || '#7b7b7b';
