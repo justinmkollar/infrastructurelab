@@ -3,21 +3,33 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import site from '../data/site.json';
+import projectPalettes from '../data/project-palettes.json';
 
-interface Theme {
-  lightBackground?: string;
-  lightText?: string;
-  lightMuted?: string;
-  lightSmall?: string;
-  lightLine?: string;
-  lightSoft?: string;
-  darkBackground?: string;
-  darkText?: string;
-  darkMuted?: string;
-  darkSmall?: string;
-  darkLine?: string;
-  darkSoft?: string;
+const colorKeys = [
+  'lightBackground', 'lightText', 'lightMuted', 'lightSmall', 'lightLine', 'lightSoft',
+  'darkBackground', 'darkText', 'darkMuted', 'darkSmall', 'darkLine', 'darkSoft'
+] as const;
+
+type ColorKey = typeof colorKeys[number];
+type ThemeColors = Partial<Record<ColorKey, string>>;
+interface Theme extends ThemeColors {
+  preset?: string;
+  overrides?: ThemeColors;
 }
+
+// A preset is the base; individually supplied custom colors override it.
+// If no preset is chosen, legacy project colors (or global defaults) apply.
+const validColors = (value?: ThemeColors): ThemeColors => {
+  const colors: ThemeColors = {};
+  for (const key of colorKeys) {
+    const color = value?.[key];
+    if (typeof color === 'string' && /^#[0-9a-fA-F]{6}$/.test(color)) {
+      colors[key] = color;
+    }
+  }
+  return colors;
+};
+
 interface Props {
   title?: string;
   description?: string;
@@ -35,7 +47,15 @@ const {
 } = Astro.props;
 
 const globalTheme = site.theme as Theme;
-const mergedProjectTheme = { ...globalTheme, ...(projectTheme || {}) };
+const namedPresets = projectPalettes as Record<string, ThemeColors>;
+const selectedPreset = projectTheme?.preset && Object.prototype.hasOwnProperty.call(namedPresets, projectTheme.preset)
+  ? namedPresets[projectTheme.preset]
+  : undefined;
+const mergedProjectTheme = {
+  ...globalTheme,
+  ...validColors(selectedPreset || projectTheme),
+  ...validColors(projectTheme?.overrides)
+};
 
 const globalLightSmall = globalTheme.lightSmall || '#7b7b7b';
 const globalLightSoft = globalTheme.lightSoft || `color-mix(in srgb,${globalTheme.lightText} 5%,${globalTheme.lightBackground})`;
@@ -46,10 +66,10 @@ const rootThemeCss = `:root{--bg:${globalTheme.lightBackground};--fg:${globalThe
 
 let projectThemeCss = '';
 if (projectTheme) {
-  const projectLightSmall = projectTheme.lightSmall || '#7d8183';
-  const projectLightSoft = projectTheme.lightSoft || `color-mix(in srgb,${mergedProjectTheme.lightText} 5%,${mergedProjectTheme.lightBackground})`;
-  const projectDarkSmall = projectTheme.darkSmall || '#8d9395';
-  const projectDarkSoft = projectTheme.darkSoft || `color-mix(in srgb,${mergedProjectTheme.darkText} 5%,${mergedProjectTheme.darkBackground})`;
+  const projectLightSmall = mergedProjectTheme.lightSmall || '#7d8183';
+  const projectLightSoft = mergedProjectTheme.lightSoft || `color-mix(in srgb,${mergedProjectTheme.lightText} 5%,${mergedProjectTheme.lightBackground})`;
+  const projectDarkSmall = mergedProjectTheme.darkSmall || '#8d9395';
+  const projectDarkSoft = mergedProjectTheme.darkSoft || `color-mix(in srgb,${mergedProjectTheme.darkText} 5%,${mergedProjectTheme.darkBackground})`;
 
   // Project palettes are scoped to the project page itself, matching the
   // original prototype. This prevents the global site palette from winning
