@@ -50,57 +50,22 @@ components:
   project_palette:
     type: object
     label: Project color scheme
+    description: The 12 color values below are editable. To populate or reset them, use the Apply palette preset action at the top of the Research entry, select a palette and refresh after the action finishes.
     fields:
-      - name: preset
-        label: Palette preset
-        type: select
-        default: existing
-        description: Select a palette for this project page. Changes appear on the site after saving and deployment; blank custom colors use the preset.
-        options:
-          values:
-            - {name: atlas-original, label: "Atlas Original — current Atlas theme"}
-            - {name: existing, label: "Site default / keep existing colors"}
-            - {name: mineral, label: "Mineral — limestone / graphite"}
-            - {name: oxide, label: "Oxide — porcelain / iron oxide"}
-            - {name: carbon, label: "Carbon — cool white / graphite"}
-            - {name: slate, label: "Slate — blue grey / ink"}
-            - {name: steel, label: "Steel — structural metal"}
-            - {name: blueprint, label: "Blueprint — technical blue"}
-            - {name: sage, label: "Sage — muted green"}
-            - {name: tidal, label: "Tidal — teal / sea glass"}
-            - {name: brass, label: "Brass — warm metallic"}
-            - {name: terracotta, label: "Terracotta — kiln / clay"}
-            - {name: basalt, label: "Basalt — volcanic stone"}
-            - {name: mica, label: "Mica — lavender grey"}
-            - {name: signal, label: "Signal — safety orange / navy"}
-            - {name: cadastral, label: "Cadastral — map red / bottle green"}
-            - {name: cmyk-proof, label: "CMYK Proof — magenta / cyan"}
-            - {name: terminal, label: "Terminal — phosphor green"}
-            - {name: amber-crt, label: "Amber CRT — analog display"}
-            - {name: arcade, label: "Arcade — violet / seafoam"}
-            - {name: control-blue, label: "Control Blue — technical cobalt"}
-            - {name: switchgear, label: "Switchgear — olive / chartreuse"}
-            - {name: transit, label: "Transit — petrol blue / rust"}
-            - {name: patina, label: "Patina — verdigris / copper"}
-            - {name: risograph, label: "Risograph — plum / offset blue"}
-            - {name: vector, label: "Vector — digital cyan / midnight"}
-      - name: overrides
-        label: Custom colors (optional)
-        type: object
-        description: Enter a six-digit HEX color to override one palette value. Leave a field blank (or clear it) to use the selected preset color. Overrides remain when switching presets.
-        fields:
-          - {name: lightBackground, label: "Light background", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
-          - {name: lightText, label: "Light text", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
-          - {name: lightMuted, label: "Light secondary text", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
-          - {name: lightSmall, label: "Light small text", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
-          - {name: lightLine, label: "Light borders", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
-          - {name: lightSoft, label: "Light soft surface", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
-          - {name: darkBackground, label: "Dark background", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
-          - {name: darkText, label: "Dark text", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
-          - {name: darkMuted, label: "Dark secondary text", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
-          - {name: darkSmall, label: "Dark small text", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
-          - {name: darkLine, label: "Dark borders", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
-          - {name: darkSoft, label: "Dark soft surface", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: preset, label: Last applied preset, type: string, readonly: true}
+      - {name: lightBackground, label: "Light background", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: lightText, label: "Light text", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: lightMuted, label: "Light secondary text", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: lightSmall, label: "Light small text", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: lightLine, label: "Light borders", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: lightSoft, label: "Light soft surface", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: darkBackground, label: "Dark background", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: darkText, label: "Dark text", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: darkMuted, label: "Dark secondary text", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: darkSmall, label: "Dark small text", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: darkLine, label: "Dark borders", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
+      - {name: darkSoft, label: "Dark soft surface", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
+
   page_modules:
     type: block
     label: Page modules
@@ -409,6 +374,48 @@ content:
     path: src/content/research
     format: yaml-frontmatter
     filename: "{title}.md"
+    actions:
+      - name: apply-project-palette
+        label: Apply palette preset to color fields
+        scope: entry
+        workflow: apply-project-palette.yml
+        ref: current
+        cancelable: false
+        confirm:
+          title: Apply project palette?
+          message: This replaces all 12 saved HEX values with the chosen preset. Afterwards you can customize individual colors directly in the editor.
+          button: Apply palette
+        fields:
+          - name: palette
+            label: Palette preset
+            type: select
+            required: true
+            options:
+              - {label: "Atlas Original", value: atlas-original}
+              - {label: "Mineral", value: mineral}
+              - {label: "Oxide", value: oxide}
+              - {label: "Carbon", value: carbon}
+              - {label: "Slate", value: slate}
+              - {label: "Steel", value: steel}
+              - {label: "Blueprint", value: blueprint}
+              - {label: "Sage", value: sage}
+              - {label: "Tidal", value: tidal}
+              - {label: "Brass", value: brass}
+              - {label: "Terracotta", value: terracotta}
+              - {label: "Basalt", value: basalt}
+              - {label: "Mica", value: mica}
+              - {label: "Signal", value: signal}
+              - {label: "Cadastral", value: cadastral}
+              - {label: "CMYK Proof", value: cmyk-proof}
+              - {label: "Terminal", value: terminal}
+              - {label: "Amber CRT", value: amber-crt}
+              - {label: "Arcade", value: arcade}
+              - {label: "Control Blue", value: control-blue}
+              - {label: "Switchgear", value: switchgear}
+              - {label: "Transit", value: transit}
+              - {label: "Patina", value: patina}
+              - {label: "Risograph", value: risograph}
+              - {label: "Vector", value: vector}
     view:
       fields: [title, dateLabel, published]
       primary: title
