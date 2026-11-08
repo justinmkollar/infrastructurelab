@@ -50,7 +50,7 @@ components:
   project_palette:
     type: object
     label: Project color scheme
-    description: The 12 color values below are editable. To populate or reset them, use the Apply palette preset action at the top of the Research entry, select a palette and refresh after the action finishes.
+    description: Choose a palette through the Apply palette preset action in the project toolbar. After it finishes, refresh this editor to see all 12 populated HEX colors and customize them.
     fields:
       - {name: preset, label: Last applied preset, type: string, readonly: true}
       - {name: lightBackground, label: "Light background", type: string, pattern: "^#[0-9A-Fa-f]{6}$"}
@@ -383,7 +383,7 @@ content:
         cancelable: false
         confirm:
           title: Apply project palette?
-          message: This replaces all 12 saved HEX values with the chosen preset. Afterwards you can customize individual colors directly in the editor.
+          message: Save any pending edits before proceeding. This replaces the project's 12 saved HEX values; refresh the editor when complete, then customize individual colors.
           button: Apply palette
         fields:
           - name: palette
