@@ -2,19 +2,29 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-const themeSchema = z.object({
-  lightBackground: z.string().default('#f4f4f0'),
-  lightText: z.string().default('#171717'),
-  lightMuted: z.string().default('#62686b'),
-  lightSmall: z.string().default('#7d8183'),
-  lightLine: z.string().default('#c8cbcc'),
-  lightSoft: z.string().default('#e8e9e5'),
-  darkBackground: z.string().default('#1d2028'),
-  darkText: z.string().default('#f3f2f2'),
-  darkMuted: z.string().default('#a9adaa'),
-  darkSmall: z.string().default('#8d9395'),
-  darkLine: z.string().default('#46515a'),
-  darkSoft: z.string().default('#252a31')
+// Colors in a project theme are optional: a chosen preset supplies all 12
+// values, and editors may override any individual value with a valid HEX code.
+// The top-level color keys are retained only for older project records.
+const optionalHex = z.union([z.string().regex(/^#[0-9a-fA-F]{6}$/), z.literal('')]).optional();
+
+const themeColorsSchema = z.object({
+  lightBackground: optionalHex,
+  lightText: optionalHex,
+  lightMuted: optionalHex,
+  lightSmall: optionalHex,
+  lightLine: optionalHex,
+  lightSoft: optionalHex,
+  darkBackground: optionalHex,
+  darkText: optionalHex,
+  darkMuted: optionalHex,
+  darkSmall: optionalHex,
+  darkLine: optionalHex,
+  darkSoft: optionalHex
+});
+
+const themeSchema = themeColorsSchema.extend({
+  preset: z.string().optional(),
+  overrides: themeColorsSchema.optional()
 }).optional();
 
 const heroSchema = z.object({
