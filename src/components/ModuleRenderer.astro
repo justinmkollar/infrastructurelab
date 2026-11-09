@@ -1,10 +1,11 @@
 ---
 import { withBase } from '../utils/paths';
 import ResearchWorkflow from './ResearchWorkflow.astro';
+import RelatedRecords from './RelatedRecords.astro';
 import '../styles/project-media.css';
 
-interface Props { modules?: any[]; }
-const { modules = [] } = Astro.props;
+interface Props { modules?: any[]; currentProjectId?: string; }
+const { modules = [], currentProjectId = '' } = Astro.props;
 
 const asset = (path = '') => /^https?:\/\//.test(path) ? path : withBase(path);
 const href = (path = '') => /^https?:\/\//.test(path) || path.startsWith('mailto:') || path.startsWith('tel:') ? path : withBase(path);
@@ -118,6 +119,10 @@ const validLinks = (items: any[] = []) => items.filter((item) => typeof item?.la
       {module.heading && <h1 class="module-heading">{module.heading}</h1>}
       <div class="link-list">{module.items?.map((item:any) => <a href={href(item.url)} target={item.newWindow ? '_blank' : undefined} rel={item.newWindow ? 'noopener' : undefined}><span>{item.label}</span><span aria-hidden="true">→</span></a>)}</div>
     </section>;
+  }
+
+  if (module.type === 'related-publications' || module.type === 'project-people' || module.type === 'related-projects') {
+    return <RelatedRecords module={module} currentProjectId={currentProjectId} />;
   }
 
   if (module.type === 'accordion') {
