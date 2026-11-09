@@ -63,7 +63,18 @@ modules:
     items:
       - date: 10 November 2026
         title: Sagas and Data Update, Version 1.0.2
-        body: <p></p>
+        body: "<p>This update introduces Sagas, expands the Events and policy records,
+          and improves connections across the database:</p><ul><li><p>Sagas: 256
+          curated histories of data center controversies, bringing together over
+          1,050 Events across 209 geographies, with summaries, chronologies, and
+          links to related records.</p></li><li><p>Navigation: Sagas are
+          accessible through the existing Events layer, with linked chronologies
+          in Details, cross-references from related records, and map indicators
+          for recently updated Sagas.</p></li><li><p>Events: expanded from 3,298
+          to 4,031 (+733), with substantially more connections to actors, data
+          centers, and legislation.</p></li><li><p>Data: added 285 legislative
+          records while consolidating duplicate data center records and
+          improving operator attribution.</p></li></ul><p></p>"
       - date: 21 October 2026
         title: Interface and Data Update, Version 1.0.1
         body: "<p>An updated version with an enhanced interface, new export tools and
