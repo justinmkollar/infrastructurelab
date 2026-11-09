@@ -61,6 +61,9 @@ modules:
   - type: updates
     heading: News & Planned Updates
     items:
+      - date: 10 November 2026
+        title: Sagas and Data Update, Version 1.0.2
+        body: <p></p>
       - date: 21 October 2026
         title: Interface and Data Update, Version 1.0.1
         body: "<p>An updated version with an enhanced interface, new export tools and
