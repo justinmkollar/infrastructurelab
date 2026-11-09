@@ -105,6 +105,17 @@ document.querySelectorAll('[data-index-entry]').forEach((entry) => {
 
   toggles.forEach((toggle) => toggle.addEventListener('click', () => setOpen(!entry.classList.contains('is-open'))));
   setOpen(false);
+
+  // A project link to /publications/#record or /people/#record opens that
+  // record's existing detail panel instead of arriving at a closed row.
+  const openDeepLink = () => {
+    if (!entry.id || !location.hash) return;
+    let target = '';
+    try { target = decodeURIComponent(location.hash.slice(1)); } catch { return; }
+    if (target === entry.id) setOpen(true);
+  };
+  openDeepLink();
+  addEventListener('hashchange', openDeepLink);
 });
 
 // Unified homepage splash controller. Images and silent video share the same layer layout.

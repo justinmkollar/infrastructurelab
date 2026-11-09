@@ -21,3 +21,6 @@
 .site-footer{width:100%;max-width:var(--max);margin:0 auto;padding:24px var(--page-x) 32px;border-top:1px solid var(--line)}.site-footer p{margin:0;color:var(--small);font-family:var(--font-display);font-size:10.5pt}
 @media(max-width:760px){:root{--header-h:56px;--module-space:20px}.page-section{padding:40px 0}.index-summary{grid-template-columns:minmax(0,1fr) 36px 36px}.index-fields,.index-fields.research-fields,.index-fields.publication-fields,.index-fields.people-fields,.index-fields.position-fields{grid-template-columns:1fr;gap:5px;padding:13px 8px}.index-cell.end{text-align:left}.index-action,.index-action-spacer{width:36px}.index-detail{padding:18px 8px 22px}.people-detail{grid-template-columns:1fr;gap:20px}.people-photo{width:min(100%,280px)}.gallery-grid{grid-template-columns:1fr}.atlas-hero{padding-top:408px}.atlas-splash{height:408px}.globe-stage{top:24px;width:360px;height:360px;max-width:calc(100vw - 28px);max-height:calc(100vw - 28px)}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.site-header,.splash-layer,.index-summary,.index-action,.index-detail-wrap,.accordion .plus{transition:none}.splash-layer.splash-image.has-motion.is-motion-active{animation:none;transform:scale(1.004)}}
+
+/* Stable record anchors for links from project modules. */
+.index-entry[id]{scroll-margin-top:calc(var(--header-h) + 12px)}

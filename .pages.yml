@@ -156,6 +156,54 @@ components:
               - {name: url, type: string, required: true}
               - {name: newWindow, label: Open in new window, type: boolean, default: false}
 
+      - name: related-publications
+        label: Related publications
+        fields:
+          - {name: heading, label: Section heading, type: string, default: "Related Publications"}
+          - name: items
+            label: Select publications
+            type: reference
+            description: Choose records from the existing publications collection. Display titles and links update automatically when those records change.
+            options:
+              collection: publications
+              multiple: true
+              value: "{path}"
+              label: "{primary}"
+              search: "title,authors"
+          - {name: showIndexLink, label: Show link to full publications index, type: boolean, default: true}
+
+      - name: project-people
+        label: Project people
+        fields:
+          - {name: heading, label: Section heading, type: string, default: "People"}
+          - name: items
+            label: Select Lab members
+            type: reference
+            description: Choose records from the existing people collection. Display titles and links update automatically when those records change.
+            options:
+              collection: people
+              multiple: true
+              value: "{path}"
+              label: "{primary}"
+              search: "name,title,institution"
+          - {name: showIndexLink, label: Show link to full people index, type: boolean, default: false}
+
+      - name: related-projects
+        label: Related projects
+        fields:
+          - {name: heading, label: Section heading, type: string, default: "Related Projects"}
+          - name: items
+            label: Select projects
+            type: reference
+            description: Choose records from the existing research collection. Display titles and links update automatically when those records change.
+            options:
+              collection: research
+              multiple: true
+              value: "{path}"
+              label: "{primary}"
+              search: "title,contributors"
+          - {name: showIndexLink, label: Show link to full research index, type: boolean, default: false}
+
       - name: accordion
         label: Expandable sections
         fields:

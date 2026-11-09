@@ -86,6 +86,24 @@ const moduleSchema = z.discriminatedUnion('type', [
     heading: z.string().optional(),
     items: z.array(linkItemSchema).default([])
   }),
+  z.object({
+    type: z.literal('related-publications'),
+    heading: z.string().default('Related Publications'),
+    items: z.array(z.string()).default([]),
+    showIndexLink: z.boolean().default(true)
+  }),
+  z.object({
+    type: z.literal('project-people'),
+    heading: z.string().default('People'),
+    items: z.array(z.string()).default([]),
+    showIndexLink: z.boolean().default(false)
+  }),
+  z.object({
+    type: z.literal('related-projects'),
+    heading: z.string().default('Related Projects'),
+    items: z.array(z.string()).default([]),
+    showIndexLink: z.boolean().default(false)
+  }),
   z.object({ type: z.literal('accordion'), heading: z.string().optional(), intro: z.string().optional(), items: z.array(z.object({ title: z.string(), body: z.string().default('') })).default([]) }),
   z.object({ type: z.literal('steps'), heading: z.string().optional(), intro: z.string().optional(), items: z.array(z.object({ title: z.string(), body: z.string().default('') })).default([]) }),
   z.object({ type: z.literal('updates'), heading: z.string().optional(), items: z.array(z.object({ date: z.string().optional(), title: z.string(), body: z.string().default('') })).default([]) })

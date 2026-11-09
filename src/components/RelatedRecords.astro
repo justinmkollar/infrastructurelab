@@ -1,0 +1,74 @@
+---
+import { getCollection } from 'astro:content';
+import { withBase } from '../utils/paths';
+
+type Kind = 'related-publications' | 'project-people' | 'related-projects';
+interface Props {
+  module: {
+    type: Kind;
+    heading?: string;
+    items?: string[];
+    showIndexLink?: boolean;
+  };
+  currentProjectId?: string;
+}
+const { module, currentProjectId = '' } = Astro.props;
+const kind = module.type;
+const collection = kind === 'related-publications'
+  ? 'publications'
+  : kind === 'project-people' ? 'people' : 'research';
+
+const indexConfig: Record<Kind, { title: string; label: string; url: string }> = {
+  'related-publications': { title: 'Related Publications', label: 'All publications', url: '/publications/' },
+  'project-people': { title: 'People', label: 'All people', url: '/people/' },
+  'related-projects': { title: 'Related Projects', label: 'All projects', url: '/research/' }
+};
+const config = indexConfig[kind];
+const recordRows = kind === 'related-publications'
+  ? (await getCollection('publications', ({ data }) => data.published)).map((entry) => ({
+      id: entry.id, label: entry.data.title, url: withBase(`/publications/#${encodeURIComponent(entry.id)}`)
+    }))
+  : kind === 'project-people'
+    ? (await getCollection('people', ({ data }) => data.published)).map((entry) => ({
+        id: entry.id, label: entry.data.name, url: withBase(`/people/#${encodeURIComponent(entry.id)}`)
+      }))
+    : (await getCollection('research', ({ data }) => data.published)).map((entry) => ({
+        id: entry.id, label: entry.data.title,
+        url: withBase(entry.data.page
+          ? `/projects/${entry.id}/`
+          : `/research/#${encodeURIComponent(entry.id)}`)
+      }));
+
+// Pages CMS stores {path} values, e.g. src/content/people/name.md.
+// Normalize them to the stable Astro content IDs without duplicating titles.
+const referenceId = (ref: string) => {
+  if (typeof ref !== 'string') return '';
+  const value = ref.replace(/\\/g, '/').replace(/^\/+/, '');
+  const prefix = `src/content/${collection}/`;
+  const id = value.startsWith(prefix)
+    ? value.slice(prefix.length).replace(/\.md$/, '')
+    : value;
+  return /^[a-zA-Z0-9._-]+$/.test(id) ? id : '';
+};
+const recordById = new Map(recordRows.map((entry) => [entry.id, entry]));
+const seen = new Set<string>();
+const links = (Array.isArray(module.items) ? module.items : [])
+  .map(referenceId)
+  .filter((id) => id && id !== currentProjectId && !seen.has(id) && (seen.add(id), true))
+  .map((id) => recordById.get(id))
+  .filter((record): record is { id: string; label: string; url: string } => Boolean(record));
+const showIndexLink = module.showIndexLink ?? (kind === 'related-publications');
+---
+{(links.length > 0 || showIndexLink) &&
+  <section class="module" data-module-type={kind}>
+    <h1 class="module-heading">{module.heading || config.title}</h1>
+    <div class="link-list">
+      {links.map((record) =>
+        <a href={record.url}><span>{record.label}</span><span aria-hidden="true">→</span></a>
+      )}
+      {showIndexLink &&
+        <a href={withBase(config.url)}><span>{config.label}</span><span aria-hidden="true">→</span></a>
+      }
+    </div>
+  </section>
+}
