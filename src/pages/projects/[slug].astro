@@ -36,6 +36,6 @@ const projectBodyClass = hero.type === 'atlas-globe'
           <h1 class="project-title">{d.title}</h1>
           {hero.intro && <p class="project-intro">{hero.intro}</p>}
         </section>}
-    <ModuleRenderer modules={d.modules} />
+    <ModuleRenderer modules={d.modules} currentProjectId={entry.id} />
   </main>
 </BaseLayout>
