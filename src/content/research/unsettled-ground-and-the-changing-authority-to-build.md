@@ -27,7 +27,7 @@ hero:
   intro: "Tracing how data center conflicts reshape planning, public participation, and state authority."
 modules:
   - type: text
-    heading: Project description
+    heading: About
     body: "<p>The rapid expansion of data centers is producing new conflicts over land, resources, and development authority, exposing a growing mismatch between municipal planning powers and the wider infrastructure systems required to support these projects. In Virginia, where approximately one-third of data centers are located near residential areas, conflicts over industrial siting and neighborhood impacts intersect with electricity and water decisions that often fall outside local planning review. At the same time, states are intervening more directly in the development process, as illustrated by West Virginia’s 2025 legislation restricting local regulation of certified data centers and microgrid districts, shifting authority over infrastructure development away from municipalities. Drawing on comparative research into local development controversies and state legislation, this project traces conflicts from early site assembly and utility commitments through zoning, permitting, public opposition, litigation, and legislative preemption, examining how developers, communities, and public institutions exercise influence at different stages. The research aims to understand how these conflicts are reorganizing the institutions of planning, when local governments and communities retain meaningful influence over development, and how the fragmented governance of land, energy, and water might be addressed through new forms of institutional coordination.</p>"
   - type: related-publications
     heading: Related publications
@@ -35,7 +35,7 @@ modules:
       - src/content/publications/planning-conflict-in-the-age-of-ai-infrastructure-governing-data-center-growth-in-the-united-states.md
       - src/content/publications/planning-under-preemption.md
       - src/content/publications/governing-the-cloud.md
-    showIndexLink: true
+    showIndexLink: false
   - type: project-people
     heading: Collaborators
     items:
