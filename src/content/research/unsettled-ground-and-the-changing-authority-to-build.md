@@ -1,11 +1,18 @@
 ---
-title: "Unsettled Ground and the Changing Authority to Build"
+title: Unsettled Ground and the Changing Authority to Build
 contributors:
   - Justin Kollar
 dateLabel: 2026—
 order: 100
-published: true
-description: "<p>The expansion of data centers is generating conflicts over land, resources, and development authority, while exposing a mismatch between municipal planning powers and the regional systems needed to support industrial computing. Through comparative studies of local controversies and state legislation, this research examines how communities, developers, and public agencies shape siting decisions, and how measures such as legislative preemption redistribute the authority to govern infrastructure development.</p>"
+published: false
+description: <p>The expansion of data centers is generating conflicts over land,
+  resources, and development authority, while exposing a mismatch between
+  municipal planning powers and the regional systems needed to support
+  industrial computing. Through comparative studies of local controversies and
+  state legislation, this research examines how communities, developers, and
+  public agencies shape siting decisions, and how measures such as legislative
+  preemption redistribute the authority to govern infrastructure
+  development.</p>
 duration: 2026—present
 page: true
 theme:
@@ -24,11 +31,32 @@ theme:
   darkSoft: "#303A31"
 hero:
   type: none
-  intro: "Tracing how data center conflicts reshape planning, public participation, and state authority."
+  intro: Tracing how data center conflicts reshape planning, public participation,
+    and state authority.
 modules:
   - type: text
     heading: About
-    body: "<p>The rapid expansion of data centers is producing new conflicts over land, resources, and development authority, exposing a growing mismatch between municipal planning powers and the wider infrastructure systems required to support these projects. In Virginia, where approximately one-third of data centers are located near residential areas, conflicts over industrial siting and neighborhood impacts intersect with electricity and water decisions that often fall outside local planning review. At the same time, states are intervening more directly in the development process, as illustrated by West Virginia’s 2025 legislation restricting local regulation of certified data centers and microgrid districts, shifting authority over infrastructure development away from municipalities. Drawing on comparative research into local development controversies and state legislation, this project traces conflicts from early site assembly and utility commitments through zoning, permitting, public opposition, litigation, and legislative preemption, examining how developers, communities, and public institutions exercise influence at different stages. The research aims to understand how these conflicts are reorganizing the institutions of planning, when local governments and communities retain meaningful influence over development, and how the fragmented governance of land, energy, and water might be addressed through new forms of institutional coordination.</p>"
+    body: <p>The rapid expansion of data centers is producing new conflicts over
+      land, resources, and development authority, exposing a growing mismatch
+      between municipal planning powers and the wider infrastructure systems
+      required to support these projects. In Virginia, where approximately
+      one-third of data centers are located near residential areas, conflicts
+      over industrial siting and neighborhood impacts intersect with electricity
+      and water decisions that often fall outside local planning review. At the
+      same time, states are intervening more directly in the development
+      process, as illustrated by West Virginia’s 2025 legislation restricting
+      local regulation of certified data centers and microgrid districts,
+      shifting authority over infrastructure development away from
+      municipalities. Drawing on comparative research into local development
+      controversies and state legislation, this project traces conflicts from
+      early site assembly and utility commitments through zoning, permitting,
+      public opposition, litigation, and legislative preemption, examining how
+      developers, communities, and public institutions exercise influence at
+      different stages. The research aims to understand how these conflicts are
+      reorganizing the institutions of planning, when local governments and
+      communities retain meaningful influence over development, and how the
+      fragmented governance of land, energy, and water might be addressed
+      through new forms of institutional coordination.</p>
   - type: related-publications
     heading: Related publications
     items:
