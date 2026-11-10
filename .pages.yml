@@ -173,11 +173,11 @@ components:
           - {name: showIndexLink, label: Show link to full publications index, type: boolean, default: true}
 
       - name: project-people
-        label: Project people
+        label: Collaborators
         fields:
-          - {name: heading, label: Section heading, type: string, default: "People"}
+          - {name: heading, label: Section heading, type: string, default: "Collaborators"}
           - name: items
-            label: Select Lab members
+            label: Select collaborators
             type: reference
             description: Choose records from the existing people collection. Display titles and links update automatically when those records change.
             options:
