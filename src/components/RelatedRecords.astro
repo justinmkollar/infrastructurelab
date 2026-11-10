@@ -57,7 +57,7 @@ const links = (Array.isArray(module.items) ? module.items : [])
   .filter((id) => id && id !== currentProjectId && !seen.has(id) && (seen.add(id), true))
   .map((id) => recordById.get(id))
   .filter((record): record is { id: string; label: string; url: string } => Boolean(record));
-const showIndexLink = module.showIndexLink ?? (kind === 'related-publications');
+const showIndexLink = module.showIndexLink ?? false;
 ---
 {(links.length > 0 || showIndexLink) &&
   <section class="module" data-module-type={kind}>

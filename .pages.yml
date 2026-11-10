@@ -170,7 +170,7 @@ components:
               value: "{path}"
               label: "{primary}"
               search: "title,authors"
-          - {name: showIndexLink, label: Show link to full publications index, type: boolean, default: true}
+          - {name: showIndexLink, label: Show link to full publications index, type: boolean, default: false}
 
       - name: project-people
         label: Collaborators
