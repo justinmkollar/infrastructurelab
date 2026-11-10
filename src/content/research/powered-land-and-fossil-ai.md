@@ -27,7 +27,7 @@ hero:
   intro: "How AI infrastructure is reorganizing fossil energy, finance, and the value of land."
 modules:
   - type: text
-    heading: Project description
+    heading: About
     body: "<p>The expansion of artificial intelligence is becoming a major force in energy and industrial development, with new projections suggesting that data centers could account for 9.5–15.3% of U.S. electricity consumption by 2030. This anticipated demand is driving investment in natural gas generation, transmission infrastructure, and large industrial sites whose value increasingly depends on access to reliable and deliverable power. Drawing on emerging gas-to-data center projects in the PJM and ERCOT electricity markets, this research examines the fossil–finance–platform coalitions that produce <em>powered land</em>, converting uncertain computing demand into investable infrastructure through revenue guarantees, electricity delivery arrangements, and the allocation of development costs. It investigates how utilities, energy producers, technology firms, and financial investors assemble these projects, and how contractual arrangements and public policies redistribute financial risks while reshaping the geography of energy production and digital infrastructure. The project aims to explain how the AI boom is reorganizing relationships between fossil capital and digital development, creating new territorial dependencies while raising questions about who captures value, who bears the costs, and what these investments mean for the energy transition.</p>"
   - type: related-publications
     heading: Related publications
@@ -35,7 +35,7 @@ modules:
       - src/content/publications/the-fossil-ai-nexus.md
       - src/content/publications/governing-the-cloud.md
       - src/content/publications/geopolitical-ecologies-of-cloud-capitalism.md
-    showIndexLink: true
+    showIndexLink: false
   - type: project-people
     heading: Collaborators
     items:
