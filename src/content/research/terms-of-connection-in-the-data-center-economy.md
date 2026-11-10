@@ -15,19 +15,19 @@ description: <p>Data centers are becoming major electricity consumers, exposing
 duration: 2026—present
 page: true
 theme:
-  preset: mineral
-  lightBackground: "#F8F8F4"
-  lightText: "#26312B"
-  lightMuted: "#5D6B61"
-  lightSmall: "#76837A"
-  lightLine: "#D7DDD7"
-  lightSoft: "#EEF1EB"
-  darkBackground: "#202923"
-  darkText: "#F0F4EE"
-  darkMuted: "#BFCCC2"
-  darkSmall: "#9BA99D"
-  darkLine: "#4B5A4F"
-  darkSoft: "#303A31"
+  preset: terracotta
+  lightBackground: "#FCFAF8"
+  lightText: "#392C2A"
+  lightMuted: "#755F59"
+  lightSmall: "#907971"
+  lightLine: "#E2D8D2"
+  lightSoft: "#F4EDE8"
+  darkBackground: "#302624"
+  darkText: "#F6EFEB"
+  darkMuted: "#CFB8AC"
+  darkSmall: "#B3998C"
+  darkLine: "#67514C"
+  darkSoft: "#40302C"
 hero:
   type: none
   intro: Who connects to the grid, under what conditions, and at whose expense.
