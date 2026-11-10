@@ -90,7 +90,7 @@ const moduleSchema = z.discriminatedUnion('type', [
     type: z.literal('related-publications'),
     heading: z.string().default('Related Publications'),
     items: z.array(z.string()).default([]),
-    showIndexLink: z.boolean().default(true)
+    showIndexLink: z.boolean().default(false)
   }),
   z.object({
     type: z.literal('project-people'),
